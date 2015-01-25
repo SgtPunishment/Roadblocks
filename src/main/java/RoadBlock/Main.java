@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Main {
 	public static final String modid = "RBlocks";
 	public static final String name = "Road Blocks";
-	public static final String version = "0.0.1";
+	public static final String version = "0.0.2";
 	public static Block Road_Block = new RBlocks_Block();
 
 	public static CreativeTabs tabRoadBlocks = new CreativeTabs("RBlocks_Tab") {
@@ -28,6 +29,9 @@ public class Main {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		GameRegistry.registerBlock(Road_Block, "RBlocks_Road").setCreativeTab(tabRoadBlocks);
+		GameRegistry.registerBlock(Road_Block, "RBlocks_Road").setCreativeTab(
+				tabRoadBlocks);
+		GameRegistry.addShapedRecipe(new ItemStack(Main.Road_Block), "AAA",
+				"ASS", "ASS", 'S', Blocks.stone_slab);
 	}
 }

@@ -11,31 +11,50 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import RoadBlock.Main;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class RBlocks_Block extends Block {
+
+	private IIcon top;
+
 	public RBlocks_Block() {
 		super(Material.rock);
-		// super(materialName);
+		// super(Material materialName, String blockName, String blockTexture);
 		this.setBlockName("RBlocks_RoadBlock");
 		// this.setBlockName(blockName + " RBlocks_RoadBlock");
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
+		this.setBlockBounds(0F, 0F, 0F, 1F, 15F / 16F, 1F);
 		this.setLightOpacity(255);
+		this.useNeighborBrightness = true;
 	}
 
-	public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
-		return false;
+	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
+		Block block = type.getBlock(x, y, z);
+		// add blocks here that wont make a road a full block
+		return block == Blocks.fence_gate || block == Blocks.air
+				|| block == Blocks.torch;
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world,
-			int xCoord, int yCoord, int zCoord) {
-		float f = 0.1F;
-		return AxisAlignedBB.getBoundingBox((double) xCoord, (double) yCoord,
-				(double) zCoord, (double) (xCoord + 1),
-				(double) ((float) (yCoord + 1) - f), (double) (zCoord + 1));
+	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
+			int z) {
+		boolean airabove = this.isFullRoad(block, x, y + 1, z);
+		float f4 = 1F;
+
+		if (airabove) {
+			f4 = 0.9375F;
+		}
+
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x,
+			int y, int z) {
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1,
+				(float) (y + 0.9375), z + 1);
 	}
 
 	public boolean isOpaqueCube() {
@@ -54,12 +73,17 @@ public class RBlocks_Block extends Block {
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return blockIcon;
+		if (side == 1) {
+			return this.top;
+		} else {
+			return blockIcon;
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		this.blockIcon = register.registerIcon("minecraft:stonebrick");
+		this.top = register.registerIcon("roadblock:road_block");
+		this.blockIcon = register.registerIcon("stonebrick");
 		// this.blockIcon = register.registerIcon(blockTexture);
 	}
 }

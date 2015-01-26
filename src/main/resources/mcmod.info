@@ -3,14 +3,14 @@
         "modid": "RBlocks",
         "name": "Road Block",
         "description": "Inspired by the upcoming 1.9 feature",
-        "version": "0.0.2",
+        "version": "1.0.0",
         "mcversion": "1.7.10",
         "url": "",
         "updateUrl": "",
         "authorList": [
             "TheSgtPunishment"
         ],
-        "credits": "",
+        "credits": "Corvus Urro",
         "logoFile": "",
         "screenshots": [],
         "dependencies": [

@@ -1,34 +1,37 @@
-package RoadBlock.Blocks;
+package roadblock.block;
 
-import java.util.Random;
-
+import roadblock.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import RoadBlock.Main;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class RBlocks_Block extends Block {
+public class Road_block extends Block {
+	public String Name;
+	public String Texture;
+	public IIcon blockIcon;
+	public IIcon top;
 
-	private IIcon top;
-
-	public RBlocks_Block() {
-		super(Material.rock);
-		// super(Material materialName, String blockName, String blockTexture);
-		this.setBlockName("RBlocks_RoadBlock");
-		// this.setBlockName(blockName + " RBlocks_RoadBlock");
+	public Road_block(Material materialName, String blockName,
+			String blockTexture) {
+		super(Material.grass);
+		if (blockName != null) {
+			this.setBlockName(blockName + "_RBlocks_RoadBlock");
+		} else {
+			this.setBlockName("RBlocks_RoadBlock");
+		}
 		this.setBlockBounds(0F, 0F, 0F, 1F, 15F / 16F, 1F);
 		this.setLightOpacity(255);
 		this.useNeighborBrightness = true;
+		Name = blockName;
+		Texture = blockTexture;
 	}
 
 	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
@@ -53,8 +56,7 @@ public class RBlocks_Block extends Block {
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x,
 			int y, int z) {
-		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1,
-				(float) (y + 0.9375), z + 1);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
 	}
 
 	public boolean isOpaqueCube() {
@@ -65,25 +67,35 @@ public class RBlocks_Block extends Block {
 		return false;
 	}
 
-	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
-			int zCoord, Entity entity) {
-		entity.motionX *= 1.1D;
-		entity.motionZ *= 1.1D;
+	@Override
+	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
+		float speed = Config.speed;
+		float max = Config.max;
+		double motionX = Math.abs(entity.motionX);
+		double motionZ = Math.abs(entity.motionZ);
+		if (motionX < max) entity.motionX *= speed;
+		if (motionZ < max) entity.motionZ *= speed;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		if (side == 1) {
-			return this.top;
-		} else {
-			return blockIcon;
+		if (Texture == "roadBlock") {
+			if (side == 1) {
+				return this.top;
+			} else {
+
+			}
 		}
+		return blockIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		this.top = register.registerIcon("roadblock:road_block");
-		this.blockIcon = register.registerIcon("stonebrick");
-		// this.blockIcon = register.registerIcon(blockTexture);
+		if (Texture == "roadBlock") {
+			this.top = register.registerIcon("roadBlock:roadBlock");
+			this.blockIcon = register.registerIcon("stonebrick");
+		} else {
+			this.blockIcon = register.registerIcon(Texture);
+		}
 	}
 }

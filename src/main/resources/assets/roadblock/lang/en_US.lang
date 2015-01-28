@@ -1,0 +1,7 @@
+tile.RBlocks_RoadBlock.name=Road Block
+tile.Dirt_RBlocks_RoadBlock.name=Dirt Road Block
+tile.Sand_RBlocks_RoadBlock.name=Sand Road Block
+tile.Gravel_RBlocks_RoadBlock.name=Gravel Road Block
+
+tile._RBlocks_RoadBlock.name=Road Block
+itemGroup.road_block=Road Blocks

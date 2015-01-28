@@ -19,7 +19,7 @@ public class Main {
 
 	public static final String modid = "RBlocks";
 	public static final String name = "Road Blocks";
-	public static final String version = "1.0.7";
+	public static final String version = "1.1.2";
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

@@ -9,10 +9,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import roadblock.block.Regblocks;
+import roadblock.particle.Particle;
+
+import java.util.Random;
 
 public class Road_block extends Block {
 	public String Name;
@@ -21,6 +26,10 @@ public class Road_block extends Block {
 	public IIcon top;
 	public IIcon podzol;
 	public IIcon dirt;
+	public Random rand;
+	public float width = 0.6F;
+	public float height = 1.8F;
+	public float f = 0.125F;
 
 	public Road_block(Material materialName, String blockName,
 			String blockTexture) {
@@ -58,7 +67,6 @@ public class Road_block extends Block {
 
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world,
 			int xCoord, int yCoord, int zCoord) {
-		float f = 0.125F;
 		return AxisAlignedBB.getBoundingBox((double) xCoord, (double) yCoord,
 				(double) zCoord, (double) (xCoord + 1),
 				(double) (yCoord + 1 - f), (double) (zCoord + 1));
@@ -75,6 +83,7 @@ public class Road_block extends Block {
 	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
 			int zCoord, Entity entity) {
 		// Code from Chisel {
+
 		double TSpeed = Math.sqrt(entity.motionX * entity.motionX
 				+ entity.motionZ * entity.motionZ);
 		if (!(entity instanceof EntityPlayerSP))
@@ -90,7 +99,11 @@ public class Road_block extends Block {
 		if (Math.abs(player.movementInput.moveStrafe) < 0.75f
 				&& Math.abs(player.movementInput.moveForward) < 0.75f)
 			return;
-
+		if (Config.heartu) {
+			if (Particle.findBlockUnderEntity(entity) == Regblocks.Podzol_Road_Block) {
+				Particle.particles(world, xCoord, yCoord, zCoord);
+			}
+		}
 		entity.motionX = Config.speed * entity.motionX / TSpeed;
 		entity.motionZ = Config.speed * entity.motionZ / TSpeed;
 		// }

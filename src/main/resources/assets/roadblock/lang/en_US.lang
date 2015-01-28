@@ -11,6 +11,7 @@ tile.Jungle_Planks_RBlocks_RoadBlock.name=Jungle Planks Road Block
 tile.Oak_Planks_RBlocks_RoadBlock.name=Oak Planks Road Block
 tile.Spruce_Planks_RBlocks_RoadBlock.name=Spruce Planks Road Block
 tile.Red_Sand_RBlocks_RoadBlock.name=Red Sand Road Block
+tile.Bricks_RBlocks_RoadBlock.name=Brick Road Block
 
 itemGroup.road_block=Road Blocks
 achievement.buildRoad=The Road not taken

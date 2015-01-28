@@ -13,6 +13,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class Config {
 
 	public static float speed;
+	public static boolean heartu;
 
 	public static Configuration config;
 	public static File configDirectory;
@@ -65,6 +66,7 @@ public class Config {
 		try {
 			speed = config.getFloat("Travel Speed", "general", 0.5F, 0.1F, 5F,
 					"How fast you travel on a road block");
+			heartu = config.getBoolean("I <3 U", "general", false, "Hearts follow you on podzol");
 
 		} catch (Exception e) {
 			e.printStackTrace();

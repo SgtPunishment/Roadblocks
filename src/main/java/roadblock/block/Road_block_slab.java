@@ -66,20 +66,20 @@ public class Road_block_slab extends Block {
 		return false;
 	}
 
-	@Override
-	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
-		float speed = Config.speed;
-		float max = Config.max;
-		if (entity.motionX <= max)
-			entity.motionX *= speed;
-		if (entity.motionZ <= max)
-			entity.motionZ *= speed;
-
-		// double motionX = Math.abs(entity.motionX);
-		// double motionZ = Math.abs(entity.motionZ);
-		// if (motionX < max) entity.motionX *= speed;
-		// if (motionZ < max) entity.motionZ *= speed;
-	}
+//	@Override
+//	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
+//		float speed = Config.speed;
+//		float max = Config.max;
+//		if (entity.motionX <= max)
+//			entity.motionX *= speed;
+//		if (entity.motionZ <= max)
+//			entity.motionZ *= speed;
+//
+//		// double motionX = Math.abs(entity.motionX);
+//		// double motionZ = Math.abs(entity.motionZ);
+//		// if (motionX < max) entity.motionX *= speed;
+//		// if (motionZ < max) entity.motionZ *= speed;
+//	}
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {

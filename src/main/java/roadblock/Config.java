@@ -12,8 +12,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class Config {
 
-	public static float max = 1.5F;
-	public static float speed = 1.5F;
+	public static float speed;
 
 	public static Configuration config;
 	public static File configDirectory;
@@ -64,11 +63,8 @@ public class Config {
 
 	public static void syncConfig() {
 		try {
-			max = config
-					.getFloat("Max Speed", "general", 1.5F, 0.1F, 3.0F,
-							"Maximum speed you will built up to whilst on the Road Block");
-			speed = config.getFloat("Travel Speed", "general", 3F, 0.1F, 10F,
-					"Travel Speed Multiplyer?");
+			speed = config.getFloat("Travel Speed", "general", 0.5F, 0.1F, 5F,
+					"How fast you travel on a road block");
 
 		} catch (Exception e) {
 			e.printStackTrace();

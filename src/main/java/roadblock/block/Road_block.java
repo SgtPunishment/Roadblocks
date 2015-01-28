@@ -3,6 +3,7 @@ package roadblock.block;
 import roadblock.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -18,6 +19,8 @@ public class Road_block extends Block {
 	public String Texture;
 	public IIcon blockIcon;
 	public IIcon top;
+	public IIcon podzol;
+	public IIcon dirt;
 
 	public Road_block(Material materialName, String blockName,
 			String blockTexture) {
@@ -58,14 +61,8 @@ public class Road_block extends Block {
 		float f = 0.125F;
 		return AxisAlignedBB.getBoundingBox((double) xCoord, (double) yCoord,
 				(double) zCoord, (double) (xCoord + 1),
-				(double) (yCoord + 0.9375), (double) (zCoord + 1));
+				(double) (yCoord + 1 - f), (double) (zCoord + 1));
 	}
-
-	// //@Override
-	// public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x,
-	// int y, int z) {
-	// return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
-	// }
 
 	public boolean isOpaqueCube() {
 		return false;
@@ -75,31 +72,28 @@ public class Road_block extends Block {
 		return false;
 	}
 
-	// @Override
-	// public void onEntityWalking(World world, int x, int y, int z, Entity
-	// entity) {
-	// float speed = Config.speed;
-	// float max = Config.max;
-	// // if (entity.motionX <= max) entity.motionX *= speed;
-	// // if (entity.motionZ <= max) entity.motionZ *= speed;
-	//
-	// double motionX = Math.abs(entity.motionX);
-	// double motionZ = Math.abs(entity.motionZ);
-	// if (motionX < max) entity.motionX *= speed;
-	// if (motionZ < max) entity.motionZ *= speed;
-	// }
 	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
 			int zCoord, Entity entity) {
-		float speed = Config.speed;
-		float max = Config.max;
-		// entity.motionX *= 1.5D;
-		// entity.motionZ *= 1.5D;
-		double motionX = Math.abs(entity.motionX);
-		double motionZ = Math.abs(entity.motionZ);
-		if (motionX < max)
-			entity.motionX *= speed;
-		if (motionZ < max)
-			entity.motionZ *= speed;
+		// Code from Chisel {
+		double TSpeed = Math.sqrt(entity.motionX * entity.motionX
+				+ entity.motionZ * entity.motionZ);
+		if (!(entity instanceof EntityPlayerSP))
+			return;
+
+		if (TSpeed == 0)
+			return;
+
+		if (TSpeed >= Config.speed)
+			return;
+
+		EntityPlayerSP player = (EntityPlayerSP) entity;
+		if (Math.abs(player.movementInput.moveStrafe) < 0.75f
+				&& Math.abs(player.movementInput.moveForward) < 0.75f)
+			return;
+
+		entity.motionX = Config.speed * entity.motionX / TSpeed;
+		entity.motionZ = Config.speed * entity.motionZ / TSpeed;
+		// }
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -107,6 +101,14 @@ public class Road_block extends Block {
 		if (Texture == "roadBlock") {
 			if (side == 1) {
 				return this.top;
+			} else {
+
+			}
+		} else if (Texture == "podzol") {
+			if (side == 1) {
+				return this.podzol;
+			} else if (side == 0) {
+				return this.dirt;
 			} else {
 
 			}
@@ -119,6 +121,10 @@ public class Road_block extends Block {
 		if (Texture == "roadBlock") {
 			this.top = register.registerIcon("roadBlock:roadBlock");
 			this.blockIcon = register.registerIcon("stonebrick");
+		} else if (Texture == "podzol") {
+			this.podzol = register.registerIcon("dirt_podzol_top");
+			this.blockIcon = register.registerIcon("dirt_podzol_side");
+			this.dirt = register.registerIcon("dirt");
 		} else {
 			this.blockIcon = register.registerIcon(Texture);
 		}

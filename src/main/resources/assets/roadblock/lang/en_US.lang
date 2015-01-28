@@ -1,7 +1,17 @@
-tile.RBlocks_RoadBlock.name=Road Block
+tile._RBlocks_RoadBlock.name=Road Block
 tile.Dirt_RBlocks_RoadBlock.name=Dirt Road Block
 tile.Sand_RBlocks_RoadBlock.name=Sand Road Block
 tile.Gravel_RBlocks_RoadBlock.name=Gravel Road Block
+tile.Podzol_RBlocks_RoadBlock.name=Podzol Road Block
+tile.Cobblestone_RBlocks_RoadBlock.name=Cobblestone Road Block
+tile.Acacia_Planks_RBlocks_RoadBlock.name=Acacia Planks Road Block
+tile.Dark_Oak_Planks_RBlocks_RoadBlock.name=Dark Oak Planks Road Block
+tile.Birch_Planks_RBlocks_RoadBlock.name=Birch Planks Road Block
+tile.Jungle_Planks_RBlocks_RoadBlock.name=Jungle Planks Road Block
+tile.Oak_Planks_RBlocks_RoadBlock.name=Oak Planks Road Block
+tile.Spruce_Planks_RBlocks_RoadBlock.name=Spruce Planks Road Block
+tile.Red_Sand_RBlocks_RoadBlock.name=Red Sand Road Block
 
-tile._RBlocks_RoadBlock.name=Road Block
 itemGroup.road_block=Road Blocks
+achievement.buildRoad=The Road not taken
+achievement.buildRoad.desc=Crafting a road block

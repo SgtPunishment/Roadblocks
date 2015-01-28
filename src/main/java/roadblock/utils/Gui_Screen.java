@@ -12,8 +12,8 @@ import net.minecraftforge.common.config.ConfigElement;
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
 
-public class guiscreen extends GuiConfig {
-	public guiscreen(GuiScreen parentScreen) {
+public class Gui_Screen extends GuiConfig {
+	public Gui_Screen(GuiScreen parentScreen) {
 		super(parentScreen, getConfigElements(parentScreen), Main.modid, false,
 				false, GuiConfig.getAbridgedConfigPath("/RoadBlocks/"));
 	}

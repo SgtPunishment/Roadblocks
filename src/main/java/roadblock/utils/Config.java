@@ -1,10 +1,11 @@
-package roadblock;
+package roadblock.utils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
+import roadblock.Main;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -12,8 +13,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class Config {
 
-	public static float speed;
-	public static boolean heartu;
+	public static int speed;
+	public static boolean debug;
 
 	public static Configuration config;
 	public static File configDirectory;
@@ -43,6 +44,8 @@ public class Config {
 	public static final Section general = new Section("general", "general");
 
 	public static void load(FMLPreInitializationEvent event) {
+		if (Config.debug)
+			System.out.println("Loading Config File");
 		FMLCommonHandler.instance().bus().register(new Config());
 		configDirectory = new File(event.getModConfigurationDirectory()
 				+ "/RoadBlocks/");
@@ -64,10 +67,10 @@ public class Config {
 
 	public static void syncConfig() {
 		try {
-			speed = config.getFloat("Travel Speed", "general", 0.5F, 0.1F, 5F,
+			speed = config.getInt("Speed Boost Level", "general", 0, 0, 9,
 					"How fast you travel on a road block");
-			heartu = config.getBoolean("I <3 U", "general", false, "Hearts follow you on podzol");
-
+			debug = config.getBoolean("Enable Debug Mode", "general", false,
+					"This will output information to the console");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -3,9 +3,8 @@ package roadblock.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import roadblock.Config;
 import roadblock.Main;
-import roadblock.Config.Section;
+import roadblock.utils.Config.Section;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.ConfigElement;
@@ -18,6 +17,7 @@ public class Gui_Screen extends GuiConfig {
 				false, GuiConfig.getAbridgedConfigPath("/RoadBlocks/"));
 	}
 
+	@SuppressWarnings("rawtypes")
 	private static List<IConfigElement> getConfigElements(GuiScreen parentScreen) {
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
 		for (Section section : Config.sections) {

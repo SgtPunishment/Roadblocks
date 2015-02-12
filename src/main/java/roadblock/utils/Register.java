@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import roadblock.block.Roadblock;
-import roadblock.item.Mallet;
+import roadblock.item.MalletTool;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Register {
@@ -343,7 +343,7 @@ public class Register {
 
 	public static void Items() {
 
-		ironMallet = new Mallet();
+		ironMallet = new MalletTool();
 	}
 
 	public static void Achievements() {

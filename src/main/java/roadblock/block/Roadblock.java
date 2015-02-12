@@ -68,25 +68,38 @@ public class Roadblock extends Block {
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
 		for (int i = 0; i < 2; i++) {
-
 			list.add(new ItemStack(item, 1, i));
 		}
 	}
 
 	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
 			int z) {
+
 		int meta = block.getBlockMetadata(x, y, z);
+
 		boolean airabove = this.isFullRoad(block, x, y + 1, z);
+
 		float f4 = 0.9375F;
 
-		if (airabove && meta == 0) {
-			f4 = 0.4375F;
+		if (meta == 0) {
+			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
+			// System.out.println("Metadata Value: " + meta);
+		} else if (meta == 1) {
+			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.4375F, 1.0F);
+			// System.out.println("Metadata Value: " + meta);
+		} else {
+
+			if (airabove && meta == 0) {
+				f4 = 1.0F;
+			}
+			// System.out.println("Metadata Value: " + meta);
+			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
 		}
 
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
 		// System.out.println("when do I get here?" + meta);
 	}
 
+	@SuppressWarnings({ "rawtypes" })
 	public void addCollisionBoxesToList(World world, int x, int y, int z,
 			AxisAlignedBB axisAlignedBB, List list, Entity entity) {
 		setBlockBoundsBasedOnState(world, x, y, z);
@@ -103,18 +116,26 @@ public class Roadblock extends Block {
 			ItemStack stack = player.getHeldItem();
 			if (stack != null && stack.getItem() == Register.ironMallet) {
 				int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
-				if (meta == 1) {
-					// System.out.println("Set to Half");
-					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0,
-					2);
-					world.markBlockForUpdate(xCoord, yCoord, zCoord);
-				} else {
-					// System.out.println("Set to Full");
+
+				switch (meta) {
+
+				case 0:
+					System.out.println("Metadata Value: " + meta);
 					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1,
 							2);
 					world.markBlockForUpdate(xCoord, yCoord, zCoord);
-				}
+					break;
+				case 1:
+					System.out.println("Metadata Value: " + meta);
+					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0,
+							2);
+					world.markBlockForUpdate(xCoord, yCoord, zCoord);
+					break;
+				case 2:
+					System.out.println("Metadata Value: " + meta);
+					break;
 
+				}
 			}
 		}
 
@@ -140,6 +161,11 @@ public class Roadblock extends Block {
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
 					Potion.moveSpeed.id, 0, speed));
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void setBlockBoundsForItemRender() {
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 	}
 
 	@SideOnly(Side.CLIENT)

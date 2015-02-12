@@ -20,13 +20,12 @@ public class Main {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
+		// Register Items
+		Register.Items();
 
 		// Register Blocks
 		Register.Blocks();
-
-		// Register Items
-		Register.Items();
-		
+	
 		// Register Achievements
 		Register.Achievements();
 	}

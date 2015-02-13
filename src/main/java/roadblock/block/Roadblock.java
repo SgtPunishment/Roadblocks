@@ -1,7 +1,6 @@
 package roadblock.block;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -34,8 +33,6 @@ public class Roadblock extends Block {
 	public IIcon top;
 	public IIcon podzol;
 	public IIcon dirt;
-	public Random rand;
-	public float f = 0.125F;
 
 	public Roadblock(Material material, String blockName, String blockTexture,
 			SoundType stepsound) {
@@ -49,7 +46,6 @@ public class Roadblock extends Block {
 		setLightOpacity(255);
 		useNeighborBrightness = true;
 		setHardness(1.5F);
-		setBlockBounds(0F, 0F, 0F, 1F, 0.9375F, 1F);
 	}
 
 	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
@@ -74,29 +70,20 @@ public class Roadblock extends Block {
 
 	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
 			int z) {
-
 		int meta = block.getBlockMetadata(x, y, z);
-
 		boolean airabove = this.isFullRoad(block, x, y + 1, z);
+		float f4;
 
-		float f4 = 0.9375F;
-
-		if (meta == 0) {
-			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
-			// System.out.println("Metadata Value: " + meta);
-		} else if (meta == 1) {
-			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.4375F, 1.0F);
-			// System.out.println("Metadata Value: " + meta);
+		if (!airabove) {
+			f4 = 1.0F;
 		} else {
-
-			if (airabove && meta == 0) {
-				f4 = 1.0F;
+			if (meta == 0) {
+				f4 = 0.9375F;
+			} else {
+				f4 = 0.4375F;
 			}
-			// System.out.println("Metadata Value: " + meta);
-			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
 		}
-
-		// System.out.println("when do I get here?" + meta);
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
 	}
 
 	@SuppressWarnings({ "rawtypes" })
@@ -120,19 +107,19 @@ public class Roadblock extends Block {
 				switch (meta) {
 
 				case 0:
-					System.out.println("Metadata Value: " + meta);
+					// System.out.println("Metadata Value: " + meta);
 					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1,
 							2);
 					world.markBlockForUpdate(xCoord, yCoord, zCoord);
 					break;
 				case 1:
-					System.out.println("Metadata Value: " + meta);
+					// System.out.println("Metadata Value: " + meta);
 					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0,
 							2);
 					world.markBlockForUpdate(xCoord, yCoord, zCoord);
 					break;
 				case 2:
-					System.out.println("Metadata Value: " + meta);
+					//System.out.println("Metadata Value: " + meta);
 					break;
 
 				}

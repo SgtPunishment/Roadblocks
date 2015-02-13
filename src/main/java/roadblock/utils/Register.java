@@ -56,8 +56,7 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering Default Roadblock");
-		defaultRoadblock = new Roadblock(Material.rock, "Default", "default",
-				Block.soundTypeStone);
+		defaultRoadblock = new Roadblock(Material.rock, "Default", "default", Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Roadblock");

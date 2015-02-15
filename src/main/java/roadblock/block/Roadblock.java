@@ -98,6 +98,7 @@ public class Roadblock extends Block {
 	public boolean onBlockActivated(World world, int xCoord, int yCoord,
 			int zCoord, EntityPlayer player, int p_149727_6, float p_149727_7,
 			float p_149727_8, float p_149727_9) {
+		Block block1 = world.getBlock(xCoord, yCoord, zCoord);
 
 		if (!world.isRemote) {
 			ItemStack stack = player.getHeldItem();
@@ -111,12 +112,26 @@ public class Roadblock extends Block {
 					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1,
 							2);
 					world.markBlockForUpdate(xCoord, yCoord, zCoord);
+					world.playSoundEffect((double) ((float) xCoord + 0.5F),
+							(double) ((float) yCoord + 0.5F),
+							(double) ((float) zCoord + 0.5F),
+							block1.stepSound.getStepResourcePath(),
+							(block1.stepSound.getVolume() + 1.0F) / 2.0F,
+							block1.stepSound.getPitch() * 0.8F);
+					stack.damageItem(1, player);
 					break;
 				case 1:
 					// System.out.println("Metadata Value: " + meta);
 					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0,
 							2);
 					world.markBlockForUpdate(xCoord, yCoord, zCoord);
+					world.playSoundEffect((double) ((float) xCoord + 0.5F),
+							(double) ((float) yCoord + 0.5F),
+							(double) ((float) zCoord + 0.5F),
+							block1.stepSound.getStepResourcePath(),
+							(block1.stepSound.getVolume() + 1.0F) / 2.0F,
+							block1.stepSound.getPitch() * 0.8F);
+					stack.damageItem(1, player);
 					break;
 				case 2:
 					// System.out.println("Metadata Value: " + meta);

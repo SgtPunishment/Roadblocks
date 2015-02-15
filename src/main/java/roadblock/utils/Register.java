@@ -8,9 +8,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.MinecraftForge;
 import roadblock.block.Roadblock;
-import roadblock.event.MalletEvent;
 import roadblock.item.MalletTool;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -53,6 +51,8 @@ public class Register {
 	public static Block prismarineRoadblock;
 
 	public static Item ironMallet;
+	public static Item goldMallet;
+	public static Item diamondMallet;
 
 	public static void Blocks() {
 		// Register Full Blocks
@@ -345,8 +345,9 @@ public class Register {
 	}
 
 	public static void Items() {
-
 		ironMallet = new MalletTool(ToolMaterial.IRON);
+		goldMallet = new MalletTool(ToolMaterial.GOLD);
+		diamondMallet = new MalletTool(ToolMaterial.EMERALD);
 	}
 
 	public static void Achievements() {
@@ -357,10 +358,6 @@ public class Register {
 
 		AchievementPage.registerAchievementPage(new AchievementPage(
 				"Road Blocks", new Achievement[] { buildRoad }));
-	}
-
-	public static void Events() {
-		MinecraftForge.EVENT_BUS.register(new MalletEvent(null, null, null, 0, 0, 0));
 	}
 
 }

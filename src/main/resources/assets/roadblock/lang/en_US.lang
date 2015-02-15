@@ -1,4 +1,6 @@
-item.roadblock_ironMallet.name=Paving Mallet
+item.roadblock_ironMallet.name=Iron Paving Mallet
+item.roadblock_goldMallet.name=Gold Paving Mallet
+item.roadblock_emeraldMallet.name=Diamond Paving Mallet
 
 tile.Default_roadblock.name=Road Block
 tile.Stone_roadblock.name=Stone Road Block

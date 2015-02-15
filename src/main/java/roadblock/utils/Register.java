@@ -4,10 +4,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.MinecraftForge;
 import roadblock.block.Roadblock;
+import roadblock.event.MalletEvent;
 import roadblock.item.MalletTool;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -56,7 +59,8 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering Default Roadblock");
-		defaultRoadblock = new Roadblock(Material.rock, "Default", "default", Block.soundTypeStone);
+		defaultRoadblock = new Roadblock(Material.rock, "Default", "default",
+				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Roadblock");
@@ -342,7 +346,7 @@ public class Register {
 
 	public static void Items() {
 
-		ironMallet = new MalletTool();
+		ironMallet = new MalletTool(ToolMaterial.IRON);
 	}
 
 	public static void Achievements() {
@@ -353,6 +357,10 @@ public class Register {
 
 		AchievementPage.registerAchievementPage(new AchievementPage(
 				"Road Blocks", new Achievement[] { buildRoad }));
+	}
+
+	public static void Events() {
+		MinecraftForge.EVENT_BUS.register(new MalletEvent(null, null, null, 0, 0, 0));
 	}
 
 }

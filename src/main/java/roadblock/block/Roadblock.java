@@ -119,7 +119,7 @@ public class Roadblock extends Block {
 					world.markBlockForUpdate(xCoord, yCoord, zCoord);
 					break;
 				case 2:
-					//System.out.println("Metadata Value: " + meta);
+					// System.out.println("Metadata Value: " + meta);
 					break;
 
 				}

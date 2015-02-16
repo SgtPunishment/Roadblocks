@@ -26,7 +26,13 @@ public class Main {
 		// Register Blocks
 		Register.Blocks();
 	
+		// Register Recipes
+		Register.Recipes();
+		
 		// Register Achievements
 		Register.Achievements();
+		
+		// Register Tools
+		
 	}
 }

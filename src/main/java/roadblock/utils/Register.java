@@ -3,12 +3,14 @@ package roadblock.utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import roadblock.block.Roadblock;
+import roadblock.block.compressedCobble;
 import roadblock.item.MalletTool;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -19,11 +21,11 @@ public class Register {
 	public static Creative_Tab tabRoadBlock = new Creative_Tab();
 
 	// Full Blocks
-
+	public static Block compressedCobblestone;
 	public static Block defaultRoadblock;
+	public static Block compressedCobbleRoadblock;
 	public static Block stoneRoadblock;
 	public static Block dirtRoadblock;
-	public static Block coarseDirtRoadblock;
 	public static Block podzolRoadblock;
 	public static Block cobbleRoadblock;
 	public static Block oakRoadblock;
@@ -35,8 +37,6 @@ public class Register {
 	public static Block sandRoadblock;
 	public static Block redsandRoadblock;
 	public static Block gravelRoadblock;
-	public static Block redSandstoneTopRoadblock;
-	public static Block redSandstoneBottomRoadblock;
 	public static Block sandstoneTopRoadblock;
 	public static Block sandstoneBottomRoadblock;
 	public static Block stoneSlabTopRoadblock;
@@ -47,20 +47,37 @@ public class Register {
 	public static Block quartzChiseledRoadblock;
 	public static Block quartzPillerTopRoadblock;
 	public static Block stonebrickChiseledRoadblock;
-	public static Block darkPrismarineRoadblock;
-	public static Block prismarineRoadblock;
 
 	public static Item ironMallet;
 	public static Item goldMallet;
 	public static Item diamondMallet;
+	public static Item souliumMallet;
+
+	public static void Items() {
+		ironMallet = new MalletTool(ToolMaterial.IRON);
+		goldMallet = new MalletTool(ToolMaterial.GOLD);
+		diamondMallet = new MalletTool(ToolMaterial.EMERALD);
+		// if (Loader.isModLoaded("SSTOW")) {
+		// souliumMallet = new MalletTool(ObjHandler.SOULIUM);
+		// }
+	}
 
 	public static void Blocks() {
 		// Register Full Blocks
 
 		if (Config.debug)
+			System.out.println("Registering Compressed Cobblestone Block");
+		compressedCobblestone = new compressedCobble();
+
+		if (Config.debug)
 			System.out.println("Registering Default Roadblock");
 		defaultRoadblock = new Roadblock(Material.rock, "Default", "default",
 				Block.soundTypeStone);
+
+		if (Config.debug)
+			System.out.println("Registering Compressed Cobblestone Roadblock");
+		compressedCobbleRoadblock = new Roadblock(Material.rock,
+				"CompressedCobble", "compressedcobble", Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Roadblock");
@@ -174,53 +191,67 @@ public class Register {
 		stonebrickChiseledRoadblock = new Roadblock(Material.rock,
 				"ChiseledStonebrick", "stonebrick_carved",
 				Block.soundTypePiston);
+	}
 
+	public static void Recipes() {
 		// Register Recipes
 
-		// Register Recipes
-		// if (Config.debug)
-		// System.out.println("Registering Compressed Cobblestone Recipe");
-		// GameRegistry.addRecipe(new ItemStack(compressedCobble), new Object[]
-		// {
-		// "AAA", "AAA", "AAA", 'A', Blocks.cobblestone });
-		//
-		// if (Config.debug)
-		// System.out
-		// .println("Registering Compressed Cobblestone to Cobblestone Recipe");
-		// GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone, 9),
-		// new Object[] { compressedCobble });
+		if (Config.debug)
+			System.out.println("Registering Iron Pavers Mallet Recipe");
+		GameRegistry.addRecipe(new ItemStack(ironMallet), "IA", "SI", 'S',
+				Items.stick, 'I', Items.iron_ingot);
+
+		if (Config.debug)
+			System.out.println("Registering Gold Pavers Mallet Recipe");
+		GameRegistry.addShapedRecipe(new ItemStack(goldMallet), "GA", "SG",
+				'S', Items.stick, 'G', Items.gold_ingot);
+
+		if (Config.debug)
+			System.out.println("Registering Diamond Pavers Mallet Recipe");
+		GameRegistry.addShapedRecipe(new ItemStack(diamondMallet), "DA", "SD",
+				'S', Items.stick, 'D', Items.diamond);
+
+		if (Config.debug)
+			System.out.println("Registering Compressed Cobblestone Recipe");
+		GameRegistry.addRecipe(new ItemStack(compressedCobblestone),
+				new Object[] { "###", "###", "###", '#', Blocks.cobblestone });
+
+		if (Config.debug)
+			System.out
+					.println("Registering Compressed Cobblestone to Cobblestone Recipe");
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone, 9),
+				new Object[] { compressedCobblestone });
 
 		if (Config.debug)
 			System.out.println("Registering Roadblock Recipe");
 		GameRegistry.addRecipe(new ItemStack(defaultRoadblock), new Object[] {
-				"AAA", "ASS", "ASS", 'S',
-				new ItemStack(Blocks.stone_slab, 1, 5) });
+				"##", "##", '#', new ItemStack(Blocks.stone_slab, 1, 5) });
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Top Recipe");
 		GameRegistry.addRecipe(new ItemStack(sandstoneTopRoadblock),
-				new Object[] { "S  ", "R  ", "   ", 'S',
+				new Object[] { "S", "R", 'S',
 						new ItemStack(Blocks.sandstone, 1, 0), 'R',
 						defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Bottom Recipe");
 		GameRegistry.addRecipe(new ItemStack(sandstoneBottomRoadblock),
-				new Object[] { "R  ", "S  ", "   ", 'S',
+				new Object[] { "R", "S", 'S',
 						new ItemStack(Blocks.sandstone, 1, 0), 'R',
 						defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Top Recipe");
 		GameRegistry.addRecipe(new ItemStack(quartzTopRoadblock),
-				new Object[] { "S  ", "R  ", "   ", 'S',
+				new Object[] { "S", "R", 'S',
 						new ItemStack(Blocks.quartz_block, 1, 0), 'R',
 						defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Bottom Recipe");
 		GameRegistry.addRecipe(new ItemStack(quartzBottomRoadblock),
-				new Object[] { "R  ", "S  ", "   ", 'S',
+				new Object[] { "R", "S", 'S',
 						new ItemStack(Blocks.quartz_block, 1, 0), 'R',
 						defaultRoadblock });
 
@@ -232,15 +263,16 @@ public class Register {
 						new ItemStack(Blocks.stone, 1, 0) });
 
 		if (Config.debug)
+			System.out.println("Registering Stone Roadblock Recipe");
+		GameRegistry.addShapelessRecipe(
+				new ItemStack(compressedCobbleRoadblock), new Object[] {
+						defaultRoadblock,
+						new ItemStack(Register.compressedCobblestone) });
+
+		if (Config.debug)
 			System.out.println("Registering Dirt Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(dirtRoadblock),
 				new Object[] { defaultRoadblock, Blocks.dirt });
-
-		if (Config.debug)
-			System.out.println("Registering Coarse Dirt Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(coarseDirtRoadblock),
-				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.dirt, 1, 1) });
 
 		if (Config.debug)
 			System.out.println("Registering Podzol Roadblock Recipe");
@@ -341,13 +373,6 @@ public class Register {
 		GameRegistry.addShapelessRecipe(new ItemStack(
 				stonebrickChiseledRoadblock), new Object[] { defaultRoadblock,
 				new ItemStack(Blocks.stonebrick, 1, 3) });
-
-	}
-
-	public static void Items() {
-		ironMallet = new MalletTool(ToolMaterial.IRON);
-		goldMallet = new MalletTool(ToolMaterial.GOLD);
-		diamondMallet = new MalletTool(ToolMaterial.EMERALD);
 	}
 
 	public static void Achievements() {

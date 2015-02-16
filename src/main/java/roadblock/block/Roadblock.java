@@ -5,12 +5,10 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -31,8 +29,9 @@ public class Roadblock extends Block {
 	public String texture;
 	public IIcon blockIcon;
 	public IIcon top;
-	public IIcon podzol;
-	public IIcon dirt;
+	public IIcon side;
+	public IIcon bottom;
+	public IIcon slab;
 
 	public Roadblock(Material material, String blockName, String blockTexture,
 			SoundType stepsound) {
@@ -60,13 +59,14 @@ public class Roadblock extends Block {
 		return meta;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
-		for (int i = 0; i < 2; i++) {
-			list.add(new ItemStack(item, 1, i));
-		}
-	}
+	// @SuppressWarnings({ "rawtypes", "unchecked" })
+	// @Override
+	// public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list)
+	// {
+	// for (int i = 0; i < 2; i++) {
+	// list.add(new ItemStack(item, 1, i));
+	// }
+	// }
 
 	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
 			int z) {
@@ -102,7 +102,9 @@ public class Roadblock extends Block {
 
 		if (!world.isRemote) {
 			ItemStack stack = player.getHeldItem();
-			if (stack != null && stack.getItem() == Register.ironMallet) {
+			if (stack != null && stack.getItem() == Register.ironMallet
+					|| stack.getItem() == Register.goldMallet
+					|| stack.getItem() == Register.diamondMallet) {
 				int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
 
 				switch (meta) {
@@ -178,27 +180,109 @@ public class Roadblock extends Block {
 			} else {
 
 			}
-		} else if (texture == "podzol") {
-			if (side == 1) {
-				return this.podzol;
-			} else if (side == 0) {
-				return this.dirt;
-			} else {
 
+		} else if (texture == "podzol") {
+			if (meta == 0) {
+				if (side == 1) {
+					return this.top;
+				} else if (side == 0) {
+					return this.bottom;
+				} else {
+
+				}
+			}
+			if (meta == 1) {
+				if (side == 1) {
+					return this.top;
+				} else if (side == 0) {
+					return this.bottom;
+				} else if (side != 1 && side != 0) {
+					return this.slab;
+				}
+			}
+
+		} else if (texture == "compressedcobble") {
+			if (meta == 0) {
+				return blockIcon;
+			}
+			if (meta == 1) {
+				if (side == 1 && side == 0) {
+					return blockIcon;
+				} else if (side != 1 && side != 0) {
+					return this.slab;
+				}
+			}
+
+		} else if (texture == "stonebrick_carved") {
+			if (meta == 0) {
+				return blockIcon;
+			}
+
+			if (meta == 1) {
+				if (side == 1 && side == 0) {
+					return blockIcon;
+				} else if (side != 1 && side != 0) {
+					return this.slab;
+				}
+			}
+		} else if (texture == "quartz_block_lines_top") {
+			if (meta == 0) {
+				return blockIcon;
+			}
+
+			if (meta == 1) {
+				if (side == 1 && side == 0) {
+					return blockIcon;
+				} else if (side != 1 && side != 0) {
+					return this.slab;
+				}
+			}
+		} else if (texture == "stone_slab_top") {
+			if (meta == 0) {
+				return blockIcon;
+			}
+
+			if (meta == 1) {
+				if (side == 1 && side == 0) {
+					return blockIcon;
+				} else if (side != 1 && side != 0) {
+					return this.slab;
+				}
 			}
 		}
+
 		return blockIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
+
 		if (texture == "default") {
 			this.top = register.registerIcon("roadblock:default");
 			this.blockIcon = register.registerIcon("stonebrick");
+
 		} else if (texture == "podzol") {
-			this.podzol = register.registerIcon("dirt_podzol_top");
+			this.top = register.registerIcon("dirt_podzol_top");
 			this.blockIcon = register.registerIcon("dirt_podzol_side");
-			this.dirt = register.registerIcon("dirt");
+			this.bottom = register.registerIcon("dirt");
+			this.slab = register.registerIcon("roadblock:podzol_slab");
+
+		} else if (texture == "compressedcobble") {
+			this.blockIcon = register.registerIcon("furnace_top");
+			this.slab = register.registerIcon("roadblock:compressedslab");
+
+		} else if (texture == "stonebrick_carved") {
+			this.blockIcon = register.registerIcon("stonebrick_carved");
+			this.slab = register.registerIcon("roadblock:chiseledslab");
+
+		} else if (texture == "quartz_block_lines_top") {
+			this.blockIcon = register.registerIcon("quartz_block_lines_top");
+			this.slab = register.registerIcon("quartz_block_lines");
+
+		} else if (texture == "stone_slab_top") {
+			this.blockIcon = register.registerIcon("stone_slab_top");
+			this.slab = register.registerIcon("roadblock:stoneslabside");
+
 		} else {
 			this.blockIcon = register.registerIcon(texture);
 		}

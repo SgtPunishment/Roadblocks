@@ -48,5 +48,6 @@ Temporary Items
 .gradle
 bin
 gradle
+lib
 libs
 .settings

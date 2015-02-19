@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import roadblock.block.Roadblock;
-import roadblock.block.decBlock;
+import roadblock.block.decroBlock;
 import roadblock.item.MalletTool;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -69,12 +69,12 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering Smooth Dirt Block");
-		smoothDirt = new decBlock(Material.ground, "SmoothDirt", "smoothDirt",
+		smoothDirt = new decroBlock(Material.ground, "SmoothDirt", "smoothDirt",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Compressed Cobblestone Block");
-		compressedCobblestone = new decBlock(Material.rock,
+		compressedCobblestone = new decroBlock(Material.rock,
 				"compressedCobblestone", "compressedCobblestone",
 				Block.soundTypeStone);
 

@@ -9,13 +9,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class decBlock extends Block {
+public class decroBlock extends Block {
 
 	public String name;
 	public String texture;
 	public IIcon sDirt;
 
-	public decBlock(Material material, String blockName, String blockTexture, SoundType stepsound) {
+	public decroBlock(Material material, String blockName, String blockTexture, SoundType stepsound) {
 		super(material);
 		name = blockName;
 		texture = blockTexture;

@@ -15,6 +15,7 @@ public class Config {
 
 	public static int speed;
 	public static boolean debug;
+	public static boolean speedOn;
 
 	public static Configuration config;
 	public static File configDirectory;
@@ -69,8 +70,10 @@ public class Config {
 		try {
 			speed = config.getInt("Speed Boost Level", "general", 0, 0, 9,
 					"How fast you travel on a road block");
+			speedOn = config.getBoolean("Enable Speed Boost", "general", true,
+					"Enable the speed boost option");
 			debug = config.getBoolean("Enable Debug Mode", "general", false,
-					"This will output information to the console");
+					"RESTART REQUIRED: This will output information to the console");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

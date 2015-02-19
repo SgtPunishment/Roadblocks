@@ -156,14 +156,16 @@ public class Roadblock extends Block {
 
 	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
 			int zCoord, Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			if (Config.speed > 9) {
-				speed = 9;
-			} else {
-				speed = Config.speed;
+		if (Config.speedOn) {
+			if (entity instanceof EntityLivingBase) {
+				if (Config.speed > 9) {
+					speed = 9;
+				} else {
+					speed = Config.speed;
+				}
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
+						Potion.moveSpeed.id, 0, speed));
 			}
-			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
-					Potion.moveSpeed.id, 0, speed));
 		}
 	}
 
@@ -249,6 +251,8 @@ public class Roadblock extends Block {
 					return this.slab;
 				}
 			}
+		} else if (texture == "smoothDirt") {
+			return blockIcon;
 		}
 
 		return blockIcon;
@@ -261,6 +265,8 @@ public class Roadblock extends Block {
 			this.top = register.registerIcon("roadblock:default");
 			this.blockIcon = register.registerIcon("stonebrick");
 
+		} else if (texture == "smoothDirt") {
+			this.blockIcon = register.registerIcon("roadblock:smoothdirt");
 		} else if (texture == "podzol") {
 			this.top = register.registerIcon("dirt_podzol_top");
 			this.blockIcon = register.registerIcon("dirt_podzol_side");

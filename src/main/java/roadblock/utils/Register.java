@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import roadblock.block.Roadblock;
-import roadblock.block.compressedCobble;
+import roadblock.block.decBlock;
 import roadblock.item.MalletTool;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -21,9 +21,11 @@ public class Register {
 	public static Creative_Tab tabRoadBlock = new Creative_Tab();
 
 	// Full Blocks
+	public static Block smoothDirt;
 	public static Block compressedCobblestone;
 	public static Block defaultRoadblock;
 	public static Block compressedCobbleRoadblock;
+	public static Block smoothDirtRoadblock;
 	public static Block stoneRoadblock;
 	public static Block dirtRoadblock;
 	public static Block podzolRoadblock;
@@ -66,13 +68,25 @@ public class Register {
 		// Register Full Blocks
 
 		if (Config.debug)
+			System.out.println("Registering Smooth Dirt Block");
+		smoothDirt = new decBlock(Material.ground, "SmoothDirt", "smoothDirt",
+				Block.soundTypeGravel);
+
+		if (Config.debug)
 			System.out.println("Registering Compressed Cobblestone Block");
-		compressedCobblestone = new compressedCobble();
+		compressedCobblestone = new decBlock(Material.rock,
+				"compressedCobblestone", "compressedCobblestone",
+				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Default Roadblock");
 		defaultRoadblock = new Roadblock(Material.rock, "Default", "default",
 				Block.soundTypeStone);
+
+		if (Config.debug)
+			System.out.println("Registering Smooth Dirt Roadblock");
+		smoothDirtRoadblock = new Roadblock(Material.ground, "SmoothDirt",
+				"smoothDirt", Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Compressed Cobblestone Roadblock");
@@ -212,6 +226,11 @@ public class Register {
 				'S', Items.stick, 'D', Items.diamond);
 
 		if (Config.debug)
+			System.out.println("Registering Dirt Path Recipe");
+		GameRegistry.addRecipe(new ItemStack(smoothDirt, 4), new Object[] {
+				"#%", "%#", '#', Blocks.dirt, '%', Blocks.sand });
+
+		if (Config.debug)
 			System.out.println("Registering Compressed Cobblestone Recipe");
 		GameRegistry.addRecipe(new ItemStack(compressedCobblestone),
 				new Object[] { "###", "###", "###", '#', Blocks.cobblestone });
@@ -243,10 +262,9 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Top Recipe");
-		GameRegistry.addRecipe(new ItemStack(quartzTopRoadblock),
-				new Object[] { "S", "R", 'S',
-						new ItemStack(Blocks.quartz_block, 1, 0), 'R',
-						defaultRoadblock });
+		GameRegistry.addRecipe(new ItemStack(quartzTopRoadblock), new Object[] {
+				"S", "R", 'S', new ItemStack(Blocks.quartz_block, 1, 0), 'R',
+				defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Bottom Recipe");
@@ -261,6 +279,11 @@ public class Register {
 		GameRegistry.addShapelessRecipe(new ItemStack(stoneRoadblock),
 				new Object[] { defaultRoadblock,
 						new ItemStack(Blocks.stone, 1, 0) });
+
+		if (Config.debug)
+			System.out.println("Registering Smooth Dirt Roadblock Recipe");
+		GameRegistry.addShapelessRecipe(new ItemStack(smoothDirtRoadblock),
+				new Object[] { defaultRoadblock, smoothDirt });
 
 		if (Config.debug)
 			System.out.println("Registering Stone Roadblock Recipe");

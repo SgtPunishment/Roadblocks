@@ -9,6 +9,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import roadblock.block.Roadblock;
 import roadblock.block.decroBlock;
 import roadblock.item.MalletTool;
@@ -69,8 +70,8 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering Smooth Dirt Block");
-		smoothDirt = new decroBlock(Material.ground, "SmoothDirt", "smoothDirt",
-				Block.soundTypeGravel);
+		smoothDirt = new decroBlock(Material.ground, "SmoothDirt",
+				"smoothDirt", Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Compressed Cobblestone Block");
@@ -212,18 +213,19 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering Iron Pavers Mallet Recipe");
-		GameRegistry.addRecipe(new ItemStack(ironMallet), "IA", "SI", 'S',
-				Items.stick, 'I', Items.iron_ingot);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ironMallet),
+				"IA", "SI", 'S', "stickWood", 'I', Items.iron_ingot));
 
 		if (Config.debug)
 			System.out.println("Registering Gold Pavers Mallet Recipe");
-		GameRegistry.addShapedRecipe(new ItemStack(goldMallet), "GA", "SG",
-				'S', Items.stick, 'G', Items.gold_ingot);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(goldMallet),
+				"GA", "SG", 'S', "stickWood", 'G', Items.gold_ingot));
 
 		if (Config.debug)
 			System.out.println("Registering Diamond Pavers Mallet Recipe");
-		GameRegistry.addShapedRecipe(new ItemStack(diamondMallet), "DA", "SD",
-				'S', Items.stick, 'D', Items.diamond);
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(diamondMallet), "DA", "SD", 'S', "stickWood",
+				'D', Items.diamond));
 
 		if (Config.debug)
 			System.out.println("Registering Dirt Path Recipe");

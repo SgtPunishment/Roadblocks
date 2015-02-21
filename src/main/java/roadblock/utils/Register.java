@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import roadblock.block.Grassroad;
 import roadblock.block.Roadblock;
 import roadblock.block.decroBlock;
 import roadblock.item.MalletTool;
@@ -22,6 +23,7 @@ public class Register {
 	public static Creative_Tab tabRoadBlock = new Creative_Tab();
 
 	// Full Blocks
+	public static Block grassRoad;
 	public static Block smoothDirt;
 	public static Block compressedCobblestone;
 	public static Block defaultRoadblock;
@@ -67,6 +69,10 @@ public class Register {
 
 	public static void Blocks() {
 		// Register Full Blocks
+
+		if (Config.debug)
+			System.out.println("Registering Grass Roadblock");
+		grassRoad = new Grassroad();
 
 		if (Config.debug)
 			System.out.println("Registering Smooth Dirt Block");

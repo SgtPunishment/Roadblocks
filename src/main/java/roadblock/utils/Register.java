@@ -14,6 +14,8 @@ import roadblock.block.Grassroad;
 import roadblock.block.Roadblock;
 import roadblock.block.decroBlock;
 import roadblock.item.MalletTool;
+import roadblock.renderer.grassRoadRender;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Register {
@@ -58,6 +60,9 @@ public class Register {
 	public static Item goldMallet;
 	public static Item diamondMallet;
 	public static Item souliumMallet;
+
+	public static int renderPass;
+	public static int grassRoadRenderType;
 
 	public static void Items() {
 		ironMallet = new MalletTool(ToolMaterial.IRON);
@@ -415,6 +420,11 @@ public class Register {
 
 		AchievementPage.registerAchievementPage(new AchievementPage(
 				"Road Blocks", new Achievement[] { buildRoad }));
+	}
+
+	public static void Renderers() {
+		grassRoadRenderType = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(new grassRoadRender());
 	}
 
 }

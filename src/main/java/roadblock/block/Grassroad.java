@@ -37,18 +37,39 @@ public class Grassroad extends Block {
 	public Grassroad() {
 		super(Material.grass);
 
-		GameRegistry.registerBlock(this, name).setStepSound(Block.soundTypeGrass);
+		GameRegistry.registerBlock(this, name).setStepSound(
+				Block.soundTypeGrass);
 		setBlockName(name);
 		setCreativeTab(Register.tabRoadBlock);
-		setLightOpacity(255);
+		setLightOpacity(0);
 		useNeighborBrightness = true;
 		setHardness(1.5F);
+	}
+
+	@Override
+	public int getRenderType() {
+		return Register.grassRoadRenderType;
+
+	}
+
+	@Override
+	public boolean canRenderInPass(int pass) {
+		// Set the static var in the client proxy
+		Register.renderPass = pass;
+		// the block can render in both passes, so return true always
+		return true;
+	}
+
+	@Override
+	public int getRenderBlockPass() {
+		return 1;
 	}
 
 	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
 		Block block = type.getBlock(x, y, z);
 		// add blocks here that wont make a road a full block
-		return block == Blocks.fence_gate || block == Blocks.air || block == Blocks.torch;
+		return block == Blocks.fence_gate || block == Blocks.air
+				|| block == Blocks.torch;
 	}
 
 	@Override
@@ -56,7 +77,8 @@ public class Grassroad extends Block {
 		return meta;
 	}
 
-	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y, int z) {
+	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
+			int z) {
 		int meta = block.getBlockMetadata(x, y, z);
 		boolean airabove = this.isFullRoad(block, x, y + 1, z);
 		float f4;
@@ -74,18 +96,24 @@ public class Grassroad extends Block {
 	}
 
 	@SuppressWarnings({ "rawtypes" })
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisAlignedBB, List list, Entity entity) {
+	public void addCollisionBoxesToList(World world, int x, int y, int z,
+			AxisAlignedBB axisAlignedBB, List list, Entity entity) {
 		setBlockBoundsBasedOnState(world, x, y, z);
-		super.addCollisionBoxesToList(world, x, y, z, axisAlignedBB, list, entity);
+		super.addCollisionBoxesToList(world, x, y, z, axisAlignedBB, list,
+				entity);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int xCoord, int yCoord, int zCoord, EntityPlayer player, int p_149727_6, float p_149727_7, float p_149727_8, float p_149727_9) {
+	public boolean onBlockActivated(World world, int xCoord, int yCoord,
+			int zCoord, EntityPlayer player, int p_149727_6, float p_149727_7,
+			float p_149727_8, float p_149727_9) {
 		Block block1 = world.getBlock(xCoord, yCoord, zCoord);
 
 		if (!world.isRemote) {
 			ItemStack stack = player.getHeldItem();
-			if (stack != null && stack.getItem() == Register.ironMallet || stack.getItem() == Register.goldMallet || stack.getItem() == Register.diamondMallet) {
+			if (stack != null && stack.getItem() == Register.ironMallet
+					|| stack.getItem() == Register.goldMallet
+					|| stack.getItem() == Register.diamondMallet) {
 				int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
 
 				switch (meta) {
@@ -95,7 +123,12 @@ public class Grassroad extends Block {
 					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1,
 							2);
 					world.markBlockForUpdate(xCoord, yCoord, zCoord);
-					world.playSoundEffect((double) ((float) xCoord + 0.5F), (double) ((float) yCoord + 0.5F), (double) ((float) zCoord + 0.5F), block1.stepSound.getStepResourcePath(), (block1.stepSound.getVolume() + 1.0F) / 2.0F, block1.stepSound.getPitch() * 0.8F);
+					world.playSoundEffect((double) ((float) xCoord + 0.5F),
+							(double) ((float) yCoord + 0.5F),
+							(double) ((float) zCoord + 0.5F),
+							block1.stepSound.getStepResourcePath(),
+							(block1.stepSound.getVolume() + 1.0F) / 2.0F,
+							block1.stepSound.getPitch() * 0.8F);
 					stack.damageItem(1, player);
 					break;
 				case 1:
@@ -103,7 +136,12 @@ public class Grassroad extends Block {
 					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0,
 							2);
 					world.markBlockForUpdate(xCoord, yCoord, zCoord);
-					world.playSoundEffect((double) ((float) xCoord + 0.5F), (double) ((float) yCoord + 0.5F), (double) ((float) zCoord + 0.5F), block1.stepSound.getStepResourcePath(), (block1.stepSound.getVolume() + 1.0F) / 2.0F, block1.stepSound.getPitch() * 0.8F);
+					world.playSoundEffect((double) ((float) xCoord + 0.5F),
+							(double) ((float) yCoord + 0.5F),
+							(double) ((float) zCoord + 0.5F),
+							block1.stepSound.getStepResourcePath(),
+							(block1.stepSound.getVolume() + 1.0F) / 2.0F,
+							block1.stepSound.getPitch() * 0.8F);
 					stack.damageItem(1, player);
 					break;
 				case 2:
@@ -125,7 +163,8 @@ public class Grassroad extends Block {
 		return false;
 	}
 
-	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord, int zCoord, Entity entity) {
+	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
+			int zCoord, Entity entity) {
 		if (Config.speedOn) {
 			if (entity instanceof EntityLivingBase) {
 				if (Config.speed > 9) {
@@ -133,7 +172,8 @@ public class Grassroad extends Block {
 				} else {
 					speed = Config.speed;
 				}
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 0, speed));
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
+						Potion.moveSpeed.id, 0, speed));
 			}
 		}
 	}
@@ -145,13 +185,15 @@ public class Grassroad extends Block {
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return side == 1 ? this.top : (side == 0 ? Blocks.dirt.getBlockTextureFromSide(side) : this.blockIcon);
+		return side == 1 ? this.top : (side == 0 ? Blocks.dirt
+				.getBlockTextureFromSide(side) : this.blockIcon);
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess world, int xCoord, int yCoord, int zCoord, int side) {
+	public IIcon getIcon(IBlockAccess block, int xCoord, int yCoord,
+			int zCoord, int side) {
 		if (side == 1) {
-			return this.top;
+			return this.top_overlay;
 		} else if (side == 0) {
 			return Blocks.dirt.getBlockTextureFromSide(side);
 		}
@@ -160,9 +202,10 @@ public class Grassroad extends Block {
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister regIcon) {
-		this.blockIcon = regIcon.registerIcon("grass_side");
+		this.blockIcon = regIcon.registerIcon("grass_side_overlay");
 		this.top = regIcon.registerIcon("roadblock:grassroad_top");
-		this.top_overlay = regIcon.registerIcon("roadblock:grassroad_top_overlay");
+		this.top_overlay = regIcon
+				.registerIcon("roadblock:grassroad_top_overlay");
 		this.side_overlay = regIcon.registerIcon("grass_side_overlay");
 	}
 
@@ -187,14 +230,17 @@ public class Grassroad extends Block {
 	 * render.
 	 */
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess world, int xCoord, int yCoord, int zCoord) {
+	public int colorMultiplier(IBlockAccess BlockAcc, int xCoord, int yCoord,
+			int zCoord) {
 		int l = 0;
 		int i1 = 0;
 		int j1 = 0;
 
 		for (int k1 = -1; k1 <= 1; ++k1) {
 			for (int l1 = -1; l1 <= 1; ++l1) {
-				int i2 = world.getBiomeGenForCoords(xCoord + l1, zCoord + k1).getBiomeGrassColor(xCoord + l1, yCoord, zCoord + k1);
+				int i2 = BlockAcc
+						.getBiomeGenForCoords(xCoord + l1, zCoord + k1)
+						.getBiomeGrassColor(xCoord + l1, yCoord, zCoord + k1);
 				l += (i2 & 16711680) >> 16;
 				i1 += (i2 & 65280) >> 8;
 				j1 += i2 & 255;
@@ -206,12 +252,12 @@ public class Grassroad extends Block {
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconSideOverlay() {
-		return this.side_overlay;
+		return this.blockIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconTopOverlay() {
-		return this.top_overlay;
+		return this.top;
 	}
 
 }

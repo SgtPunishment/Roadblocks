@@ -34,5 +34,7 @@ public class Main {
 		
 		// Register Tools
 		
+		// Register Renderer
+		Register.Renderers();
 	}
 }

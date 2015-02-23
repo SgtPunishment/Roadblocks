@@ -184,6 +184,8 @@ public class Modroad extends Block {
 				return blockIcon;
 			} else if (texture == "wireframewhite") {
 				return blockIcon;
+			}else if (texture == "paver") {
+				return blockIcon;
 			}
 		}
 		return blockIcon;
@@ -196,9 +198,14 @@ public class Modroad extends Block {
 			if (texture == "wireframe") {
 				this.blockIcon = register.registerIcon(Chisel.MOD_ID
 						+ ":factory/wireframe");
+			
 			} else if (texture == "wireframewhite") {
 				this.blockIcon = register.registerIcon(Chisel.MOD_ID
 						+ ":factory/wireframewhite");
+
+			} else if (texture == "paver") {
+				this.blockIcon = register.registerIcon(Chisel.MOD_ID
+						+ ":paver");
 			}
 		} else {
 			this.blockIcon = register.registerIcon(texture);

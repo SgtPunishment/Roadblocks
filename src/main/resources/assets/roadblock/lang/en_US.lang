@@ -36,3 +36,7 @@ tile.ChiseledStonebrick_roadblock.name=Decorative Stone Brick Road Block
 itemGroup.road_block=Road Blocks
 achievement.buildRoad=The Road not taken
 achievement.buildRoad.desc=Crafting a road block
+
+tile.paver_roadblock.name=Paving Stone Path
+tile.WireFrame_roadblock.name=Factory Roadblock
+tile.WireFrameWhite_roadblock.name=Factory Roadblock

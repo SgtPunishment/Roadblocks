@@ -61,6 +61,7 @@ public class Register {
 	// Chisel 2 Textures
 	public static Block chiselFactory01;
 	public static Block chiselFactory02;
+	public static Block chiselPaver;
 
 	public static Item ironMallet;
 	public static Item goldMallet;
@@ -91,6 +92,11 @@ public class Register {
 				System.out.println("Registering Factory Block");
 			chiselFactory02 = new Modroad(Material.iron, "WireFrameWhite",
 					"wireframewhite", Block.soundTypeMetal);
+
+			if (Config.debug)
+				System.out.println("Registering Paver Block");
+			chiselPaver = new Modroad(Material.iron, "paver",
+					"paver", Block.soundTypeMetal);
 
 		} else {
 

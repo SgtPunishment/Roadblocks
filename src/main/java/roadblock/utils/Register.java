@@ -81,20 +81,20 @@ public class Register {
 
 	public static void Blocks() {
 		// Register Full Blocks
-//		if (Loader.isModLoaded("chisel")) {
-//			if (Config.debug)
-//				System.out.println("Registering Factory Block");
-//			chiselFactory01 = new Modroad(Material.iron, "WireFrame",
-//					"wireframe", Block.soundTypeMetal);
-//
-//			if (Config.debug)
-//				System.out.println("Registering Factory Block");
-//			chiselFactory02 = new Modroad(Material.iron, "WireFrameWhite",
-//					"wireframewhite", Block.soundTypeMetal);
-//		
-//		} else {
-//
-//		}
+		if (Loader.isModLoaded("chisel")) {
+			if (Config.debug)
+				System.out.println("Registering Factory Block");
+			chiselFactory01 = new Modroad(Material.iron, "WireFrame",
+					"wireframe", Block.soundTypeMetal);
+
+			if (Config.debug)
+				System.out.println("Registering Factory Block");
+			chiselFactory02 = new Modroad(Material.iron, "WireFrameWhite",
+					"wireframewhite", Block.soundTypeMetal);
+
+		} else {
+
+		}
 
 		if (Config.debug)
 			System.out.println("Registering Grass Roadblock");

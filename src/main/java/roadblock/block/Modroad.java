@@ -2,6 +2,8 @@ package roadblock.block;
 
 import java.util.List;
 
+import com.cricketcraft.chisel.Chisel;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,11 +20,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import roadblock.utils.Config;
 import roadblock.utils.Register;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Roadblock extends Block {
+public class Modroad extends Block {
 
 	private int speed;
 	public String name;
@@ -33,7 +36,7 @@ public class Roadblock extends Block {
 	public IIcon bottom;
 	public IIcon slab;
 
-	public Roadblock(Material material, String blockName, String blockTexture,
+	public Modroad(Material material, String blockName, String blockTexture,
 			SoundType stepsound) {
 		super(material);
 		name = blockName;
@@ -176,118 +179,27 @@ public class Roadblock extends Block {
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		if (texture == "default") {
-			if (side == 1) {
-				return this.top;
-			} else {
-
-			}
-
-		} else if (texture == "podzol") {
-			if (meta == 0) {
-				if (side == 1) {
-					return this.top;
-				} else if (side == 0) {
-					return this.bottom;
-				} else {
-
-				}
-			}
-			if (meta == 1) {
-				if (side == 1) {
-					return this.top;
-				} else if (side == 0) {
-					return this.bottom;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-
-		} else if (texture == "compressedcobble") {
-			if (meta == 0) {
+		if (Loader.isModLoaded("chisel")) {
+			if (texture == "wireframe") {
+				return blockIcon;
+			} else if (texture == "wireframewhite") {
 				return blockIcon;
 			}
-			if (meta == 1) {
-				if (side == 1 && side == 0) {
-					return blockIcon;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-
-		} else if (texture == "stonebrick_carved") {
-			if (meta == 0) {
-				return blockIcon;
-			}
-
-			if (meta == 1) {
-				if (side == 1 && side == 0) {
-					return blockIcon;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-		} else if (texture == "quartz_block_lines_top") {
-			if (meta == 0) {
-				return blockIcon;
-			}
-
-			if (meta == 1) {
-				if (side == 1 && side == 0) {
-					return blockIcon;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-		} else if (texture == "stone_slab_top") {
-			if (meta == 0) {
-				return blockIcon;
-			}
-
-			if (meta == 1) {
-				if (side == 1 && side == 0) {
-					return blockIcon;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-		} else if (texture == "smoothDirt") {
-			return blockIcon;
 		}
-
 		return blockIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		if (texture == "default") {
-			this.top = register.registerIcon("roadblock:default");
-			this.blockIcon = register.registerIcon("stonebrick");
 
-		} else if (texture == "smoothDirt") {
-			this.blockIcon = register.registerIcon("roadblock:smoothdirt");
-		} else if (texture == "podzol") {
-			this.top = register.registerIcon("dirt_podzol_top");
-			this.blockIcon = register.registerIcon("dirt_podzol_side");
-			this.bottom = register.registerIcon("dirt");
-			this.slab = register.registerIcon("roadblock:podzol_slab");
-
-		} else if (texture == "compressedcobble") {
-			this.blockIcon = register.registerIcon("furnace_top");
-			this.slab = register.registerIcon("roadblock:compressedslab");
-
-		} else if (texture == "stonebrick_carved") {
-			this.blockIcon = register.registerIcon("stonebrick_carved");
-			this.slab = register.registerIcon("roadblock:chiseledslab");
-
-		} else if (texture == "quartz_block_lines_top") {
-			this.blockIcon = register.registerIcon("quartz_block_lines_top");
-			this.slab = register.registerIcon("quartz_block_lines");
-
-		} else if (texture == "stone_slab_top") {
-			this.blockIcon = register.registerIcon("stone_slab_top");
-			this.slab = register.registerIcon("roadblock:stoneslabside");
-
+		if (Loader.isModLoaded("chisel")) {
+			if (texture == "wireframe") {
+				this.blockIcon = register.registerIcon(Chisel.MOD_ID
+						+ ":factory/wireframe");
+			} else if (texture == "wireframewhite") {
+				this.blockIcon = register.registerIcon(Chisel.MOD_ID
+						+ ":factory/wireframewhite");
+			}
 		} else {
 			this.blockIcon = register.registerIcon(texture);
 		}

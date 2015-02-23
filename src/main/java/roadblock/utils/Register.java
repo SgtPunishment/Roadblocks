@@ -11,11 +11,13 @@ import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import roadblock.block.Grassroad;
+import roadblock.block.Modroad;
 import roadblock.block.Roadblock;
 import roadblock.block.decroBlock;
 import roadblock.item.MalletTool;
 import roadblock.renderer.grassRoadRender;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Register {
@@ -56,6 +58,10 @@ public class Register {
 	public static Block quartzPillerTopRoadblock;
 	public static Block stonebrickChiseledRoadblock;
 
+	// Chisel 2 Textures
+	public static Block chiselFactory01;
+	public static Block chiselFactory02;
+
 	public static Item ironMallet;
 	public static Item goldMallet;
 	public static Item diamondMallet;
@@ -75,6 +81,20 @@ public class Register {
 
 	public static void Blocks() {
 		// Register Full Blocks
+//		if (Loader.isModLoaded("chisel")) {
+//			if (Config.debug)
+//				System.out.println("Registering Factory Block");
+//			chiselFactory01 = new Modroad(Material.iron, "WireFrame",
+//					"wireframe", Block.soundTypeMetal);
+//
+//			if (Config.debug)
+//				System.out.println("Registering Factory Block");
+//			chiselFactory02 = new Modroad(Material.iron, "WireFrameWhite",
+//					"wireframewhite", Block.soundTypeMetal);
+//		
+//		} else {
+//
+//		}
 
 		if (Config.debug)
 			System.out.println("Registering Grass Roadblock");

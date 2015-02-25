@@ -14,9 +14,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import roadblock.renderer.CTM;
 import roadblock.utils.Config;
 import roadblock.utils.Register;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -27,12 +27,11 @@ public class Grassroad extends Block {
 
 	private int speed;
 	private final String name = "Grassroad";
+	public CTM CTM;
 	@SideOnly(Side.CLIENT)
-	public IIcon top;
+	public IIcon icon;
 	@SideOnly(Side.CLIENT)
-	public IIcon top_overlay;
-	@SideOnly(Side.CLIENT)
-	public IIcon side_overlay;
+	private IIcon[] icons;
 
 	public Grassroad() {
 		super(Material.grass);
@@ -44,25 +43,7 @@ public class Grassroad extends Block {
 		setLightOpacity(0);
 		useNeighborBrightness = true;
 		setHardness(1.5F);
-	}
-
-	@Override
-	public int getRenderType() {
-		return Register.grassRoadRenderType;
-
-	}
-
-	@Override
-	public boolean canRenderInPass(int pass) {
-		// Set the static var in the client proxy
-		Register.renderPass = pass;
-		// the block can render in both passes, so return true always
-		return true;
-	}
-
-	@Override
-	public int getRenderBlockPass() {
-		return 1;
+		CTM = new CTM();
 	}
 
 	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
@@ -77,6 +58,7 @@ public class Grassroad extends Block {
 		return meta;
 	}
 
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
 			int z) {
 		int meta = block.getBlockMetadata(x, y, z);
@@ -95,6 +77,7 @@ public class Grassroad extends Block {
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes" })
 	public void addCollisionBoxesToList(World world, int x, int y, int z,
 			AxisAlignedBB axisAlignedBB, List list, Entity entity) {
@@ -155,14 +138,17 @@ public class Grassroad extends Block {
 		return true;
 	}
 
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
+	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
+	@Override
 	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
 			int zCoord, Entity entity) {
 		if (Config.speedOn) {
@@ -178,86 +164,25 @@ public class Grassroad extends Block {
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void setBlockBoundsForItemRender() {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side == 1 ? this.top : (side == 0 ? Blocks.dirt
-				.getBlockTextureFromSide(side) : this.blockIcon);
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		int tex = roadblock.renderer.CTM.getTex(world, x, y, z, side);
+		return icons[tex];
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess block, int xCoord, int yCoord,
-			int zCoord, int side) {
-		if (side == 1) {
-			return this.top_overlay;
-		} else if (side == 0) {
-			return Blocks.dirt.getBlockTextureFromSide(side);
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		this.icons = new IIcon[59];
+		for (int i = 0; i < icons.length; ++i) {
+			this.icons[i] = iconRegister.registerIcon("roadblock:desirepath/" + i);
 		}
-		return blockIcon;
 	}
-
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister regIcon) {
-		this.blockIcon = regIcon.registerIcon("grass_side_overlay");
-		this.top = regIcon.registerIcon("roadblock:grassroad_top");
-		this.top_overlay = regIcon
-				.registerIcon("roadblock:grassroad_top_overlay");
-		this.side_overlay = regIcon.registerIcon("grass_side_overlay");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public int getBlockColor() {
-		double d0 = 0.5D;
-		double d1 = 1.0D;
-		return ColorizerGrass.getGrassColor(d0, d1);
-	}
-
-	/**
-	 * Returns the color this block should be rendered. Used by leaves.
-	 */
-	@SideOnly(Side.CLIENT)
-	public int getRenderColor(int p_149741_1_) {
-		return this.getBlockColor();
-	}
-
-	/**
-	 * Returns a integer with hex for 0xrrggbb with this color multiplied
-	 * against the blocks color. Note only called when first determining what to
-	 * render.
-	 */
-	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess BlockAcc, int xCoord, int yCoord,
-			int zCoord) {
-		int l = 0;
-		int i1 = 0;
-		int j1 = 0;
-
-		for (int k1 = -1; k1 <= 1; ++k1) {
-			for (int l1 = -1; l1 <= 1; ++l1) {
-				int i2 = BlockAcc
-						.getBiomeGenForCoords(xCoord + l1, zCoord + k1)
-						.getBiomeGrassColor(xCoord + l1, yCoord, zCoord + k1);
-				l += (i2 & 16711680) >> 16;
-				i1 += (i2 & 65280) >> 8;
-				j1 += i2 & 255;
-			}
-		}
-
-		return (l / 9 & 255) << 16 | (i1 / 9 & 255) << 8 | j1 / 9 & 255;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconSideOverlay() {
-		return this.blockIcon;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconTopOverlay() {
-		return this.top;
-	}
-
 }

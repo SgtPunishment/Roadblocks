@@ -75,9 +75,9 @@ public class Register {
 		ironMallet = new MalletTool(ToolMaterial.IRON);
 		goldMallet = new MalletTool(ToolMaterial.GOLD);
 		diamondMallet = new MalletTool(ToolMaterial.EMERALD);
-		// if (Loader.isModLoaded("SSTOW")) {
-		// souliumMallet = new MalletTool(ObjHandler.SOULIUM);
-		// }
+//		if (Loader.isModLoaded("SSTOW")) {
+//			souliumMallet = new MalletTool(ObjHandler.SOULIUM);
+//		}
 	}
 
 	public static void Blocks() {

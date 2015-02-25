@@ -2,6 +2,7 @@ package roadblock.block;
 
 import java.util.List;
 
+import mods.railcraft.common.blocks.hidden.BlockHidden;
 //import mods.railcraft.common.blocks.hidden.BlockHidden;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,6 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import roadblock.utils.Config;
 import roadblock.utils.Register;
+import cpw.mods.fml.common.Loader;
 //import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -52,10 +54,10 @@ public class Roadblock extends Block {
 	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
 		Block block = type.getBlock(x, y, z);
 		// add blocks here that wont make a road a full block
-//		if (Loader.isModLoaded("Railcraft")) {
-//			return block == Blocks.fence_gate || block == Blocks.air
-//					|| block == Blocks.torch || block == BlockHidden.getBlock();
-//		}
+		if (Loader.isModLoaded("Railcraft")) {
+			return block == Blocks.fence_gate || block == Blocks.air
+					|| block == Blocks.torch || block == BlockHidden.getBlock();
+		}
 		return block == Blocks.fence_gate || block == Blocks.air
 				|| block == Blocks.torch;
 	}

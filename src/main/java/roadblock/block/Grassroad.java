@@ -2,6 +2,7 @@ package roadblock.block;
 
 import java.util.List;
 
+import mods.railcraft.common.blocks.hidden.BlockHidden;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -19,6 +20,7 @@ import net.minecraft.world.World;
 import roadblock.renderer.CTM;
 import roadblock.utils.Config;
 import roadblock.utils.Register;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -49,6 +51,10 @@ public class Grassroad extends Block {
 	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
 		Block block = type.getBlock(x, y, z);
 		// add blocks here that wont make a road a full block
+		if (Loader.isModLoaded("Railcraft")) {
+			return block == Blocks.fence_gate || block == Blocks.air
+					|| block == Blocks.torch || block == BlockHidden.getBlock();
+		}
 		return block == Blocks.fence_gate || block == Blocks.air
 				|| block == Blocks.torch;
 	}
@@ -182,7 +188,8 @@ public class Grassroad extends Block {
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		this.icons = new IIcon[59];
 		for (int i = 0; i < icons.length; ++i) {
-			this.icons[i] = iconRegister.registerIcon("roadblock:desirepath/" + i);
+			this.icons[i] = iconRegister.registerIcon("roadblock:desirepath/"
+					+ i);
 		}
 	}
 }

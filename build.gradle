@@ -17,9 +17,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-2.1.4"
+version = "2.1.5"
 group= "roadblock" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "roadblock"
+archivesBaseName = "roadblock-1.7.10"
 
 minecraft {
     version = "1.7.10-10.13.2.1232"

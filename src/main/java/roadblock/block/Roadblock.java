@@ -3,7 +3,6 @@ package roadblock.block;
 import java.util.List;
 
 import mods.railcraft.common.blocks.hidden.BlockHidden;
-//import mods.railcraft.common.blocks.hidden.BlockHidden;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

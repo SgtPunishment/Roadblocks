@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import roadblock.Main;
+import roadblock.utils.Config;
 import roadblock.utils.Register;
 
 import com.google.common.collect.Multimap;
@@ -33,6 +34,10 @@ public class MalletTool extends Item {
 				+ getToolMaterialName().toLowerCase() + name);
 		setCreativeTab(Register.tabRoadBlock);
 		this.DamVEnt = 2.0F + theToolMaterial.getDamageVsEntity();
+		if (Config.debug)
+			System.out.println("Registering "
+					+ getToolMaterialName().toLowerCase()
+					+ " Pavers Mallet Recipe");
 	}
 
 	public float func_150931_i() {

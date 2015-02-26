@@ -21,20 +21,37 @@ public class Main {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		// Register Items
+		if (Config.debug)
+			System.out.println("Registering Items");
 		Register.Items();
 
 		// Register Blocks
+		if (Config.debug)
+			System.out.println("Registering Blocks");
 		Register.Blocks();
-	
+
 		// Register Recipes
+		if (Config.debug)
+			System.out.println("Registering Recipes");
 		Register.Recipes();
-		
+
 		// Register Achievements
+		if (Config.debug)
+			System.out.println("Registering Achievements");
 		Register.Achievements();
-		
+
 		// Register Tools
-		
+		if (Config.debug)
+			System.out.println("Registering Mallet Recipes");
+		Register.malletRecipes();
+
+		if (Config.debug)
+			System.out.println("Registering Mallet Crafting");
+		Register.malletCrafting();
+
 		// Register Renderer
+		if (Config.debug)
+			System.out.println("Registering Renderers");
 		Register.Renderers();
 	}
 }

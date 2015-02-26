@@ -72,17 +72,32 @@ public class Register {
 	public static int renderPass;
 	public static int grassRoadRenderType;
 
+	private static String[][] recipePatterns = new String[][] { { "RA", "SR" } };
+	private static Object[][] recipeItems;
+
 	public static void Items() {
+		// TODO Register Items
+		if (Config.debug)
+			System.out.println("Registering Iron Paver's Mallet");
 		ironMallet = new MalletTool(ToolMaterial.IRON);
+
+		if (Config.debug)
+			System.out.println("Registering Gold Paver's Mallet");
 		goldMallet = new MalletTool(ToolMaterial.GOLD);
+
+		if (Config.debug)
+			System.out.println("Registering Diamond Paver's Mallet");
 		diamondMallet = new MalletTool(ToolMaterial.EMERALD);
+
 		if (Loader.isModLoaded("SSTOW")) {
+			if (Config.debug)
+				System.out.println("Registering Soulium Paver's Mallet");
 			souliumMallet = new MalletTool(ObjHandler.SOULIUM);
 		}
 	}
 
 	public static void Blocks() {
-		// Register Full Blocks
+		// TODO Register Mod Blocks
 		if (Loader.isModLoaded("chisel")) {
 			if (Config.debug)
 				System.out.println("Registering Factory Block");
@@ -103,9 +118,10 @@ public class Register {
 
 		}
 
-//		if (Config.debug)
-//			System.out.println("Registering Grass Roadblock");
-//		grassRoad = new Grassroad();
+		// TODO Register Full Blocks
+		// if (Config.debug)
+		// System.out.println("Registering Grass Roadblock");
+		// grassRoad = new Grassroad();
 
 		if (Config.debug)
 			System.out.println("Registering Smooth Dirt Block");
@@ -117,6 +133,8 @@ public class Register {
 		compressedCobblestone = new decroBlock(Material.rock,
 				"compressedCobblestone", "compressedCobblestone",
 				Block.soundTypeStone);
+
+		// TODO Register Roadblocks
 
 		if (Config.debug)
 			System.out.println("Registering Default Roadblock");
@@ -247,24 +265,36 @@ public class Register {
 				Block.soundTypePiston);
 	}
 
+	public static void malletCrafting() { // addRecipes
+		for (int i = 0; i < recipeItems[0].length; ++i) {
+			Object object = recipeItems[0][i];
+
+			for (int j = 0; j < recipeItems.length - 1; ++j) {
+				Item item = (Item) recipeItems[j + 1][i];
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(item),
+						new Object[] { recipePatterns[j], 'S', "stickWood",
+								'R', object }));
+			}
+		}
+	}
+
+	public static void malletRecipes() { // RecipesWeapons
+		if (Loader.isModLoaded("SSTOW")) {
+			recipeItems = new Object[][] {
+					{ Items.iron_ingot, Items.gold_ingot, Items.diamond,
+							ObjHandler.SOULIUM_INGOT },
+					{ Register.ironMallet, Register.goldMallet,
+							Register.diamondMallet, Register.souliumMallet } };
+		} else {
+			recipeItems = new Object[][] {
+					{ Items.iron_ingot, Items.gold_ingot, Items.diamond },
+					{ Register.ironMallet, Register.goldMallet,
+							Register.diamondMallet } };
+		}
+	}
+
 	public static void Recipes() {
-		// Register Recipes
-
-		if (Config.debug)
-			System.out.println("Registering Iron Pavers Mallet Recipe");
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ironMallet),
-				"IA", "SI", 'S', "stickWood", 'I', Items.iron_ingot));
-
-		if (Config.debug)
-			System.out.println("Registering Gold Pavers Mallet Recipe");
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(goldMallet),
-				"GA", "SG", 'S', "stickWood", 'G', Items.gold_ingot));
-
-		if (Config.debug)
-			System.out.println("Registering Diamond Pavers Mallet Recipe");
-		GameRegistry.addRecipe(new ShapedOreRecipe(
-				new ItemStack(diamondMallet), "DA", "SD", 'S', "stickWood",
-				'D', Items.diamond));
+		// TODO Register Recipes
 
 		if (Config.debug)
 			System.out.println("Registering Dirt Path Recipe");
@@ -440,16 +470,25 @@ public class Register {
 	}
 
 	public static void Achievements() {
+		// TODO Register Achievements
 
+		if (Config.debug)
+			System.out.println("Registering Achievement");
 		buildRoad = new Achievement("achievement.buildRoad", "buildRoad", 0, 0,
 				Register.defaultRoadblock, (Achievement) null)
 				.initIndependentStat().registerStat();
 
+		if (Config.debug)
+			System.out.println("Registering Achievement Page");
 		AchievementPage.registerAchievementPage(new AchievementPage(
 				"Road Blocks", new Achievement[] { buildRoad }));
 	}
 
 	public static void Renderers() {
+		// TODO Register Renderers
+		if (Config.debug)
+			System.out.println("Registering Renderers");
+
 		grassRoadRenderType = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new grassRoadRender());
 	}

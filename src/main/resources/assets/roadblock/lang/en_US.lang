@@ -1,6 +1,7 @@
 item.roadblock_ironMallet.name=Iron Paving Mallet
 item.roadblock_goldMallet.name=Gold Paving Mallet
 item.roadblock_emeraldMallet.name=Diamond Paving Mallet
+item.roadblock_souliumMallet.name=Soulium Paving Mallet
 
 tile.SmoothDirt.name=Worn Dirt
 tile.compressedCobblestone.name=Block of Compressed Cobblestone

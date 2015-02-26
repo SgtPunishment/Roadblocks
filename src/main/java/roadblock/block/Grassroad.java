@@ -100,42 +100,89 @@ public class Grassroad extends Block {
 
 		if (!world.isRemote) {
 			ItemStack stack = player.getHeldItem();
-			if (stack != null && stack.getItem() == Register.ironMallet
-					|| stack.getItem() == Register.goldMallet
-					|| stack.getItem() == Register.diamondMallet) {
-				int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
+			if (Loader.isModLoaded("SSTOW")) {
+				if (stack != null && stack.getItem() == Register.ironMallet
+						|| stack.getItem() == Register.goldMallet
+						|| stack.getItem() == Register.diamondMallet
+						|| stack.getItem() == Register.souliumMallet) {
+					int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
 
-				switch (meta) {
+					switch (meta) {
 
-				case 0:
-					// System.out.println("Metadata Value: " + meta);
-					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1,
-							2);
-					world.markBlockForUpdate(xCoord, yCoord, zCoord);
-					world.playSoundEffect((double) ((float) xCoord + 0.5F),
-							(double) ((float) yCoord + 0.5F),
-							(double) ((float) zCoord + 0.5F),
-							block1.stepSound.getStepResourcePath(),
-							(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-							block1.stepSound.getPitch() * 0.8F);
-					stack.damageItem(1, player);
-					break;
-				case 1:
-					// System.out.println("Metadata Value: " + meta);
-					world.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0,
-							2);
-					world.markBlockForUpdate(xCoord, yCoord, zCoord);
-					world.playSoundEffect((double) ((float) xCoord + 0.5F),
-							(double) ((float) yCoord + 0.5F),
-							(double) ((float) zCoord + 0.5F),
-							block1.stepSound.getStepResourcePath(),
-							(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-							block1.stepSound.getPitch() * 0.8F);
-					stack.damageItem(1, player);
-					break;
-				case 2:
-					// System.out.println("Metadata Value: " + meta);
-					break;
+					case 0:
+						// System.out.println("Metadata Value: " + meta);
+						world.setBlockMetadataWithNotify(xCoord, yCoord,
+								zCoord, 1, 2);
+						world.markBlockForUpdate(xCoord, yCoord, zCoord);
+						world.playSoundEffect((double) ((float) xCoord + 0.5F),
+								(double) ((float) yCoord + 0.5F),
+								(double) ((float) zCoord + 0.5F),
+								block1.stepSound.getStepResourcePath(),
+								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
+								block1.stepSound.getPitch() * 0.8F);
+						stack.damageItem(1, player);
+						break;
+					case 1:
+						// System.out.println("Metadata Value: " + meta);
+						world.setBlockMetadataWithNotify(xCoord, yCoord,
+								zCoord, 0, 2);
+						world.markBlockForUpdate(xCoord, yCoord, zCoord);
+						world.playSoundEffect((double) ((float) xCoord + 0.5F),
+								(double) ((float) yCoord + 0.5F),
+								(double) ((float) zCoord + 0.5F),
+								block1.stepSound.getStepResourcePath(),
+								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
+								block1.stepSound.getPitch() * 0.8F);
+						stack.damageItem(1, player);
+						break;
+					case 2:
+						// System.out.println("Metadata Value: " + meta);
+						break;
+
+					}
+				} else {
+
+				}
+			} else {
+				if (stack != null && stack.getItem() == Register.ironMallet
+						|| stack.getItem() == Register.goldMallet
+						|| stack.getItem() == Register.diamondMallet) {
+					int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
+
+					switch (meta) {
+
+					case 0:
+						// System.out.println("Metadata Value: " + meta);
+						world.setBlockMetadataWithNotify(xCoord, yCoord,
+								zCoord, 1, 2);
+						world.markBlockForUpdate(xCoord, yCoord, zCoord);
+						world.playSoundEffect((double) ((float) xCoord + 0.5F),
+								(double) ((float) yCoord + 0.5F),
+								(double) ((float) zCoord + 0.5F),
+								block1.stepSound.getStepResourcePath(),
+								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
+								block1.stepSound.getPitch() * 0.8F);
+						stack.damageItem(1, player);
+						break;
+					case 1:
+						// System.out.println("Metadata Value: " + meta);
+						world.setBlockMetadataWithNotify(xCoord, yCoord,
+								zCoord, 0, 2);
+						world.markBlockForUpdate(xCoord, yCoord, zCoord);
+						world.playSoundEffect((double) ((float) xCoord + 0.5F),
+								(double) ((float) yCoord + 0.5F),
+								(double) ((float) zCoord + 0.5F),
+								block1.stepSound.getStepResourcePath(),
+								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
+								block1.stepSound.getPitch() * 0.8F);
+						stack.damageItem(1, player);
+						break;
+					case 2:
+						// System.out.println("Metadata Value: " + meta);
+						break;
+
+					}
+				} else {
 
 				}
 			}

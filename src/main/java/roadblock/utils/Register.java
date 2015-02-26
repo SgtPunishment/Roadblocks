@@ -16,6 +16,7 @@ import roadblock.block.Roadblock;
 import roadblock.block.decroBlock;
 import roadblock.item.MalletTool;
 import roadblock.renderer.grassRoadRender;
+import sstow.gameObjs.ObjHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -75,9 +76,9 @@ public class Register {
 		ironMallet = new MalletTool(ToolMaterial.IRON);
 		goldMallet = new MalletTool(ToolMaterial.GOLD);
 		diamondMallet = new MalletTool(ToolMaterial.EMERALD);
-//		if (Loader.isModLoaded("SSTOW")) {
-//			souliumMallet = new MalletTool(ObjHandler.SOULIUM);
-//		}
+		if (Loader.isModLoaded("SSTOW")) {
+			souliumMallet = new MalletTool(ObjHandler.SOULIUM);
+		}
 	}
 
 	public static void Blocks() {
@@ -95,16 +96,16 @@ public class Register {
 
 			if (Config.debug)
 				System.out.println("Registering Paver Block");
-			chiselPaver = new Modroad(Material.iron, "paver",
-					"paver", Block.soundTypeMetal);
+			chiselPaver = new Modroad(Material.iron, "paver", "paver",
+					Block.soundTypeMetal);
 
 		} else {
 
 		}
 
-		if (Config.debug)
-			System.out.println("Registering Grass Roadblock");
-		grassRoad = new Grassroad();
+//		if (Config.debug)
+//			System.out.println("Registering Grass Roadblock");
+//		grassRoad = new Grassroad();
 
 		if (Config.debug)
 			System.out.println("Registering Smooth Dirt Block");

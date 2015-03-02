@@ -1,10 +1,12 @@
-package roadblock.block;
+package com.whammich.roadblock.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
-import roadblock.utils.Register;
+
+import com.whammich.roadblock.utils.Register;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,7 +17,8 @@ public class decroBlock extends Block {
 	public String texture;
 	public IIcon sDirt;
 
-	public decroBlock(Material material, String blockName, String blockTexture, SoundType stepsound) {
+	public decroBlock(Material material, String blockName, String blockTexture,
+			SoundType stepsound) {
 		super(material);
 		name = blockName;
 		texture = blockTexture;

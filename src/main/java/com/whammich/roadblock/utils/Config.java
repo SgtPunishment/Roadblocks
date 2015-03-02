@@ -1,11 +1,13 @@
-package roadblock.utils;
+package com.whammich.roadblock.utils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
-import roadblock.Main;
+
+import com.whammich.roadblock.Roadblock;
+
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -61,7 +63,7 @@ public class Config {
 
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event) {
-		if (event.modID.equals(Main.modid)) {
+		if (event.modID.equals(Roadblock.modid)) {
 			System.out.println("Updating config...");
 			syncConfig();
 		}

@@ -1,4 +1,4 @@
-package roadblock.item;
+package com.whammich.roadblock.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -8,11 +8,11 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import roadblock.Main;
-import roadblock.utils.Config;
-import roadblock.utils.Register;
 
 import com.google.common.collect.Multimap;
+import com.whammich.roadblock.Roadblock;
+import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.Register;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -30,7 +30,7 @@ public class MalletTool extends Item {
 		this.setMaxDamage(material.getMaxUses());
 		GameRegistry.registerItem(this, getToolMaterialName().toLowerCase()
 				+ name);
-		setUnlocalizedName(Main.modid + "_"
+		setUnlocalizedName(Roadblock.modid + "_"
 				+ getToolMaterialName().toLowerCase() + name);
 		setCreativeTab(Register.tabRoadBlock);
 		this.DamVEnt = 2.0F + theToolMaterial.getDamageVsEntity();

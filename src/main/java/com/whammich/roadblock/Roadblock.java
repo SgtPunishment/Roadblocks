@@ -1,13 +1,13 @@
-package roadblock;
+package com.whammich.roadblock;
 
-import roadblock.utils.Config;
-import roadblock.utils.Register;
+import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.Register;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Main.modid, name = Main.name, version = Main.version, dependencies = "after:chisel;after:Botania;after:Railcraft")
-public class Main {
+@Mod(modid = Roadblock.modid, name = Roadblock.name, version = Roadblock.version, dependencies = "after:chisel;after:Botania;after:Railcraft")
+public class Roadblock {
 
 	public static final String modid = "roadblock";
 	public static final String name = "Roadblocks";
@@ -49,9 +49,9 @@ public class Main {
 			System.out.println("Registering Mallet Crafting");
 		Register.malletCrafting();
 
-		// Register Renderer
-		if (Config.debug)
-			System.out.println("Registering Renderers");
-		Register.Renderers();
+//		// Register Renderer
+//		if (Config.debug)
+//			System.out.println("Registering Renderers");
+//		Register.Renderers();
 	}
 }

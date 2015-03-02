@@ -1,13 +1,15 @@
-package roadblock.block;
+package com.whammich.roadblock.block;
 
 import java.util.List;
 
+import mods.railcraft.common.blocks.hidden.BlockHidden;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -15,37 +17,46 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import roadblock.utils.Config;
-import roadblock.utils.Register;
+import com.whammich.roadblock.renderer.CTM;
+import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.Register;
 import cpw.mods.fml.common.Loader;
-//import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Roadblock extends Block {
+public class Grassroad extends Block {
 
 	private int speed;
-	public String name;
-	public String texture;
-	public IIcon blockIcon;
-	public IIcon top;
-	public IIcon side;
-	public IIcon bottom;
-	public IIcon slab;
+	private final String name = "Grassroad";
+	public CTM CTM;
+	@SideOnly(Side.CLIENT)
+	public IIcon icon;
+	@SideOnly(Side.CLIENT)
+	private IIcon[] icons;
 
-	public Roadblock(Material material, String blockName, String blockTexture,
-			SoundType stepsound) {
-		super(material);
-		name = blockName;
-		texture = blockTexture;
-		GameRegistry.registerBlock(this, name + "_roadblock").setStepSound(
-				stepsound);
-		setBlockName(name + "_roadblock");
+	public Grassroad() {
+		super(Material.grass);
+
+		GameRegistry.registerBlock(this, name).setStepSound(
+				Block.soundTypeGrass);
+		setBlockName(name);
 		setCreativeTab(Register.tabRoadBlock);
-		setLightOpacity(255);
+		setLightOpacity(0);
 		useNeighborBrightness = true;
 		setHardness(1.5F);
+		CTM = new CTM();
+	}
+
+	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
+		Block block = type.getBlock(x, y, z);
+		// add blocks here that wont make a road a full block
+		if (Loader.isModLoaded("Railcraft")) {
+			return block == Blocks.fence_gate || block == Blocks.air
+					|| block == Blocks.torch || block == BlockHidden.getBlock();
+		}
+		return block == Blocks.fence_gate || block == Blocks.air
+				|| block == Blocks.torch;
 	}
 
 	@Override
@@ -53,31 +64,26 @@ public class Roadblock extends Block {
 		return meta;
 	}
 
-	// @SuppressWarnings({ "rawtypes", "unchecked" })
-	// @Override
-	// public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list)
-	// {
-	// for (int i = 0; i < 2; i++) {
-	// list.add(new ItemStack(item, 1, i));
-	// }
-	// }
-
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
 			int z) {
-		int meta = world.getBlockMetadata(x, y, z);
+		int meta = block.getBlockMetadata(x, y, z);
+		boolean airabove = this.isFullRoad(block, x, y + 1, z);
+		float f4;
 
-		Block blockAbove = world.getBlock(x, y + 1, z);
-		if (!blockAbove.isAir(world, x, y + 1, z)) {
-			setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
+		if (!airabove) {
+			f4 = 1.0F;
 		} else {
 			if (meta == 0) {
-				setBlockBounds(0F, 0F, 0F, 1F, 0.9375F, 1F);
+				f4 = 0.9375F;
 			} else {
-				setBlockBounds(0F, 0F, 0F, 1F, 0.4375F, 1F);
+				f4 = 0.4375F;
 			}
 		}
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes" })
 	public void addCollisionBoxesToList(World world, int x, int y, int z,
 			AxisAlignedBB axisAlignedBB, List list, Entity entity) {
@@ -185,14 +191,17 @@ public class Roadblock extends Block {
 		return true;
 	}
 
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
+	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
+	@Override
 	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
 			int zCoord, Entity entity) {
 		if (Config.speedOn) {
@@ -208,128 +217,27 @@ public class Roadblock extends Block {
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void setBlockBoundsForItemRender() {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (texture == "default") {
-			if (side == 1) {
-				return this.top;
-			} else {
-
-			}
-
-		} else if (texture == "podzol") {
-			if (meta == 0) {
-				if (side == 1) {
-					return this.top;
-				} else if (side == 0) {
-					return this.bottom;
-				} else {
-
-				}
-			}
-			if (meta == 1) {
-				if (side == 1) {
-					return this.top;
-				} else if (side == 0) {
-					return this.bottom;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-
-		} else if (texture == "compressedcobble") {
-			if (meta == 0) {
-				return blockIcon;
-			}
-			if (meta == 1) {
-				if (side == 1 && side == 0) {
-					return blockIcon;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-
-		} else if (texture == "stonebrick_carved") {
-			if (meta == 0) {
-				return blockIcon;
-			}
-
-			if (meta == 1) {
-				if (side == 1 && side == 0) {
-					return blockIcon;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-		} else if (texture == "quartz_block_lines_top") {
-			if (meta == 0) {
-				return blockIcon;
-			}
-
-			if (meta == 1) {
-				if (side == 1 && side == 0) {
-					return blockIcon;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-		} else if (texture == "stone_slab_top") {
-			if (meta == 0) {
-				return blockIcon;
-			}
-
-			if (meta == 1) {
-				if (side == 1 && side == 0) {
-					return blockIcon;
-				} else if (side != 1 && side != 0) {
-					return this.slab;
-				}
-			}
-		} else if (texture == "smoothDirt") {
-			return blockIcon;
-		}
-
-		return blockIcon;
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		int tex = com.whammich.roadblock.renderer.CTM.getTex(world, x, y, z,
+				side);
+		return icons[tex];
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-		if (texture == "default") {
-			this.top = register.registerIcon("roadblock:default");
-			this.blockIcon = register.registerIcon("stonebrick");
-
-		} else if (texture == "smoothDirt") {
-			this.blockIcon = register.registerIcon("roadblock:smoothdirt");
-		} else if (texture == "podzol") {
-			this.top = register.registerIcon("dirt_podzol_top");
-			this.blockIcon = register.registerIcon("dirt_podzol_side");
-			this.bottom = register.registerIcon("dirt");
-			this.slab = register.registerIcon("roadblock:podzol_slab");
-
-		} else if (texture == "compressedcobble") {
-			this.blockIcon = register.registerIcon("furnace_top");
-			this.slab = register.registerIcon("roadblock:compressedslab");
-
-		} else if (texture == "stonebrick_carved") {
-			this.blockIcon = register.registerIcon("stonebrick_carved");
-			this.slab = register.registerIcon("roadblock:chiseledslab");
-
-		} else if (texture == "quartz_block_lines_top") {
-			this.blockIcon = register.registerIcon("quartz_block_lines_top");
-			this.slab = register.registerIcon("quartz_block_lines");
-
-		} else if (texture == "stone_slab_top") {
-			this.blockIcon = register.registerIcon("stone_slab_top");
-			this.slab = register.registerIcon("roadblock:stoneslabside");
-
-		} else {
-			this.blockIcon = register.registerIcon(texture);
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		this.icons = new IIcon[59];
+		for (int i = 0; i < icons.length; ++i) {
+			this.icons[i] = iconRegister.registerIcon("roadblock:desirepath/"
+					+ i);
 		}
 	}
-
 }

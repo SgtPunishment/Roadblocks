@@ -1,10 +1,12 @@
-package roadblock.renderer;
+package com.whammich.roadblock.renderer;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
-import roadblock.utils.Register;
+
+import com.whammich.roadblock.utils.Register;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class grassRoadRender implements ISimpleBlockRenderingHandler {

@@ -1,4 +1,4 @@
-package roadblock.utils;
+package com.whammich.roadblock.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -10,14 +10,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-//import roadblock.block.Grassroad;
-import roadblock.block.Modroad;
-import roadblock.block.Roadblock;
-import roadblock.block.decroBlock;
-import roadblock.item.MalletTool;
-import roadblock.renderer.grassRoadRender;
 import sstow.gameObjs.ObjHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+
+//import roadblock.block.Grassroad;
+import com.whammich.roadblock.block.Modroad;
+import com.whammich.roadblock.block.Roadblock;
+import com.whammich.roadblock.block.decroBlock;
+import com.whammich.roadblock.item.MalletTool;
+//import com.whammich.roadblock.renderer.grassRoadRender;
+
+//import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -136,7 +138,7 @@ public class Register {
 		} else {
 
 		}
-		
+
 		// TODO Register Full Blocks
 		// if (Config.debug)
 		// System.out.println("Registering Grass Roadblock");
@@ -510,13 +512,13 @@ public class Register {
 				"Road Blocks", new Achievement[] { buildRoad }));
 	}
 
-	public static void Renderers() {
-		// TODO Register Renderers
-		if (Config.debug)
-			System.out.println("Registering Renderers");
-
-		grassRoadRenderType = RenderingRegistry.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(new grassRoadRender());
-	}
+//	public static void Renderers() {
+//		// TODO Register Renderers
+//		if (Config.debug)
+//			System.out.println("Registering Renderers");
+//
+//		grassRoadRenderType = RenderingRegistry.getNextAvailableRenderId();
+//		RenderingRegistry.registerBlockHandler(new grassRoadRender());
+//	}
 
 }

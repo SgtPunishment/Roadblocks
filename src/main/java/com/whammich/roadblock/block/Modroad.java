@@ -1,4 +1,4 @@
-package roadblock.block;
+package com.whammich.roadblock.block;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import roadblock.utils.Config;
-import roadblock.utils.Register;
+import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.Register;
 import vazkii.botania.common.lib.LibMisc;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -254,23 +254,26 @@ public class Modroad extends Block {
 
 		if (Loader.isModLoaded("chisel")) {
 			if (texture == "wireframe") {
-				this.blockIcon = register.registerIcon("chisel:factory/wireframe");
+				this.blockIcon = register
+						.registerIcon("chisel:factory/wireframe");
 
 			} else if (texture == "wireframewhite") {
-				this.blockIcon = register.registerIcon("chisel:factory/wireframewhite");
+				this.blockIcon = register
+						.registerIcon("chisel:factory/wireframewhite");
 
 			} else if (texture == "paver") {
-				this.blockIcon = register
-						.registerIcon("chisel:paver");
+				this.blockIcon = register.registerIcon("chisel:paver");
 			}
 		} else if (Loader.isModLoaded("Botania")) {
 			if (texture == "") {
-				this.blockIcon = register.registerIcon(LibMisc.MOD_ID + ":prismarine01");
+				this.blockIcon = register.registerIcon(LibMisc.MOD_ID
+						+ ":prismarine01");
 
 			} else if (texture == "") {
-				this.blockIcon = register.registerIcon(LibMisc.MOD_ID + ":prismarine03");
+				this.blockIcon = register.registerIcon(LibMisc.MOD_ID
+						+ ":prismarine03");
 
-			} 
+			}
 		} else {
 			this.blockIcon = register.registerIcon(texture);
 		}

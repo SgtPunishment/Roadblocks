@@ -1,4 +1,4 @@
-package roadblock.utils;
+package com.whammich.roadblock.utils;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;

@@ -1,4 +1,4 @@
-package roadblock.utils;
+package com.whammich.roadblock.utils;
 
 import java.util.Set;
 import net.minecraft.client.Minecraft;

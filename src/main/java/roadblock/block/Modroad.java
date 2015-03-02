@@ -2,8 +2,6 @@ package roadblock.block;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.Chisel;
-
 import mods.railcraft.common.blocks.hidden.BlockHidden;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -21,6 +19,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import roadblock.utils.Config;
 import roadblock.utils.Register;
+import vazkii.botania.common.lib.LibMisc;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -240,6 +239,13 @@ public class Modroad extends Block {
 				return blockIcon;
 			}
 		}
+		if (Loader.isModLoaded("Botania")) {
+			if (texture == "") {
+				return blockIcon;
+			} else if (texture == "") {
+				return blockIcon;
+			}
+		}
 		return blockIcon;
 	}
 
@@ -248,17 +254,23 @@ public class Modroad extends Block {
 
 		if (Loader.isModLoaded("chisel")) {
 			if (texture == "wireframe") {
-				this.blockIcon = register.registerIcon(Chisel.MOD_ID
-						+ ":factory/wireframe");
+				this.blockIcon = register.registerIcon("chisel:factory/wireframe");
 
 			} else if (texture == "wireframewhite") {
-				this.blockIcon = register.registerIcon(Chisel.MOD_ID
-						+ ":factory/wireframewhite");
+				this.blockIcon = register.registerIcon("chisel:factory/wireframewhite");
 
 			} else if (texture == "paver") {
 				this.blockIcon = register
-						.registerIcon(Chisel.MOD_ID + ":paver");
+						.registerIcon("chisel:paver");
 			}
+		} else if (Loader.isModLoaded("Botania")) {
+			if (texture == "") {
+				this.blockIcon = register.registerIcon(LibMisc.MOD_ID + ":prismarine01");
+
+			} else if (texture == "") {
+				this.blockIcon = register.registerIcon(LibMisc.MOD_ID + ":prismarine03");
+
+			} 
 		} else {
 			this.blockIcon = register.registerIcon(texture);
 		}

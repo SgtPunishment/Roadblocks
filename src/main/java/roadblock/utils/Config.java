@@ -16,6 +16,7 @@ public class Config {
 	public static int speed;
 	public static boolean debug;
 	public static boolean speedOn;
+	public static int returnBlocks;
 
 	public static Configuration config;
 	public static File configDirectory;
@@ -68,12 +69,15 @@ public class Config {
 
 	public static void syncConfig() {
 		try {
+			returnBlocks = config.getInt("How many roadblocks should you get?",
+					"general", 2, 1, 2, "How fast you travel on a road block");
 			speed = config.getInt("Speed Boost Level", "general", 0, 0, 9,
 					"How fast you travel on a road block");
 			speedOn = config.getBoolean("Enable Speed Boost", "general", true,
 					"Enable the speed boost option");
-			debug = config.getBoolean("Enable Debug Mode", "general", false,
-					"RESTART REQUIRED: This will output information to the console");
+			debug = config
+					.getBoolean("Enable Debug Mode", "general", false,
+							"RESTART REQUIRED: This will output information to the console");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -6,7 +6,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Main.modid, name = Main.name, version = Main.version, dependencies = "required-after:Forge@[10.13.2.1232,)", guiFactory = "roadblock.utils.Gui_Factory")
+@Mod(modid = Main.modid, name = Main.name, version = Main.version, dependencies = "after:chisel;after:Botania;after:Railcraft")
 public class Main {
 
 	public static final String modid = "roadblock";

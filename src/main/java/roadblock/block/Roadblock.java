@@ -2,14 +2,12 @@ package roadblock.block;
 
 import java.util.List;
 
-import mods.railcraft.common.blocks.hidden.BlockHidden;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -50,17 +48,6 @@ public class Roadblock extends Block {
 		setHardness(1.5F);
 	}
 
-	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
-		Block block = type.getBlock(x, y, z);
-		// add blocks here that wont make a road a full block
-		if (Loader.isModLoaded("Railcraft")) {
-			return block == Blocks.fence_gate || block == Blocks.air
-					|| block == Blocks.torch || block == BlockHidden.getBlock();
-		}
-		return block == Blocks.fence_gate || block == Blocks.air
-				|| block == Blocks.torch;
-	}
-
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
@@ -75,22 +62,20 @@ public class Roadblock extends Block {
 	// }
 	// }
 
-	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
 			int z) {
-		int meta = block.getBlockMetadata(x, y, z);
-		boolean airabove = this.isFullRoad(block, x, y + 1, z);
-		float f4;
+		int meta = world.getBlockMetadata(x, y, z);
 
-		if (!airabove) {
-			f4 = 1.0F;
+		Block blockAbove = world.getBlock(x, y + 1, z);
+		if (!blockAbove.isAir(world, x, y + 1, z)) {
+			setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
 		} else {
 			if (meta == 0) {
-				f4 = 0.9375F;
+				setBlockBounds(0F, 0F, 0F, 1F, 0.9375F, 1F);
 			} else {
-				f4 = 0.4375F;
+				setBlockBounds(0F, 0F, 0F, 1F, 0.4375F, 1F);
 			}
 		}
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
 	}
 
 	@SuppressWarnings({ "rawtypes" })

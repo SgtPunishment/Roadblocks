@@ -1,21 +1,35 @@
 package com.whammich.roadblock;
 
+import com.whammich.roadblock.proxy.IProxy;
 import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.Reference;
 import com.whammich.roadblock.utils.Register;
+
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Roadblock.modid, name = Roadblock.name, version = Roadblock.version, dependencies = "after:chisel;after:Botania;after:Railcraft")
+@Mod(
+		modid = Reference.modid, 
+		name = Reference.name, 
+		version = Reference.version, 
+		dependencies = Reference.dependencies, 
+		guiFactory = Reference.GuiFactory_class
+	)
+
 public class Roadblock {
 
-	public static final String modid = "roadblock";
-	public static final String name = "Roadblocks";
-	public static final String version = "@VERSION@";
+	@Instance(Reference.modid)
+	public static Roadblock instance;
+
+	@SidedProxy(clientSide = Reference.client_proxy_class, serverSide = Reference.server_proxy_class)
+	public static IProxy proxy;
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		Config.load(event);
+		Config.loadConfig(event.getSuggestedConfigurationFile());
 	}
 
 	@Mod.EventHandler
@@ -49,9 +63,10 @@ public class Roadblock {
 			System.out.println("Registering Mallet Crafting");
 		Register.malletCrafting();
 
-//		// Register Renderer
-//		if (Config.debug)
-//			System.out.println("Registering Renderers");
-//		Register.Renderers();
+		// // Register Renderer
+		// if (Config.debug)
+		// System.out.println("Registering Renderers");
+		// Register.Renderers();
 	}
+
 }

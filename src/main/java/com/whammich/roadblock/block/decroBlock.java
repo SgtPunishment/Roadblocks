@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
+import com.whammich.roadblock.utils.Reference;
 import com.whammich.roadblock.utils.Register;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -39,7 +40,7 @@ public class decroBlock extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		if (texture == "smoothDirt") {
-			this.blockIcon = register.registerIcon("roadblock:smoothdirt");
+			this.blockIcon = register.registerIcon(Reference.modid + ":smoothdirt");
 		} else if (texture == "compressedCobblestone") {
 			this.blockIcon = register.registerIcon("furnace_top");
 		}

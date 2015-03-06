@@ -17,9 +17,12 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.whammich.roadblock.renderer.CTM;
 import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.Reference;
 import com.whammich.roadblock.utils.Register;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -236,8 +239,8 @@ public class Grassroad extends Block {
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		this.icons = new IIcon[59];
 		for (int i = 0; i < icons.length; ++i) {
-			this.icons[i] = iconRegister.registerIcon("roadblock:desirepath/"
-					+ i);
+			this.icons[i] = iconRegister.registerIcon(Reference.modid
+					+ ":desirepath/" + i);
 		}
 	}
 }

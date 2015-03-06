@@ -17,8 +17,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.Chisel;
 import com.whammich.roadblock.utils.Config;
 import com.whammich.roadblock.utils.Register;
+
 import vazkii.botania.common.lib.LibMisc;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -254,17 +257,20 @@ public class Modroad extends Block {
 
 		if (Loader.isModLoaded("chisel")) {
 			if (texture == "wireframe") {
-				this.blockIcon = register
-						.registerIcon("chisel:factory/wireframe");
+				this.blockIcon = register.registerIcon(Chisel.MOD_ID
+						+ ":factory/wireframe");
 
 			} else if (texture == "wireframewhite") {
-				this.blockIcon = register
-						.registerIcon("chisel:factory/wireframewhite");
+				this.blockIcon = register.registerIcon(Chisel.MOD_ID
+						+ ":factory/wireframewhite");
 
 			} else if (texture == "paver") {
-				this.blockIcon = register.registerIcon("chisel:paver");
+				this.blockIcon = register
+						.registerIcon(Chisel.MOD_ID + ":paver");
 			}
-		} else if (Loader.isModLoaded("Botania")) {
+		}
+
+		if (Loader.isModLoaded("Botania")) {
 			if (texture == "") {
 				this.blockIcon = register.registerIcon(LibMisc.MOD_ID
 						+ ":prismarine01");

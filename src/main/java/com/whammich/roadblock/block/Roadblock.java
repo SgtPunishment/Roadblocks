@@ -7,8 +7,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+//import net.minecraft.entity.player.EntityPlayer;
+//import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -17,9 +17,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.Reference;
 import com.whammich.roadblock.utils.Register;
 
-import cpw.mods.fml.common.Loader;
+//import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -87,104 +88,104 @@ public class Roadblock extends Block {
 				entity);
 	}
 
-	@Override
-	public boolean onBlockActivated(World world, int xCoord, int yCoord,
-			int zCoord, EntityPlayer player, int p_149727_6, float p_149727_7,
-			float p_149727_8, float p_149727_9) {
-		Block block1 = world.getBlock(xCoord, yCoord, zCoord);
-
-		if (!world.isRemote) {
-			ItemStack stack = player.getHeldItem();
-			if (Loader.isModLoaded("SSTOW")) {
-				if (stack != null && stack.getItem() == Register.ironMallet
-						|| stack.getItem() == Register.goldMallet
-						|| stack.getItem() == Register.diamondMallet
-						|| stack.getItem() == Register.souliumMallet) {
-					int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
-
-					switch (meta) {
-
-					case 0:
-						// System.out.println("Metadata Value: " + meta);
-						world.setBlockMetadataWithNotify(xCoord, yCoord,
-								zCoord, 1, 2);
-						world.markBlockForUpdate(xCoord, yCoord, zCoord);
-						world.playSoundEffect((double) ((float) xCoord + 0.5F),
-								(double) ((float) yCoord + 0.5F),
-								(double) ((float) zCoord + 0.5F),
-								block1.stepSound.getStepResourcePath(),
-								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-								block1.stepSound.getPitch() * 0.8F);
-						stack.damageItem(1, player);
-						break;
-					case 1:
-						// System.out.println("Metadata Value: " + meta);
-						world.setBlockMetadataWithNotify(xCoord, yCoord,
-								zCoord, 0, 2);
-						world.markBlockForUpdate(xCoord, yCoord, zCoord);
-						world.playSoundEffect((double) ((float) xCoord + 0.5F),
-								(double) ((float) yCoord + 0.5F),
-								(double) ((float) zCoord + 0.5F),
-								block1.stepSound.getStepResourcePath(),
-								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-								block1.stepSound.getPitch() * 0.8F);
-						stack.damageItem(1, player);
-						break;
-					case 2:
-						// System.out.println("Metadata Value: " + meta);
-						break;
-
-					}
-				} else {
-
-				}
-			} else {
-				if (stack != null && stack.getItem() == Register.ironMallet
-						|| stack.getItem() == Register.goldMallet
-						|| stack.getItem() == Register.diamondMallet) {
-					int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
-
-					switch (meta) {
-
-					case 0:
-						// System.out.println("Metadata Value: " + meta);
-						world.setBlockMetadataWithNotify(xCoord, yCoord,
-								zCoord, 1, 2);
-						world.markBlockForUpdate(xCoord, yCoord, zCoord);
-						world.playSoundEffect((double) ((float) xCoord + 0.5F),
-								(double) ((float) yCoord + 0.5F),
-								(double) ((float) zCoord + 0.5F),
-								block1.stepSound.getStepResourcePath(),
-								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-								block1.stepSound.getPitch() * 0.8F);
-						stack.damageItem(1, player);
-						break;
-					case 1:
-						// System.out.println("Metadata Value: " + meta);
-						world.setBlockMetadataWithNotify(xCoord, yCoord,
-								zCoord, 0, 2);
-						world.markBlockForUpdate(xCoord, yCoord, zCoord);
-						world.playSoundEffect((double) ((float) xCoord + 0.5F),
-								(double) ((float) yCoord + 0.5F),
-								(double) ((float) zCoord + 0.5F),
-								block1.stepSound.getStepResourcePath(),
-								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-								block1.stepSound.getPitch() * 0.8F);
-						stack.damageItem(1, player);
-						break;
-					case 2:
-						// System.out.println("Metadata Value: " + meta);
-						break;
-
-					}
-				} else {
-
-				}
-			}
-		}
-
-		return true;
-	}
+	// @Override
+	// public boolean onBlockActivated(World world, int xCoord, int yCoord,
+	// int zCoord, EntityPlayer player, int p_149727_6, float p_149727_7,
+	// float p_149727_8, float p_149727_9) {
+	// Block block1 = world.getBlock(xCoord, yCoord, zCoord);
+	//
+	// if (!world.isRemote) {
+	// ItemStack stack = player.getHeldItem();
+	// if (Loader.isModLoaded("SSTOW")) {
+	// if (stack != null && stack.getItem() == Register.ironMallet
+	// || stack.getItem() == Register.goldMallet
+	// || stack.getItem() == Register.diamondMallet
+	// || stack.getItem() == Register.souliumMallet) {
+	// int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
+	//
+	// switch (meta) {
+	//
+	// case 0:
+	// // System.out.println("Metadata Value: " + meta);
+	// world.setBlockMetadataWithNotify(xCoord, yCoord,
+	// zCoord, 1, 2);
+	// world.markBlockForUpdate(xCoord, yCoord, zCoord);
+	// world.playSoundEffect((double) ((float) xCoord + 0.5F),
+	// (double) ((float) yCoord + 0.5F),
+	// (double) ((float) zCoord + 0.5F),
+	// block1.stepSound.getStepResourcePath(),
+	// (block1.stepSound.getVolume() + 1.0F) / 2.0F,
+	// block1.stepSound.getPitch() * 0.8F);
+	// stack.damageItem(1, player);
+	// break;
+	// case 1:
+	// // System.out.println("Metadata Value: " + meta);
+	// world.setBlockMetadataWithNotify(xCoord, yCoord,
+	// zCoord, 0, 2);
+	// world.markBlockForUpdate(xCoord, yCoord, zCoord);
+	// world.playSoundEffect((double) ((float) xCoord + 0.5F),
+	// (double) ((float) yCoord + 0.5F),
+	// (double) ((float) zCoord + 0.5F),
+	// block1.stepSound.getStepResourcePath(),
+	// (block1.stepSound.getVolume() + 1.0F) / 2.0F,
+	// block1.stepSound.getPitch() * 0.8F);
+	// stack.damageItem(1, player);
+	// break;
+	// case 2:
+	// // System.out.println("Metadata Value: " + meta);
+	// break;
+	//
+	// }
+	// } else {
+	//
+	// }
+	// } else {
+	// if (stack != null && stack.getItem() == Register.ironMallet
+	// || stack.getItem() == Register.goldMallet
+	// || stack.getItem() == Register.diamondMallet) {
+	// int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
+	//
+	// switch (meta) {
+	//
+	// case 0:
+	// // System.out.println("Metadata Value: " + meta);
+	// world.setBlockMetadataWithNotify(xCoord, yCoord,
+	// zCoord, 1, 2);
+	// world.markBlockForUpdate(xCoord, yCoord, zCoord);
+	// world.playSoundEffect((double) ((float) xCoord + 0.5F),
+	// (double) ((float) yCoord + 0.5F),
+	// (double) ((float) zCoord + 0.5F),
+	// block1.stepSound.getStepResourcePath(),
+	// (block1.stepSound.getVolume() + 1.0F) / 2.0F,
+	// block1.stepSound.getPitch() * 0.8F);
+	// stack.damageItem(1, player);
+	// break;
+	// case 1:
+	// // System.out.println("Metadata Value: " + meta);
+	// world.setBlockMetadataWithNotify(xCoord, yCoord,
+	// zCoord, 0, 2);
+	// world.markBlockForUpdate(xCoord, yCoord, zCoord);
+	// world.playSoundEffect((double) ((float) xCoord + 0.5F),
+	// (double) ((float) yCoord + 0.5F),
+	// (double) ((float) zCoord + 0.5F),
+	// block1.stepSound.getStepResourcePath(),
+	// (block1.stepSound.getVolume() + 1.0F) / 2.0F,
+	// block1.stepSound.getPitch() * 0.8F);
+	// stack.damageItem(1, player);
+	// break;
+	// case 2:
+	// // System.out.println("Metadata Value: " + meta);
+	// break;
+	//
+	// }
+	// } else {
+	//
+	// }
+	// }
+	// }
+	//
+	// return true;
+	// }
 
 	public boolean isOpaqueCube() {
 		return false;
@@ -301,24 +302,27 @@ public class Roadblock extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		if (texture == "default") {
-			this.top = register.registerIcon("roadblock:default");
+			this.top = register.registerIcon(Reference.modid + ":default");
 			this.blockIcon = register.registerIcon("stonebrick");
 
 		} else if (texture == "smoothDirt") {
-			this.blockIcon = register.registerIcon("roadblock:smoothdirt");
+			this.blockIcon = register.registerIcon(Reference.modid
+					+ ":smoothdirt");
 		} else if (texture == "podzol") {
 			this.top = register.registerIcon("dirt_podzol_top");
 			this.blockIcon = register.registerIcon("dirt_podzol_side");
 			this.bottom = register.registerIcon("dirt");
-			this.slab = register.registerIcon("roadblock:podzol_slab");
+			this.slab = register.registerIcon(Reference.modid + ":podzol_slab");
 
 		} else if (texture == "compressedcobble") {
 			this.blockIcon = register.registerIcon("furnace_top");
-			this.slab = register.registerIcon("roadblock:compressedslab");
+			this.slab = register.registerIcon(Reference.modid
+					+ ":compressedslab");
 
 		} else if (texture == "stonebrick_carved") {
 			this.blockIcon = register.registerIcon("stonebrick_carved");
-			this.slab = register.registerIcon("roadblock:chiseledslab");
+			this.slab = register
+					.registerIcon(Reference.modid + ":chiseledslab");
 
 		} else if (texture == "quartz_block_lines_top") {
 			this.blockIcon = register.registerIcon("quartz_block_lines_top");
@@ -326,7 +330,8 @@ public class Roadblock extends Block {
 
 		} else if (texture == "stone_slab_top") {
 			this.blockIcon = register.registerIcon("stone_slab_top");
-			this.slab = register.registerIcon("roadblock:stoneslabside");
+			this.slab = register.registerIcon(Reference.modid
+					+ ":stoneslabside");
 
 		} else {
 			this.blockIcon = register.registerIcon(texture);

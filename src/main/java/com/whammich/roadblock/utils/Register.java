@@ -13,10 +13,10 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import sstow.gameObjs.ObjHandler;
 
 //import roadblock.block.Grassroad;
-import com.whammich.roadblock.block.Modroad;
-import com.whammich.roadblock.block.Roadblock;
-import com.whammich.roadblock.block.decroBlock;
-import com.whammich.roadblock.item.MalletTool;
+import com.whammich.roadblock.block.BlockModroad;
+import com.whammich.roadblock.block.BlockRoad;
+import com.whammich.roadblock.block.BlockDecro;
+import com.whammich.roadblock.item.ItemMallet;
 //import com.whammich.roadblock.renderer.grassRoadRender;
 
 //import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -27,7 +27,7 @@ public class Register {
 
 	public static Achievement buildRoad;
 
-	public static Creative_Tab tabRoadBlock = new Creative_Tab();
+	public static RoadTabs tabRoadBlock = new RoadTabs();
 
 	// Full Blocks
 
@@ -85,20 +85,20 @@ public class Register {
 		// TODO Register Items
 		if (Config.debug)
 			System.out.println("Registering Iron Paver's Mallet");
-		ironMallet = new MalletTool(ToolMaterial.IRON);
+		ironMallet = new ItemMallet(ToolMaterial.IRON);
 
 		if (Config.debug)
 			System.out.println("Registering Gold Paver's Mallet");
-		goldMallet = new MalletTool(ToolMaterial.GOLD);
+		goldMallet = new ItemMallet(ToolMaterial.GOLD);
 
 		if (Config.debug)
 			System.out.println("Registering Diamond Paver's Mallet");
-		diamondMallet = new MalletTool(ToolMaterial.EMERALD);
+		diamondMallet = new ItemMallet(ToolMaterial.EMERALD);
 
 		if (Loader.isModLoaded("SSTOW")) {
 			if (Config.debug)
 				System.out.println("Registering Soulium Paver's Mallet");
-			souliumMallet = new MalletTool(ObjHandler.SOULIUM);
+			souliumMallet = new ItemMallet(ObjHandler.SOULIUM);
 		}
 	}
 
@@ -107,17 +107,17 @@ public class Register {
 		if (Loader.isModLoaded("chisel")) {
 			if (Config.debug)
 				System.out.println("Registering Chisel Factory Block");
-			chiselFactory01 = new Modroad(Material.iron, "WireFrame",
+			chiselFactory01 = new BlockModroad(Material.iron, "WireFrame",
 					"wireframe", Block.soundTypeMetal);
 
 			if (Config.debug)
 				System.out.println("Registering Chisel Factory Block");
-			chiselFactory02 = new Modroad(Material.iron, "WireFrameWhite",
+			chiselFactory02 = new BlockModroad(Material.iron, "WireFrameWhite",
 					"wireframewhite", Block.soundTypeMetal);
 
 			if (Config.debug)
 				System.out.println("Registering Chisel Paver Block");
-			chiselPaver = new Modroad(Material.iron, "paver", "paver",
+			chiselPaver = new BlockModroad(Material.iron, "paver", "paver",
 					Block.soundTypeMetal);
 
 		} else {
@@ -127,12 +127,12 @@ public class Register {
 		if (Loader.isModLoaded("Botania")) {
 			if (Config.debug)
 				System.out.println("Registering Botania Prismarine Block");
-			prismarine = new Modroad(Material.ground, "prismarine01",
+			prismarine = new BlockModroad(Material.ground, "prismarine01",
 					"prismarine01", Block.soundTypeStone);
 
 			if (Config.debug)
 				System.out.println("Registering Botania Dark Prismarine Block");
-			darkPrismarine = new Modroad(Material.ground, "prismarine03",
+			darkPrismarine = new BlockModroad(Material.ground, "prismarine03",
 					"prismarine03", Block.soundTypeMetal);
 
 		} else {
@@ -146,12 +146,12 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering Smooth Dirt Block");
-		smoothDirt = new decroBlock(Material.ground, "SmoothDirt",
+		smoothDirt = new BlockDecro(Material.ground, "SmoothDirt",
 				"smoothDirt", Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Compressed Cobblestone Block");
-		compressedCobblestone = new decroBlock(Material.rock,
+		compressedCobblestone = new BlockDecro(Material.rock,
 				"compressedCobblestone", "compressedCobblestone",
 				Block.soundTypeStone);
 
@@ -159,129 +159,129 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering Default Roadblock");
-		defaultRoadblock = new Roadblock(Material.rock, "Default", "default",
+		defaultRoadblock = new BlockRoad(Material.rock, "Default", "default",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Smooth Dirt Roadblock");
-		smoothDirtRoadblock = new Roadblock(Material.ground, "SmoothDirt",
+		smoothDirtRoadblock = new BlockRoad(Material.ground, "SmoothDirt",
 				"smoothDirt", Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Compressed Cobblestone Roadblock");
-		compressedCobbleRoadblock = new Roadblock(Material.rock,
+		compressedCobbleRoadblock = new BlockRoad(Material.rock,
 				"CompressedCobble", "compressedcobble", Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Roadblock");
-		stoneRoadblock = new Roadblock(Material.rock, "Stone", "stone",
+		stoneRoadblock = new BlockRoad(Material.rock, "Stone", "stone",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Dirt Roadblock");
-		dirtRoadblock = new Roadblock(Material.grass, "Dirt", "dirt",
+		dirtRoadblock = new BlockRoad(Material.grass, "Dirt", "dirt",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Podzol Roadblock");
-		podzolRoadblock = new Roadblock(Material.grass, "Podzol", "podzol",
+		podzolRoadblock = new BlockRoad(Material.grass, "Podzol", "podzol",
 				Block.soundTypeGrass);
 
 		if (Config.debug)
 			System.out.println("Registering Cobblestone Roadblock");
-		cobbleRoadblock = new Roadblock(Material.rock, "Cobblestone",
+		cobbleRoadblock = new BlockRoad(Material.rock, "Cobblestone",
 				"cobblestone", Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Oak Roadblock");
-		oakRoadblock = new Roadblock(Material.wood, "Oak", "planks_oak",
+		oakRoadblock = new BlockRoad(Material.wood, "Oak", "planks_oak",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Spruce Roadblock");
-		spruceRoadblock = new Roadblock(Material.wood, "Spruce",
+		spruceRoadblock = new BlockRoad(Material.wood, "Spruce",
 				"planks_spruce", Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Birch Roadblock");
-		birchRoadblock = new Roadblock(Material.wood, "Birch", "planks_birch",
+		birchRoadblock = new BlockRoad(Material.wood, "Birch", "planks_birch",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Jungle Roadblock");
-		jungleRoadblock = new Roadblock(Material.wood, "Jungle",
+		jungleRoadblock = new BlockRoad(Material.wood, "Jungle",
 				"planks_jungle", Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Acacia Roadblock");
-		acaciaRoadblock = new Roadblock(Material.wood, "Acacia",
+		acaciaRoadblock = new BlockRoad(Material.wood, "Acacia",
 				"planks_acacia", Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Dark Oak Roadblock");
-		darkOakRoadblock = new Roadblock(Material.wood, "DarkOak",
+		darkOakRoadblock = new BlockRoad(Material.wood, "DarkOak",
 				"planks_big_oak", Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Sand Roadblock");
-		sandRoadblock = new Roadblock(Material.sand, "Sand", "sand",
+		sandRoadblock = new BlockRoad(Material.sand, "Sand", "sand",
 				Block.soundTypeSand);
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Top Roadblock");
-		sandstoneTopRoadblock = new Roadblock(Material.rock, "SandstoneTop",
+		sandstoneTopRoadblock = new BlockRoad(Material.rock, "SandstoneTop",
 				"sandstone_top", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Bottom Roadblock");
-		sandstoneBottomRoadblock = new Roadblock(Material.rock,
+		sandstoneBottomRoadblock = new BlockRoad(Material.rock,
 				"SandstoneBottom", "sandstone_bottom", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Gravel Roadblock");
-		gravelRoadblock = new Roadblock(Material.ground, "Gravel", "gravel",
+		gravelRoadblock = new BlockRoad(Material.ground, "Gravel", "gravel",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Slab Roadblock");
-		stoneSlabTopRoadblock = new Roadblock(Material.rock, "StoneSlabTop",
+		stoneSlabTopRoadblock = new BlockRoad(Material.rock, "StoneSlabTop",
 				"stone_slab_top", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Brick Roadblock");
-		bricksRoadblock = new Roadblock(Material.rock, "Brick", "brick",
+		bricksRoadblock = new BlockRoad(Material.rock, "Brick", "brick",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Nether Brick Roadblock");
-		netherRoadblock = new Roadblock(Material.rock, "NetherBrick",
+		netherRoadblock = new BlockRoad(Material.rock, "NetherBrick",
 				"nether_brick", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Bottom Roadblock");
-		quartzBottomRoadblock = new Roadblock(Material.rock, "QuartzBottom",
+		quartzBottomRoadblock = new BlockRoad(Material.rock, "QuartzBottom",
 				"quartz_block_bottom", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Top Roadblock");
-		quartzTopRoadblock = new Roadblock(Material.rock, "QuartzTop",
+		quartzTopRoadblock = new BlockRoad(Material.rock, "QuartzTop",
 				"quartz_block_top", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Chiseled Quartz Roadblock");
-		quartzChiseledRoadblock = new Roadblock(Material.rock,
+		quartzChiseledRoadblock = new BlockRoad(Material.rock,
 				"QuartzChiseled", "quartz_block_chiseled",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Piller Top Roadblock");
-		quartzPillerTopRoadblock = new Roadblock(Material.rock,
+		quartzPillerTopRoadblock = new BlockRoad(Material.rock,
 				"QuartzPillerTop", "quartz_block_lines_top",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Chiseled Stone Bricks Roadblock");
-		stonebrickChiseledRoadblock = new Roadblock(Material.rock,
+		stonebrickChiseledRoadblock = new BlockRoad(Material.rock,
 				"ChiseledStonebrick", "stonebrick_carved",
 				Block.soundTypePiston);
 	}

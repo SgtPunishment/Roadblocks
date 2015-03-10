@@ -17,18 +17,19 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import vazkii.botania.common.lib.LibMisc;
 
 import com.cricketcraft.chisel.Chisel;
 import com.whammich.roadblock.utils.Config;
 import com.whammich.roadblock.utils.Register;
+import com.whammich.roadblock.utils.RoadTabs;
 
-import vazkii.botania.common.lib.LibMisc;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Modroad extends Block {
+public class BlockModroad extends Block {
 
 	private int speed;
 	public String name;
@@ -39,7 +40,7 @@ public class Modroad extends Block {
 	public IIcon bottom;
 	public IIcon slab;
 
-	public Modroad(Material material, String blockName, String blockTexture,
+	public BlockModroad(Material material, String blockName, String blockTexture,
 			SoundType stepsound) {
 		super(material);
 		name = blockName;
@@ -47,7 +48,7 @@ public class Modroad extends Block {
 		GameRegistry.registerBlock(this, name + "_roadblock").setStepSound(
 				stepsound);
 		setBlockName(name + "_roadblock");
-		setCreativeTab(Register.tabRoadBlock);
+		setCreativeTab(RoadTabs.tabRoad);
 		setLightOpacity(255);
 		useNeighborBrightness = true;
 		setHardness(1.5F);

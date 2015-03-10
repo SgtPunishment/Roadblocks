@@ -18,14 +18,14 @@ import net.minecraft.world.World;
 
 import com.whammich.roadblock.utils.Config;
 import com.whammich.roadblock.utils.Reference;
-import com.whammich.roadblock.utils.Register;
+import com.whammich.roadblock.utils.RoadTabs;
 
 //import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Roadblock extends Block {
+public class BlockRoad extends Block {
 
 	private int speed;
 	public String name;
@@ -36,7 +36,7 @@ public class Roadblock extends Block {
 	public IIcon bottom;
 	public IIcon slab;
 
-	public Roadblock(Material material, String blockName, String blockTexture,
+	public BlockRoad(Material material, String blockName, String blockTexture,
 			SoundType stepsound) {
 		super(material);
 		name = blockName;
@@ -44,7 +44,7 @@ public class Roadblock extends Block {
 		GameRegistry.registerBlock(this, name + "_roadblock").setStepSound(
 				stepsound);
 		setBlockName(name + "_roadblock");
-		setCreativeTab(Register.tabRoadBlock);
+		setCreativeTab(RoadTabs.tabRoad);
 		setLightOpacity(255);
 		useNeighborBrightness = true;
 		setHardness(1.5F);
@@ -195,20 +195,39 @@ public class Roadblock extends Block {
 		return false;
 	}
 
-	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
-			int zCoord, Entity entity) {
-		if (Config.speedOn) {
-			if (entity instanceof EntityLivingBase) {
-				if (Config.speed > 9) {
-					speed = 9;
-				} else {
-					speed = Config.speed;
-				}
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
-						Potion.moveSpeed.id, 0, speed));
-			}
-		}
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x,
+			int y, int z) {
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
 	}
+
+	@Override
+	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
+		float speed = 2F;
+		float max = 0.4F;
+		double motionX = Math.abs(entity.motionX);
+		double motionZ = Math.abs(entity.motionZ);
+		if (motionX < max)
+			entity.motionX *= speed;
+		if (motionZ < max)
+			entity.motionZ *= speed;
+	}
+
+	// public void onEntityCollidedWithBlock(World world, int xCoord, int
+	// yCoord,
+	// int zCoord, Entity entity) {
+	// if (Config.speedOn) {
+	// if (entity instanceof EntityLivingBase) {
+	// if (Config.speed > 9) {
+	// speed = 9;
+	// } else {
+	// speed = Config.speed;
+	// }
+	// ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
+	// Potion.moveSpeed.id, 0, speed));
+	// }
+	// }
+	// }
 
 	@SideOnly(Side.CLIENT)
 	public void setBlockBoundsForItemRender() {

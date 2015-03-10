@@ -17,19 +17,20 @@ import com.whammich.roadblock.event.UseMalletEvent;
 import com.whammich.roadblock.utils.Config;
 import com.whammich.roadblock.utils.Reference;
 import com.whammich.roadblock.utils.Register;
+import com.whammich.roadblock.utils.RoadTabs;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class MalletTool extends Item {
+public class ItemMallet extends Item {
 	public final String name = "Mallet";
 	private float DamVEnt;
 
 	public Item.ToolMaterial theToolMaterial;
 
-	public MalletTool(Item.ToolMaterial material) {
+	public ItemMallet(Item.ToolMaterial material) {
 		this.theToolMaterial = material;
 		this.maxStackSize = 1;
 		this.setMaxDamage(material.getMaxUses());
@@ -37,7 +38,7 @@ public class MalletTool extends Item {
 				+ name);
 		setUnlocalizedName(Reference.modid + "_"
 				+ getToolMaterialName().toLowerCase() + name);
-		setCreativeTab(Register.tabRoadBlock);
+		setCreativeTab(RoadTabs.tabRoad);
 		this.DamVEnt = 2.0F + theToolMaterial.getDamageVsEntity();
 		if (Config.debug)
 			System.out.println("Registering "

@@ -22,13 +22,14 @@ import com.whammich.roadblock.renderer.CTM;
 import com.whammich.roadblock.utils.Config;
 import com.whammich.roadblock.utils.Reference;
 import com.whammich.roadblock.utils.Register;
+import com.whammich.roadblock.utils.RoadTabs;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Grassroad extends Block {
+public class BlockDesire extends Block {
 
 	private int speed;
 	private final String name = "Grassroad";
@@ -38,13 +39,13 @@ public class Grassroad extends Block {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
-	public Grassroad() {
+	public BlockDesire() {
 		super(Material.grass);
 
 		GameRegistry.registerBlock(this, name).setStepSound(
 				Block.soundTypeGrass);
 		setBlockName(name);
-		setCreativeTab(Register.tabRoadBlock);
+		setCreativeTab(RoadTabs.tabRoad);
 		setLightOpacity(0);
 		useNeighborBrightness = true;
 		setHardness(1.5F);

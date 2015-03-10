@@ -6,26 +6,26 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 import com.whammich.roadblock.utils.Reference;
-import com.whammich.roadblock.utils.Register;
+import com.whammich.roadblock.utils.RoadTabs;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class decroBlock extends Block {
+public class BlockDecro extends Block {
 
 	public String name;
 	public String texture;
 	public IIcon sDirt;
 
-	public decroBlock(Material material, String blockName, String blockTexture,
+	public BlockDecro(Material material, String blockName, String blockTexture,
 			SoundType stepsound) {
 		super(material);
 		name = blockName;
 		texture = blockTexture;
 		GameRegistry.registerBlock(this, name).setStepSound(stepsound);
 		setBlockName(name);
-		setCreativeTab(Register.tabRoadBlock);
+		setCreativeTab(RoadTabs.tabRoad);
 		setLightOpacity(255);
 		useNeighborBrightness = true;
 		setHardness(1.5F);

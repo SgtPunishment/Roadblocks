@@ -2,17 +2,10 @@ package com.whammich.roadblock.block;
 
 import java.util.List;
 
-import mods.railcraft.common.blocks.hidden.BlockHidden;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -20,8 +13,6 @@ import net.minecraft.world.World;
 import vazkii.botania.common.lib.LibMisc;
 
 import com.cricketcraft.chisel.Chisel;
-import com.whammich.roadblock.utils.Config;
-import com.whammich.roadblock.utils.Register;
 import com.whammich.roadblock.utils.RoadTabs;
 
 import cpw.mods.fml.common.Loader;
@@ -30,8 +21,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockModroad extends Block {
-
-	private int speed;
 	public String name;
 	public String texture;
 	public IIcon blockIcon;
@@ -40,8 +29,8 @@ public class BlockModroad extends Block {
 	public IIcon bottom;
 	public IIcon slab;
 
-	public BlockModroad(Material material, String blockName, String blockTexture,
-			SoundType stepsound) {
+	public BlockModroad(Material material, String blockName,
+			String blockTexture, SoundType stepsound) {
 		super(material);
 		name = blockName;
 		texture = blockTexture;
@@ -54,47 +43,25 @@ public class BlockModroad extends Block {
 		setHardness(1.5F);
 	}
 
-	private boolean isFullRoad(IBlockAccess type, int x, int y, int z) {
-		Block block = type.getBlock(x, y, z);
-		// add blocks here that wont make a road a full block
-		if (Loader.isModLoaded("Railcraft")) {
-			return block == Blocks.fence_gate || block == Blocks.air
-					|| block == Blocks.torch || block == BlockHidden.getBlock();
-		}
-		return block == Blocks.fence_gate || block == Blocks.air
-				|| block == Blocks.torch;
-	}
-
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
 	}
 
-	// @SuppressWarnings({ "rawtypes", "unchecked" })
-	// @Override
-	// public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list)
-	// {
-	// for (int i = 0; i < 2; i++) {
-	// list.add(new ItemStack(item, 1, i));
-	// }
-	// }
-
-	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y,
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
 			int z) {
-		int meta = block.getBlockMetadata(x, y, z);
-		boolean airabove = this.isFullRoad(block, x, y + 1, z);
-		float f4;
+		int meta = world.getBlockMetadata(x, y, z);
 
-		if (!airabove) {
-			f4 = 1.0F;
+		Block blockAbove = world.getBlock(x, y + 1, z);
+		if (!blockAbove.isAir(world, x, y + 1, z)) {
+			setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
 		} else {
 			if (meta == 0) {
-				f4 = 0.9375F;
+				setBlockBounds(0F, 0F, 0F, 1F, 0.9375F, 1F);
 			} else {
-				f4 = 0.4375F;
+				setBlockBounds(0F, 0F, 0F, 1F, 0.4375F, 1F);
 			}
 		}
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f4, 1.0F);
 	}
 
 	@SuppressWarnings({ "rawtypes" })
@@ -105,105 +72,6 @@ public class BlockModroad extends Block {
 				entity);
 	}
 
-	@Override
-	public boolean onBlockActivated(World world, int xCoord, int yCoord,
-			int zCoord, EntityPlayer player, int p_149727_6, float p_149727_7,
-			float p_149727_8, float p_149727_9) {
-		Block block1 = world.getBlock(xCoord, yCoord, zCoord);
-
-		if (!world.isRemote) {
-			ItemStack stack = player.getHeldItem();
-			if (Loader.isModLoaded("SSTOW")) {
-				if (stack != null && stack.getItem() == Register.ironMallet
-						|| stack.getItem() == Register.goldMallet
-						|| stack.getItem() == Register.diamondMallet
-						|| stack.getItem() == Register.souliumMallet) {
-					int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
-
-					switch (meta) {
-
-					case 0:
-						// System.out.println("Metadata Value: " + meta);
-						world.setBlockMetadataWithNotify(xCoord, yCoord,
-								zCoord, 1, 2);
-						world.markBlockForUpdate(xCoord, yCoord, zCoord);
-						world.playSoundEffect((double) ((float) xCoord + 0.5F),
-								(double) ((float) yCoord + 0.5F),
-								(double) ((float) zCoord + 0.5F),
-								block1.stepSound.getStepResourcePath(),
-								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-								block1.stepSound.getPitch() * 0.8F);
-						stack.damageItem(1, player);
-						break;
-					case 1:
-						// System.out.println("Metadata Value: " + meta);
-						world.setBlockMetadataWithNotify(xCoord, yCoord,
-								zCoord, 0, 2);
-						world.markBlockForUpdate(xCoord, yCoord, zCoord);
-						world.playSoundEffect((double) ((float) xCoord + 0.5F),
-								(double) ((float) yCoord + 0.5F),
-								(double) ((float) zCoord + 0.5F),
-								block1.stepSound.getStepResourcePath(),
-								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-								block1.stepSound.getPitch() * 0.8F);
-						stack.damageItem(1, player);
-						break;
-					case 2:
-						// System.out.println("Metadata Value: " + meta);
-						break;
-
-					}
-				} else {
-
-				}
-			} else {
-				if (stack != null && stack.getItem() == Register.ironMallet
-						|| stack.getItem() == Register.goldMallet
-						|| stack.getItem() == Register.diamondMallet) {
-					int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
-
-					switch (meta) {
-
-					case 0:
-						// System.out.println("Metadata Value: " + meta);
-						world.setBlockMetadataWithNotify(xCoord, yCoord,
-								zCoord, 1, 2);
-						world.markBlockForUpdate(xCoord, yCoord, zCoord);
-						world.playSoundEffect((double) ((float) xCoord + 0.5F),
-								(double) ((float) yCoord + 0.5F),
-								(double) ((float) zCoord + 0.5F),
-								block1.stepSound.getStepResourcePath(),
-								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-								block1.stepSound.getPitch() * 0.8F);
-						stack.damageItem(1, player);
-						break;
-					case 1:
-						// System.out.println("Metadata Value: " + meta);
-						world.setBlockMetadataWithNotify(xCoord, yCoord,
-								zCoord, 0, 2);
-						world.markBlockForUpdate(xCoord, yCoord, zCoord);
-						world.playSoundEffect((double) ((float) xCoord + 0.5F),
-								(double) ((float) yCoord + 0.5F),
-								(double) ((float) zCoord + 0.5F),
-								block1.stepSound.getStepResourcePath(),
-								(block1.stepSound.getVolume() + 1.0F) / 2.0F,
-								block1.stepSound.getPitch() * 0.8F);
-						stack.damageItem(1, player);
-						break;
-					case 2:
-						// System.out.println("Metadata Value: " + meta);
-						break;
-
-					}
-				} else {
-
-				}
-			}
-		}
-
-		return true;
-	}
-
 	public boolean isOpaqueCube() {
 		return false;
 	}
@@ -212,19 +80,22 @@ public class BlockModroad extends Block {
 		return false;
 	}
 
-	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
-			int zCoord, Entity entity) {
-		if (Config.speedOn) {
-			if (entity instanceof EntityLivingBase) {
-				if (Config.speed > 9) {
-					speed = 9;
-				} else {
-					speed = Config.speed;
-				}
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
-						Potion.moveSpeed.id, 0, speed));
-			}
-		}
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x,
+			int y, int z) {
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
+	}
+
+	@Override
+	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
+		float speed = 2F;
+		float max = 0.4F;
+		double motionX = Math.abs(entity.motionX);
+		double motionZ = Math.abs(entity.motionZ);
+		if (motionX < max)
+			entity.motionX *= speed;
+		if (motionZ < max)
+			entity.motionZ *= speed;
 	}
 
 	@SideOnly(Side.CLIENT)

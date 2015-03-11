@@ -17,18 +17,17 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2.1.5"
-group= "roadblock" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "roadblock-1.7.10"
+version = "${mod_version}"
+group= "com.whammich.roadblock" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "roadblock-${minecraft_version}"
 
 minecraft {
-    version = "1.7.10-10.13.2.1232"
+    version = "${minecraft_version}-${forge_version}"
 	if(file('../run-1.7.10').exists()){
-		assetDir = "../run-1.7.10/assets"
+		runDir = "../run-1.7.10/assets"
 	} else {
-		assetDir = "assets"
+		runDir = "assets"
 	}
-    //runDir = "eclipse"
 	replaceIn "Reference.java"
     replace "@VERSION@", project.version
 }
@@ -36,23 +35,10 @@ minecraft {
 dependencies {
 	compile files (
 		"../Libraries/Chisel2_DEV-2.3.7.65-deobf.jar",
-		"../Libraries/Railcraft_1.7.10-9.5.0.0-dev.jar",
-		"../Libraries/SSTOW-RC8-deobf.jar",
-		"../Libraries/Botania r1.5-166-deobf.jar"
+		"../Libraries/SSTOW-RC9-deobf.jar",
+		"../Libraries/Botania r1.5-169-deobf.jar",
+		"../Libraries/Baubles-deobf-1.7.10-1.0.1.10.jar"
 	)
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-    //compile 'lib/Thaumcraft-1.7.10-4.2.0.1.jar'
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
 }
 
 processResources

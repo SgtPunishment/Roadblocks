@@ -97,12 +97,10 @@ public class ItemMallet extends Item {
 			float p_77648_9_, float p_77648_10_) {
 		if (world.getBlock(xCoord, yCoord, zCoord) instanceof BlockRoad) {
 			if (world.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
-				world.setBlock(xCoord, yCoord, zCoord,
-						world.getBlock(xCoord, yCoord, zCoord), 1, 3);
+				world.setBlock(xCoord, yCoord, zCoord, world.getBlock(xCoord, yCoord, zCoord), 1, 3);
 				world.markBlockForUpdate(xCoord, yCoord, zCoord);
 			} else {
-				world.setBlock(xCoord, yCoord, zCoord,
-						world.getBlock(xCoord, yCoord, zCoord), 0, 3);
+				world.setBlock(xCoord, yCoord, zCoord, world.getBlock(xCoord, yCoord, zCoord), 0, 3);
 				world.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}

@@ -12,6 +12,8 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import sstow.gameObjs.ObjHandler;
 
+import vazkii.botania.common.block.ModBlocks;
+
 //import roadblock.block.Grassroad;
 import com.whammich.roadblock.block.BlockModroad;
 import com.whammich.roadblock.block.BlockRoad;
@@ -69,6 +71,7 @@ public class Register {
 	// Botanita Textures
 	public static Block prismarine;
 	public static Block darkPrismarine;
+	public static Block brickPrismarine;
 
 	public static Item ironMallet;
 	public static Item goldMallet;
@@ -104,38 +107,41 @@ public class Register {
 
 	public static void Blocks() {
 		// TODO Register Mod Blocks
-		if (Loader.isModLoaded("chisel")) {
-			if (Config.debug)
-				System.out.println("Registering Chisel Factory Block");
-			chiselFactory01 = new BlockModroad(Material.iron, "WireFrame",
-					"wireframe", Block.soundTypeMetal);
-
-			if (Config.debug)
-				System.out.println("Registering Chisel Factory Block");
-			chiselFactory02 = new BlockModroad(Material.iron, "WireFrameWhite",
-					"wireframewhite", Block.soundTypeMetal);
-
-			if (Config.debug)
-				System.out.println("Registering Chisel Paver Block");
-			chiselPaver = new BlockModroad(Material.iron, "paver", "paver",
-					Block.soundTypeMetal);
-
-		} else {
-
-		}
+		// if (Loader.isModLoaded("chisel")) {
+		// if (Config.debug)
+		// System.out.println("Registering Chisel Factory Block");
+		// chiselFactory01 = new BlockModroad(Material.iron, "WireFrame",
+		// "wireframe", Block.soundTypeMetal);
+		//
+		// if (Config.debug)
+		// System.out.println("Registering Chisel Factory Block");
+		// chiselFactory02 = new BlockModroad(Material.iron, "WireFrameWhite",
+		// "wireframewhite", Block.soundTypeMetal);
+		//
+		// if (Config.debug)
+		// System.out.println("Registering Chisel Paver Block");
+		// chiselPaver = new BlockModroad(Material.iron, "paver", "paver",
+		// Block.soundTypeMetal);
+		//
+		// }
 
 		if (Loader.isModLoaded("Botania")) {
 			if (Config.debug)
 				System.out.println("Registering Botania Prismarine Block");
-			prismarine = new BlockModroad(Material.ground, "prismarine01",
-					"prismarine01", Block.soundTypeStone);
-
-			if (Config.debug)
-				System.out.println("Registering Botania Dark Prismarine Block");
-			darkPrismarine = new BlockModroad(Material.ground, "prismarine03",
-					"prismarine03", Block.soundTypeMetal);
-
-		} else {
+			prismarine = new BlockModroad(ModBlocks.prismarine, 0,
+					Block.soundTypeStone);
+			GameRegistry.registerBlock(prismarine, "Prismarine");
+			brickPrismarine = new BlockModroad(ModBlocks.prismarine, 1,
+					Block.soundTypeStone);
+			GameRegistry.registerBlock(brickPrismarine, "Prismarine Bricks");
+			darkPrismarine = new BlockModroad(ModBlocks.prismarine, 2,
+					Block.soundTypeStone);
+			GameRegistry.registerBlock(darkPrismarine, "Dark Prismarine");
+			// if (Config.debug)
+			// System.out.println("Registering Botania Dark Prismarine Block");
+			// darkPrismarine = new BlockModroad(Material.ground,
+			// "prismarine03",
+			// "prismarine03", Block.soundTypeMetal);
 
 		}
 
@@ -512,13 +518,13 @@ public class Register {
 				"Road Blocks", new Achievement[] { buildRoad }));
 	}
 
-//	public static void Renderers() {
-//		// TODO Register Renderers
-//		if (Config.debug)
-//			System.out.println("Registering Renderers");
-//
-//		grassRoadRenderType = RenderingRegistry.getNextAvailableRenderId();
-//		RenderingRegistry.registerBlockHandler(new grassRoadRender());
-//	}
+	// public static void Renderers() {
+	// // TODO Register Renderers
+	// if (Config.debug)
+	// System.out.println("Registering Renderers");
+	//
+	// grassRoadRenderType = RenderingRegistry.getNextAvailableRenderId();
+	// RenderingRegistry.registerBlockHandler(new grassRoadRender());
+	// }
 
 }

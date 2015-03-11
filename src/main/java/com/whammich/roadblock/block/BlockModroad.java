@@ -4,43 +4,56 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import vazkii.botania.common.lib.LibMisc;
 
-import com.cricketcraft.chisel.Chisel;
+import com.whammich.roadblock.utils.Reference;
 import com.whammich.roadblock.utils.RoadTabs;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockModroad extends Block {
-	public String name;
-	public String texture;
-	public IIcon blockIcon;
-	public IIcon top;
-	public IIcon side;
-	public IIcon bottom;
-	public IIcon slab;
 
-	public BlockModroad(Material material, String blockName,
-			String blockTexture, SoundType stepsound) {
+	private Block block = null;
+	int blockMeta = 0;
+
+	public BlockModroad(String unlocName, String textureName,
+			Material material, SoundType soundType) {
 		super(material);
-		name = blockName;
-		texture = blockTexture;
-		GameRegistry.registerBlock(this, name + "_roadblock").setStepSound(
-				stepsound);
-		setBlockName(name + "_roadblock");
+
+		setBlockName(Reference.modid + "." + unlocName + ".roadblock");
+		setBlockTextureName(textureName);
 		setCreativeTab(RoadTabs.tabRoad);
-		setLightOpacity(255);
-		useNeighborBrightness = true;
+		setStepSound(soundType);
 		setHardness(1.5F);
+	}
+
+	public BlockModroad(Block block, int blockMeta, SoundType soundType) {
+		super(block.getMaterial());
+		ItemStack blockStack = new ItemStack(block, 1, blockMeta);
+		setBlockName(Reference.modid
+				+ "."
+				+ blockStack.getDisplayName().replaceAll("[^A-Za-z0-9]", "")
+						.replaceAll(" ", ""));
+		setCreativeTab(RoadTabs.tabRoad);
+		setStepSound(soundType);
+		setHardness(1.5F);
+
+		this.block = block;
+		this.blockMeta = blockMeta;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		if (block != null)
+			return block.getIcon(side, blockMeta);
+		else
+			return blockIcon;
 	}
 
 	@Override
@@ -50,17 +63,17 @@ public class BlockModroad extends Block {
 
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
 			int z) {
-		int meta = world.getBlockMetadata(x, y, z);
 
+		int meta = world.getBlockMetadata(x, y, z);
 		Block blockAbove = world.getBlock(x, y + 1, z);
-		if (!blockAbove.isAir(world, x, y + 1, z)) {
+
+		if (!blockAbove.isAir(world, x, y + 1, z))
 			setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
-		} else {
-			if (meta == 0) {
+		else {
+			if (meta == 0)
 				setBlockBounds(0F, 0F, 0F, 1F, 0.9375F, 1F);
-			} else {
+			else
 				setBlockBounds(0F, 0F, 0F, 1F, 0.4375F, 1F);
-			}
 		}
 	}
 
@@ -86,6 +99,11 @@ public class BlockModroad extends Block {
 		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
 	}
 
+	@SideOnly(Side.CLIENT)
+	public void setBlockBoundsForItemRender() {
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
+	}
+
 	@Override
 	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
 		float speed = 2F;
@@ -97,64 +115,4 @@ public class BlockModroad extends Block {
 		if (motionZ < max)
 			entity.motionZ *= speed;
 	}
-
-	@SideOnly(Side.CLIENT)
-	public void setBlockBoundsForItemRender() {
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (Loader.isModLoaded("chisel")) {
-			if (texture == "wireframe") {
-				return blockIcon;
-			} else if (texture == "wireframewhite") {
-				return blockIcon;
-			} else if (texture == "paver") {
-				return blockIcon;
-			}
-		}
-		if (Loader.isModLoaded("Botania")) {
-			if (texture == "") {
-				return blockIcon;
-			} else if (texture == "") {
-				return blockIcon;
-			}
-		}
-		return blockIcon;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-
-		if (Loader.isModLoaded("chisel")) {
-			if (texture == "wireframe") {
-				this.blockIcon = register.registerIcon(Chisel.MOD_ID
-						+ ":factory/wireframe");
-
-			} else if (texture == "wireframewhite") {
-				this.blockIcon = register.registerIcon(Chisel.MOD_ID
-						+ ":factory/wireframewhite");
-
-			} else if (texture == "paver") {
-				this.blockIcon = register
-						.registerIcon(Chisel.MOD_ID + ":paver");
-			}
-		}
-
-		if (Loader.isModLoaded("Botania")) {
-			if (texture == "") {
-				this.blockIcon = register.registerIcon(LibMisc.MOD_ID
-						+ ":prismarine01");
-
-			} else if (texture == "") {
-				this.blockIcon = register.registerIcon(LibMisc.MOD_ID
-						+ ":prismarine03");
-
-			}
-		} else {
-			this.blockIcon = register.registerIcon(texture);
-		}
-	}
-
 }

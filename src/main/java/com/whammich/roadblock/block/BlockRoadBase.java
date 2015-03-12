@@ -2,39 +2,51 @@ package com.whammich.roadblock.block;
 
 import java.util.List;
 
-import com.whammich.roadblock.Roadblock;
-import com.whammich.roadblock.utils.LogHelper;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import com.whammich.roadblock.Roadblock;
+import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.LogHelper;
 import com.whammich.roadblock.utils.Reference;
+import com.whammich.roadblock.utils.Utils;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class BlockRoadBase extends Block {
 
+	int speed;
 	private Block block = null;
 	int blockMeta = 0;
 
-    /**
-     *
-     * @param unlocName - Unlocalized name to give to the block. Gets prefixed with the modid and suffixed with ".roadblock"
-     * @param textureName - Name of the texture to use for the block
-     * @param material - Material of the block
-     * @param soundType - Sound type of the block
-     */
-	public BlockRoadBase(String unlocName, String textureName, Material material, SoundType soundType) {
+	/**
+	 *
+	 * @param unlocName
+	 *            - Unlocalized name to give to the block. Gets prefixed with
+	 *            the modid and suffixed with ".roadblock"
+	 * @param textureName
+	 *            - Name of the texture to use for the block
+	 * @param material
+	 *            - Material of the block
+	 * @param soundType
+	 *            - Sound type of the block
+	 */
+	public BlockRoadBase(String unlocName, String textureName,
+			Material material, SoundType soundType) {
 		super(material);
 
 		setBlockName(Reference.modid + "." + unlocName + ".roadblock");
@@ -43,19 +55,23 @@ public class BlockRoadBase extends Block {
 		setStepSound(soundType);
 		setHardness(1.5F);
 
-        LogHelper.info("Registering roadblock with name: " + getLocalizedName());
+		LogHelper
+				.info("Registering roadblock with name: " + getLocalizedName());
 	}
 
-    /**
-     *
-     * @param block - Block to get Name, Texture, and Material from
-     * @param blockMeta - Meta of the block to get Name, Texture, and Material from
-     * @param soundType - Soundtype of the roadblock
-     */
+	/**
+	 *
+	 * @param block
+	 *            - Block to get Name, Texture, and Material from
+	 * @param blockMeta
+	 *            - Meta of the block to get Name, Texture, and Material from
+	 * @param soundType
+	 *            - Soundtype of the roadblock
+	 */
 	public BlockRoadBase(Block block, int blockMeta, SoundType soundType) {
 		super(block.getMaterial());
 
-        setBlockName(Reference.modid + ".road");
+		setBlockName(Reference.modid + ".road");
 		setCreativeTab(Roadblock.tabRoadblocks);
 		setStepSound(soundType);
 		setHardness(1.5F);
@@ -63,18 +79,23 @@ public class BlockRoadBase extends Block {
 		this.block = block;
 		this.blockMeta = blockMeta;
 
-        LogHelper.info("Registering roadblock for block: " + block.getLocalizedName());
-        ItemStack blockStack = new ItemStack(block, 1, blockMeta);
+		LogHelper.info("Registering roadblock for block: "
+				+ block.getLocalizedName());
+		ItemStack blockStack = new ItemStack(block, 1, blockMeta);
 
-        GameRegistry.registerBlock(this, "BlockRoad" + blockStack.getDisplayName().replaceAll(" ", ""));
-        GameRegistry.addRecipe(new ShapedOreRecipe(this, "SBS", 'S', Items.sugar, 'B', new ItemStack(block, 1, blockMeta)));
+		GameRegistry.registerBlock(this, "BlockRoad"
+				+ blockStack.getDisplayName().replaceAll(" ", ""));
+		GameRegistry.addRecipe(new ShapedOreRecipe(this, "SBS", 'S',
+				Items.sugar, 'B', new ItemStack(block, 1, blockMeta)));
 	}
 
-    @Override
-    public String getUnlocalizedName() {
-        ItemStack blockStack = new ItemStack(block, 1, blockMeta);
-        return String.format(StatCollector.translateToLocal("tile.roadblock.road.name"), blockStack.getDisplayName());
-    }
+	@Override
+	public String getUnlocalizedName() {
+		ItemStack blockStack = new ItemStack(block, 1, blockMeta);
+		return String.format(
+				StatCollector.translateToLocal("tile.roadblock.road.name"),
+				blockStack.getDisplayName());
+	}
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
@@ -106,9 +127,11 @@ public class BlockRoadBase extends Block {
 	}
 
 	@SuppressWarnings({ "rawtypes" })
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisAlignedBB, List list, Entity entity) {
+	public void addCollisionBoxesToList(World world, int x, int y, int z,
+			AxisAlignedBB axisAlignedBB, List list, Entity entity) {
 		setBlockBoundsBasedOnState(world, x, y, z);
-		super.addCollisionBoxesToList(world, x, y, z, axisAlignedBB, list, entity);
+		super.addCollisionBoxesToList(world, x, y, z, axisAlignedBB, list,
+				entity);
 	}
 
 	public boolean isOpaqueCube() {
@@ -120,7 +143,8 @@ public class BlockRoadBase extends Block {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x,
+			int y, int z) {
 		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
 	}
 
@@ -131,14 +155,28 @@ public class BlockRoadBase extends Block {
 
 	@Override
 	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
-		float speed = 2F;
-		float max = 0.4F;
-		double motionX = Math.abs(entity.motionX);
-		double motionZ = Math.abs(entity.motionZ);
-
-		if (motionX < max)
-			entity.motionX *= speed;
-		if (motionZ < max)
-			entity.motionZ *= speed;
+		if (Utils.findBlockUnderEntity(entity) instanceof BlockRoadBase) {
+			if (Config.speedOn) {
+				if (entity instanceof EntityLivingBase) {
+					if (Config.speed > 9) {
+						speed = 9;
+					} else {
+						speed = Config.speed;
+					}
+					((EntityLivingBase) entity)
+							.addPotionEffect(new PotionEffect(
+									Potion.moveSpeed.id, 20, speed));
+				}
+			}
+		}
+		// float speed = 2F;
+		// float max = 0.4F;
+		// double motionX = Math.abs(entity.motionX);
+		// double motionZ = Math.abs(entity.motionZ);
+		//
+		// if (motionX < max)
+		// entity.motionX *= speed;
+		// if (motionZ < max)
+		// entity.motionZ *= speed;
 	}
 }

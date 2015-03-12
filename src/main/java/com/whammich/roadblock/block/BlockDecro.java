@@ -1,13 +1,12 @@
 package com.whammich.roadblock.block;
 
-import com.whammich.roadblock.Roadblock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
+import com.whammich.roadblock.Roadblock;
 import com.whammich.roadblock.utils.Reference;
-import com.whammich.roadblock.utils.CreativeTabRoadblocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;

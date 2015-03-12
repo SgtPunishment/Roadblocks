@@ -1,15 +1,17 @@
 package com.whammich.roadblock.utils;
 
-import com.whammich.roadblock.block.BlockRoadBase;
-import com.whammich.roadblock.item.ItemMallet;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import sstow.gameObjs.ObjHandler;
+
+import com.whammich.roadblock.block.BlockRoadBase;
+import com.whammich.roadblock.item.ItemMallet;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Register {
 
@@ -59,6 +61,6 @@ public class Register {
         buildRoad = new Achievement("achievement.buildRoad", "buildRoad", 0, 0, defaultRoadblock, (Achievement) null).initIndependentStat().registerStat();
 
         LogHelper.info("Registering Achievement Page");
-        AchievementPage.registerAchievementPage(new AchievementPage("Road Blocks", buildRoad));
+        AchievementPage.registerAchievementPage(new AchievementPage("Roadblocks", buildRoad));
     }
 }

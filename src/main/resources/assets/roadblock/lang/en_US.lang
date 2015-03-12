@@ -1,10 +1,11 @@
 # Gui
-itemGroup.roadblock.creativeTab=Road Blocks
+itemGroup.roadblock.creativeTab=Roadblocks
 achievement.buildRoad=The Road not taken
 achievement.buildRoad.desc=Crafting a road block
 
 # Blocks
 tile.roadblock.road.name=%s Road
+tile.roadblock.slab.name=%s Road Slab
 
 # Items
 item.roadblock.mallet.iron.name=Iron Paving Mallet

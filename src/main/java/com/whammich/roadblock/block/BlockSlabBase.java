@@ -91,10 +91,14 @@ public class BlockSlabBase extends BlockSlab {
 
 	@Override
 	public String getUnlocalizedName() {
-		ItemStack blockStack = new ItemStack(block, 1, blockMeta);
-		return String.format(
-				StatCollector.translateToLocal("tile.roadblock.slab.name"),
-				blockStack.getDisplayName());
+		if (block != null) {
+			ItemStack blockStack = new ItemStack(block, 1, blockMeta);
+			return String.format(
+					StatCollector.translateToLocal("tile.roadblock.slab.name"),
+					blockStack.getDisplayName());
+		}
+
+		return super.getUnlocalizedName();
 	}
 
 	@SideOnly(Side.CLIENT)

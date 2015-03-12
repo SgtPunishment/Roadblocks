@@ -46,11 +46,12 @@ public class Register {
 			case 2: {
 				Block block = GameRegistry.findBlock(split[0], split[1]);
 				int meta = 0;
-
-				roadblockConfig[configBlockCount] = new BlockRoadBase(block,
-						meta, Block.soundTypeStone);
-				roadblockConfig[configBlockCount] = new BlockSlabBase(false,
-						block, meta, Block.soundTypeStone);
+				if (block != null) {
+					roadblockConfig[configBlockCount] = new BlockRoadBase(
+							block, meta, Block.soundTypeStone);
+					roadblockConfig[configBlockCount] = new BlockSlabBase(
+							false, block, meta, Block.soundTypeStone);
+				}
 				LogHelper.info(block + ": " + meta);
 				configBlockCount++;
 				break;
@@ -58,11 +59,12 @@ public class Register {
 			case 3: {
 				Block block = GameRegistry.findBlock(split[0], split[1]);
 				int meta = Integer.parseInt(split[2]);
-
-				roadblockConfig[configBlockCount] = new BlockRoadBase(block,
-						meta, Block.soundTypeStone);
-				roadblockConfig[configBlockCount] = new BlockSlabBase(false,
-						block, meta, Block.soundTypeStone);
+				if (block != null) {
+					roadblockConfig[configBlockCount] = new BlockRoadBase(
+							block, meta, Block.soundTypeStone);
+					roadblockConfig[configBlockCount] = new BlockSlabBase(
+							false, block, meta, Block.soundTypeStone);
+				}
 				configBlockCount++;
 				break;
 			}
@@ -70,9 +72,10 @@ public class Register {
 				Block block = GameRegistry.findBlock(split[0], split[1]);
 				int meta = Integer.parseInt(split[2]);
 				float light = Float.parseFloat(split[3]);
-
-				roadblockConfig[configBlockCount] = new BlockRoadBase(block,
-						meta, Block.soundTypeStone, light);
+				if (block != null) {
+					roadblockConfig[configBlockCount] = new BlockRoadBase(
+							block, meta, Block.soundTypeStone, light);
+				}
 				configBlockCount++;
 				break;
 			}
@@ -80,11 +83,13 @@ public class Register {
 
 		}
 
-		roadblockDefault = new BlockRoadBase("default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
+		roadblockDefault = new BlockRoadBase("default", Reference.modid
+				+ ":default", Material.ground, Block.soundTypeStone);
 		GameRegistry.registerBlock(roadblockDefault, "BlockRoadDefault");
-		roadblockDefault = new BlockSlabBase(false, "default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
+		roadblockDefault = new BlockSlabBase(false, "default", Reference.modid
+				+ ":default", Material.ground, Block.soundTypeStone);
 		GameRegistry.registerBlock(roadblockDefault, "BlockSlabDefault");
-		
+
 	}
 
 	public static void Achievements() {

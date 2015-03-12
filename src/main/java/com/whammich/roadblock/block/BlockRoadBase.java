@@ -91,10 +91,12 @@ public class BlockRoadBase extends Block {
 
 	@Override
 	public String getUnlocalizedName() {
+          if (block != null) {
 		ItemStack blockStack = new ItemStack(block, 1, blockMeta);
-		return String.format(
-				StatCollector.translateToLocal("tile.roadblock.road.name"),
-				blockStack.getDisplayName());
+		return String.format(StatCollector.translateToLocal("tile.roadblock.road.name"),blockStack.getDisplayName());
+          }
+
+          return super.getUnlocalizedName();
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -12,6 +12,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Reference.modid, name = Reference.name, version = Reference.version, dependencies = Reference.dependencies, guiFactory = Reference.GuiFactory_class)
@@ -37,37 +38,23 @@ public class Roadblock {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		// Register Items
-		if (Config.debug)
-			System.out.println("Registering Items");
+        LogHelper.info("Registering Items");
 		Register.registerItems();
 
 		// Register Blocks
-		if (Config.debug)
-			System.out.println("Registering Blocks");
+        LogHelper.info("Registering Blocks");
 		Register.registerBlocks();
 
 		// Register Recipes
-		if (Config.debug)
-			System.out.println("Registering Recipes");
+        LogHelper.info("Registering Recipes");
 //		Register.Recipes();
 
 		// Register Achievements
-		if (Config.debug)
-			System.out.println("Registering Achievements");
+        LogHelper.info("Registering Achievements");
 		Register.Achievements();
 
-		// Register Tools
-		if (Config.debug)
-			System.out.println("Registering Mallet Recipes");
-		Register.malletRecipes();
-
-		if (Config.debug)
-			System.out.println("Registering Mallet Crafting");
-		Register.malletCrafting();
-
 		// // Register Renderer
-		// if (Config.debug)
-		// System.out.println("Registering Renderers");
+		// LogHelper.info("Registering Renderers");
 		// Register.Renderers();
 	}
 
@@ -75,6 +62,7 @@ public class Roadblock {
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
         if (eventArgs.modID.equals(Reference.modid)) {
             Config.syncConfig();
+            LogHelper.info(StatCollector.translateToLocal("info.roadblock.config.reload"));
         }
     }
 }

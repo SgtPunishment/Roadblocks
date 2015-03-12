@@ -3,11 +3,12 @@ package com.whammich.roadblock.block;
 import java.util.List;
 
 import com.whammich.roadblock.Roadblock;
-import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -19,6 +20,7 @@ import com.whammich.roadblock.utils.Reference;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class BlockRoadBase extends Block {
 
@@ -41,8 +43,7 @@ public class BlockRoadBase extends Block {
 		setStepSound(soundType);
 		setHardness(1.5F);
 
-        if (Config.debug)
-            System.out.println("Registering roadblock with name: " + getLocalizedName());
+        LogHelper.info("Registering roadblock with name: " + getLocalizedName());
 	}
 
     /**
@@ -62,11 +63,11 @@ public class BlockRoadBase extends Block {
 		this.block = block;
 		this.blockMeta = blockMeta;
 
-        if (Config.debug)
-            System.out.println("Registering roadblock for block: " + block.getLocalizedName());
+        LogHelper.info("Registering roadblock for block: " + block.getLocalizedName());
         ItemStack blockStack = new ItemStack(block, 1, blockMeta);
 
         GameRegistry.registerBlock(this, "BlockRoad" + blockStack.getDisplayName().replaceAll(" ", ""));
+        GameRegistry.addRecipe(new ShapedOreRecipe(this, "SBS", 'S', Items.sugar, 'B', new ItemStack(block, 1, blockMeta)));
 	}
 
     @Override

@@ -2,6 +2,8 @@ package com.whammich.roadblock.item;
 
 import com.whammich.roadblock.Roadblock;
 import com.whammich.roadblock.block.BlockRoadBase;
+import com.whammich.roadblock.utils.LogHelper;
+import com.whammich.roadblock.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,45 +15,57 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
-import com.whammich.roadblock.utils.Config;
 import com.whammich.roadblock.utils.Reference;
-import com.whammich.roadblock.utils.CreativeTabRoadblocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemMallet extends Item {
-	public final String name = "Mallet";
+
 	private float DamVEnt;
 
-	public Item.ToolMaterial theToolMaterial;
+    String toolMaterial;
 
-	public ItemMallet(Item.ToolMaterial material) {
-		this.theToolMaterial = material;
-		this.maxStackSize = 1;
-		this.setMaxDamage(material.getMaxUses());
-		GameRegistry.registerItem(this, getToolMaterialName().toLowerCase()
-				+ name);
-		setUnlocalizedName(Reference.modid + "_"
-				+ getToolMaterialName().toLowerCase() + name);
-		setCreativeTab(Roadblock.tabRoadblocks);
-		this.DamVEnt = 2.0F + theToolMaterial.getDamageVsEntity();
-		if (Config.debug)
-			System.out.println("Registering "
-					+ getToolMaterialName().toLowerCase()
-					+ " Pavers Mallet Recipe");
+	public ItemMallet(Item.ToolMaterial material, Item resource) {
+
+        String toolMaterial = material.toString().toLowerCase();
+        this.toolMaterial = toolMaterial;
+
+        setUnlocalizedName(Reference.modid + ".mallet." + toolMaterial);
+        setCreativeTab(Roadblock.tabRoadblocks);
+        setMaxStackSize(1);
+        setMaxDamage(material.getMaxUses());
+
+        DamVEnt = 2.0F + material.getDamageVsEntity();
+
+        LogHelper.info("Registering " + toolMaterial + " Pavers Mallet");
+        GameRegistry.registerItem(this, "ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
+        GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', "stickWood", 'M', resource));
 	}
 
-	public float func_150931_i() {
-		return this.theToolMaterial.getDamageVsEntity();
-	}
+    public ItemMallet(Item.ToolMaterial material, String resource) {
+
+        String toolMaterial = material.toString().toLowerCase();
+        this.toolMaterial = toolMaterial;
+
+        setUnlocalizedName(Reference.modid + ".mallet." + toolMaterial);
+        setCreativeTab(Roadblock.tabRoadblocks);
+        setMaxStackSize(1);
+        setMaxDamage(material.getMaxUses());
+
+        DamVEnt = 2.0F + material.getDamageVsEntity();
+
+        LogHelper.info("Registering " + toolMaterial + " Pavers Mallet");
+        GameRegistry.registerItem(this, "ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
+        GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', "stickWood", 'M', resource));
+    }
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.modid + ":"
-				+ getToolMaterialName().toLowerCase() + "mallet");
+		itemIcon = iconRegister.registerIcon(Reference.modid + ":" + toolMaterial + "mallet");
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -59,21 +73,15 @@ public class ItemMallet extends Item {
 		return true;
 	}
 
-	public String getToolMaterialName() {
-		return this.theToolMaterial.toString();
-	}
-
-	public boolean hitEntity(ItemStack stack, EntityLivingBase entity,
-			EntityLivingBase player) {
+	public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase player) {
 		stack.damageItem(1, player);
+
 		return true;
 	}
 
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block,
-			int xCoord, int yCoord, int zCoord, EntityLivingBase player) {
-		if ((double) block.getBlockHardness(world, xCoord, yCoord, zCoord) != 0.0D) {
+	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int xCoord, int yCoord, int zCoord, EntityLivingBase player) {
+		if ((double) block.getBlockHardness(world, xCoord, yCoord, zCoord) != 0.0D)
 			stack.damageItem(2, player);
-		}
 
 		return true;
 	}
@@ -81,30 +89,26 @@ public class ItemMallet extends Item {
 	@SuppressWarnings({ "unchecked", "deprecation", "rawtypes" })
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage
-				.getAttributeUnlocalizedName(), new AttributeModifier(
-				field_111210_e, "Weapon modifier", (double) this.DamVEnt, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double) this.DamVEnt, 0));
+
 		return multimap;
 	}
 
-	/**
-	 * Callback for item usage. If the item does something special on right
-	 * clicking, he will have one of those. Return True if something happen and
-	 * false if it don't. This is for ITEMS, not BLOCKS
-	 */
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world,
-			int xCoord, int yCoord, int zCoord, int side, float p_77648_8_,
-			float p_77648_9_, float p_77648_10_) {
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int xCoord, int yCoord, int zCoord, int side, float hitX, float hitY, float hitZ) {
 		if (world.getBlock(xCoord, yCoord, zCoord) instanceof BlockRoadBase) {
 			if (world.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
 				world.setBlock(xCoord, yCoord, zCoord, world.getBlock(xCoord, yCoord, zCoord), 1, 3);
 				world.markBlockForUpdate(xCoord, yCoord, zCoord);
+                stack.damageItem(1, player);
+                return true;
 			} else {
 				world.setBlock(xCoord, yCoord, zCoord, world.getBlock(xCoord, yCoord, zCoord), 0, 3);
 				world.markBlockForUpdate(xCoord, yCoord, zCoord);
+                stack.damageItem(1, player);
+                return true;
 			}
 		}
-		return false;
 
+		return false;
 	}
 }

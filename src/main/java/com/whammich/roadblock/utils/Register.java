@@ -128,20 +128,24 @@ public class Register {
 		if (Loader.isModLoaded("Botania")) {
 			if (Config.debug)
 				System.out.println("Registering Botania Prismarine Block");
+
 			prismarine = new BlockModroad(ModBlocks.prismarine, 0,
 					Block.soundTypeStone);
 			GameRegistry.registerBlock(prismarine, "Prismarine");
+
+			if (Config.debug)
+				System.out.println("Registering Botania Prismarine Bricks Block");
+
 			brickPrismarine = new BlockModroad(ModBlocks.prismarine, 1,
 					Block.soundTypeStone);
 			GameRegistry.registerBlock(brickPrismarine, "Prismarine Bricks");
+
+			if (Config.debug)
+				System.out.println("Registering Botania Dark Prismarine Block");
+
 			darkPrismarine = new BlockModroad(ModBlocks.prismarine, 2,
 					Block.soundTypeStone);
 			GameRegistry.registerBlock(darkPrismarine, "Dark Prismarine");
-			// if (Config.debug)
-			// System.out.println("Registering Botania Dark Prismarine Block");
-			// darkPrismarine = new BlockModroad(Material.ground,
-			// "prismarine03",
-			// "prismarine03", Block.soundTypeMetal);
 
 		}
 

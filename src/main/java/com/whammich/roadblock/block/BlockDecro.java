@@ -1,12 +1,13 @@
 package com.whammich.roadblock.block;
 
+import com.whammich.roadblock.Roadblock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 import com.whammich.roadblock.utils.Reference;
-import com.whammich.roadblock.utils.RoadTabs;
+import com.whammich.roadblock.utils.CreativeTabRoadblocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -25,7 +26,7 @@ public class BlockDecro extends Block {
 		texture = blockTexture;
 		GameRegistry.registerBlock(this, name).setStepSound(stepsound);
 		setBlockName(name);
-		setCreativeTab(RoadTabs.tabRoad);
+		setCreativeTab(Roadblock.tabRoadblocks);
 		setLightOpacity(255);
 		useNeighborBrightness = true;
 		setHardness(1.5F);

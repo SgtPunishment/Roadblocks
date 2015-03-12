@@ -24,21 +24,17 @@ archivesBaseName = "roadblock-${minecraft_version}"
 minecraft {
     version = "${minecraft_version}-${forge_version}"
 	if(file('../run-1.7.10').exists()){
-		runDir = "../run-1.7.10/assets"
+		runDir = "run-1.7.10/"
 	} else {
-		runDir = "assets"
+		runDir = "run"
 	}
 	replaceIn "Reference.java"
     replace "@VERSION@", project.version
 }
 
 dependencies {
-	compile files (
-		"../Libraries/Chisel2_DEV-2.3.7.65-deobf.jar",
-		"../Libraries/SSTOW-RC9-deobf.jar",
-		"../Libraries/Botania r1.5-169-deobf.jar",
-		"../Libraries/Baubles-deobf-1.7.10-1.0.1.10.jar"
-	)
+	compile fileTree(dir: 'libs', include: '*.jar')
+	compile fileTree(dir: 'Libraries', include: '*.jar')
 }
 
 processResources

@@ -9,47 +9,33 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class Config {
 
-	public static int speed;
+    public static Configuration config;
+
+    // Category Base
+    static String category;
+
+    // Config Options
+    public static int speed;
 	public static boolean debug;
 	public static boolean speedOn;
 	public static int returnBlocks;
+    public static String[] roadblocks;
+    private static String[] roadblocksDefault = { "minecraft:dirt", "minecraft:dirt:2", "minecraft:grass", "minecraft:stone", "minecraft:cobblestone", "minecraft:planks", "minecraft:planks:1" };
 
-	public static Configuration config;
-	public static boolean configExists;
+    public static void init(File file) {
+        config = new Configuration(file);
+        syncConfig();
+    }
 
-	public static void loadConfig(File configFile) {
-		config = new Configuration(configFile);
-		config.load();
-		load();
-		FMLCommonHandler.instance().bus().register(new syncConfig());
-	}
+    public static void syncConfig() {
+        category = "general";
 
-	public static void load() {
-		String category;
+        speed = config.get(category, "speedBoostLevel", 0, "How fast to travel on a roadblock.").getInt();
+        returnBlocks = config.get(category, "amountCraftedReturn", 1, "Amount of roadblocks to obtain when crafted").getInt();
+        speedOn = config.get(category, "speedBoostEnabled", true, "Enable the speed boost.").getBoolean();
+        debug = config.get(category, "enableDebugSettings", false, "Enables debug console logging.").getBoolean();
+        roadblocks = config.get(category, "roadblocksToCreate", roadblocksDefault, "Blocks to create roadblocks for. \nSyntax is: \nmodid:blockname:meta").getStringList();
 
-		category = "general";
-
-		returnBlocks = config.get(category, "Roadblock Crafted Amount", 1,
-				"How many roadblocks should you get when crafted?").getInt(1);
-
-		speed = config.get(category, "Speed Boost Level", 0,
-				"How fast you travel on a roadblock").getInt(0);
-
-		speedOn = config.get(category, "Enable Speed Boost", true,
-				"Enable Speed Boost Option").getBoolean(true);
-
-		debug = config
-				.get(category, "Enable Debug Mode", false,
-						"RESTART REQUIRED: This will output information to the console")
-				.getBoolean(false);
-	}
-
-	public static class syncConfig {
-		@SubscribeEvent
-		public void onConfigChanged(
-				ConfigChangedEvent.OnConfigChangedEvent event) {
-			if (event.modID.equals(Reference.modid))
-				load();
-		}
-	}
+        config.save();
+    }
 }

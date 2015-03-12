@@ -2,6 +2,7 @@ package com.whammich.roadblock.block;
 
 import java.util.List;
 
+import com.whammich.roadblock.Roadblock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 
 import com.whammich.roadblock.renderer.CTM;
 import com.whammich.roadblock.utils.Reference;
-import com.whammich.roadblock.utils.RoadTabs;
+import com.whammich.roadblock.utils.CreativeTabRoadblocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -34,7 +35,7 @@ public class BlockDesire extends Block {
 		GameRegistry.registerBlock(this, name).setStepSound(
 				Block.soundTypeGrass);
 		setBlockName(name);
-		setCreativeTab(RoadTabs.tabRoad);
+		setCreativeTab(Roadblock.tabRoadblocks);
 		setLightOpacity(0);
 		useNeighborBrightness = true;
 		setHardness(1.5F);

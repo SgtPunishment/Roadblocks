@@ -1,7 +1,10 @@
 package com.whammich.roadblock.utils;
 
+import com.whammich.roadblock.block.BlockRoadBase;
+import com.whammich.roadblock.item.ItemMallet;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -12,523 +15,449 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import sstow.gameObjs.ObjHandler;
 
-import vazkii.botania.common.block.ModBlocks;
-
-//import roadblock.block.Grassroad;
-import com.whammich.roadblock.block.BlockModroad;
-import com.whammich.roadblock.block.BlockRoad;
-import com.whammich.roadblock.block.BlockDecro;
-import com.whammich.roadblock.item.ItemMallet;
-//import com.whammich.roadblock.renderer.grassRoadRender;
-
-//import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class Register {
 
-	public static Achievement buildRoad;
-
-	public static RoadTabs tabRoadBlock = new RoadTabs();
-
-	// Full Blocks
-
-	public static Block grassRoad;
-	public static Block smoothDirt;
-	public static Block compressedCobblestone;
-	public static Block defaultRoadblock;
-	public static Block compressedCobbleRoadblock;
-	public static Block smoothDirtRoadblock;
-	public static Block stoneRoadblock;
-	public static Block dirtRoadblock;
-	public static Block podzolRoadblock;
-	public static Block cobbleRoadblock;
-	public static Block oakRoadblock;
-	public static Block spruceRoadblock;
-	public static Block birchRoadblock;
-	public static Block jungleRoadblock;
-	public static Block acaciaRoadblock;
-	public static Block darkOakRoadblock;
-	public static Block sandRoadblock;
-	public static Block redsandRoadblock;
-	public static Block gravelRoadblock;
-	public static Block sandstoneTopRoadblock;
-	public static Block sandstoneBottomRoadblock;
-	public static Block stoneSlabTopRoadblock;
-	public static Block bricksRoadblock;
-	public static Block netherRoadblock;
-	public static Block quartzBottomRoadblock;
-	public static Block quartzTopRoadblock;
-	public static Block quartzChiseledRoadblock;
-	public static Block quartzPillerTopRoadblock;
-	public static Block stonebrickChiseledRoadblock;
-
-	// Chisel 2 Textures
-	public static Block chiselFactory01;
-	public static Block chiselFactory02;
-	public static Block chiselPaver;
-
-	// Botanita Textures
-	public static Block prismarine;
-	public static Block darkPrismarine;
-	public static Block brickPrismarine;
-
-	public static Item ironMallet;
-	public static Item goldMallet;
-	public static Item diamondMallet;
-	public static Item souliumMallet;
-
-	public static int renderPass;
-	public static int grassRoadRenderType;
-
-	private static String[][] recipePatterns = new String[][] { { "RA", "SR" } };
-	private static Object[][] recipeItems;
-
-	public static void Items() {
-		// TODO Register Items
-		if (Config.debug)
-			System.out.println("Registering Iron Paver's Mallet");
-		ironMallet = new ItemMallet(ToolMaterial.IRON);
-
-		if (Config.debug)
-			System.out.println("Registering Gold Paver's Mallet");
-		goldMallet = new ItemMallet(ToolMaterial.GOLD);
-
-		if (Config.debug)
-			System.out.println("Registering Diamond Paver's Mallet");
-		diamondMallet = new ItemMallet(ToolMaterial.EMERALD);
-
-		if (Loader.isModLoaded("SSTOW")) {
-			if (Config.debug)
-				System.out.println("Registering Soulium Paver's Mallet");
-			souliumMallet = new ItemMallet(ObjHandler.SOULIUM);
-		}
-	}
-
-	public static void Blocks() {
-		// TODO Register Mod Blocks
-		// if (Loader.isModLoaded("chisel")) {
-		// if (Config.debug)
-		// System.out.println("Registering Chisel Factory Block");
-		// chiselFactory01 = new BlockModroad(Material.iron, "WireFrame",
-		// "wireframe", Block.soundTypeMetal);
-		//
-		// if (Config.debug)
-		// System.out.println("Registering Chisel Factory Block");
-		// chiselFactory02 = new BlockModroad(Material.iron, "WireFrameWhite",
-		// "wireframewhite", Block.soundTypeMetal);
-		//
-		// if (Config.debug)
-		// System.out.println("Registering Chisel Paver Block");
-		// chiselPaver = new BlockModroad(Material.iron, "paver", "paver",
-		// Block.soundTypeMetal);
-		//
-		// }
-
-		if (Loader.isModLoaded("Botania")) {
-			if (Config.debug)
-				System.out.println("Registering Botania Prismarine Block");
-
-			prismarine = new BlockModroad(ModBlocks.prismarine, 0,
-					Block.soundTypeStone);
-			GameRegistry.registerBlock(prismarine, "Prismarine");
-
-			if (Config.debug)
-				System.out.println("Registering Botania Prismarine Bricks Block");
-
-			brickPrismarine = new BlockModroad(ModBlocks.prismarine, 1,
-					Block.soundTypeStone);
-			GameRegistry.registerBlock(brickPrismarine, "Prismarine Bricks");
-
-			if (Config.debug)
-				System.out.println("Registering Botania Dark Prismarine Block");
-
-			darkPrismarine = new BlockModroad(ModBlocks.prismarine, 2,
-					Block.soundTypeStone);
-			GameRegistry.registerBlock(darkPrismarine, "Dark Prismarine");
-
-		}
-
-		// TODO Register Full Blocks
-		// if (Config.debug)
-		// System.out.println("Registering Grass Roadblock");
-		// grassRoad = new Grassroad();
-
-		if (Config.debug)
-			System.out.println("Registering Smooth Dirt Block");
-		smoothDirt = new BlockDecro(Material.ground, "SmoothDirt",
-				"smoothDirt", Block.soundTypeGravel);
-
-		if (Config.debug)
-			System.out.println("Registering Compressed Cobblestone Block");
-		compressedCobblestone = new BlockDecro(Material.rock,
-				"compressedCobblestone", "compressedCobblestone",
-				Block.soundTypeStone);
-
-		// TODO Register Roadblocks
-
-		if (Config.debug)
-			System.out.println("Registering Default Roadblock");
-		defaultRoadblock = new BlockRoad(Material.rock, "Default", "default",
-				Block.soundTypeStone);
-
-		if (Config.debug)
-			System.out.println("Registering Smooth Dirt Roadblock");
-		smoothDirtRoadblock = new BlockRoad(Material.ground, "SmoothDirt",
-				"smoothDirt", Block.soundTypeGravel);
-
-		if (Config.debug)
-			System.out.println("Registering Compressed Cobblestone Roadblock");
-		compressedCobbleRoadblock = new BlockRoad(Material.rock,
-				"CompressedCobble", "compressedcobble", Block.soundTypeStone);
-
-		if (Config.debug)
-			System.out.println("Registering Stone Roadblock");
-		stoneRoadblock = new BlockRoad(Material.rock, "Stone", "stone",
-				Block.soundTypeStone);
-
-		if (Config.debug)
-			System.out.println("Registering Dirt Roadblock");
-		dirtRoadblock = new BlockRoad(Material.grass, "Dirt", "dirt",
-				Block.soundTypeGravel);
-
-		if (Config.debug)
-			System.out.println("Registering Podzol Roadblock");
-		podzolRoadblock = new BlockRoad(Material.grass, "Podzol", "podzol",
-				Block.soundTypeGrass);
-
-		if (Config.debug)
-			System.out.println("Registering Cobblestone Roadblock");
-		cobbleRoadblock = new BlockRoad(Material.rock, "Cobblestone",
-				"cobblestone", Block.soundTypeStone);
-
-		if (Config.debug)
-			System.out.println("Registering Oak Roadblock");
-		oakRoadblock = new BlockRoad(Material.wood, "Oak", "planks_oak",
-				Block.soundTypeWood);
-
-		if (Config.debug)
-			System.out.println("Registering Spruce Roadblock");
-		spruceRoadblock = new BlockRoad(Material.wood, "Spruce",
-				"planks_spruce", Block.soundTypeWood);
-
-		if (Config.debug)
-			System.out.println("Registering Birch Roadblock");
-		birchRoadblock = new BlockRoad(Material.wood, "Birch", "planks_birch",
-				Block.soundTypeWood);
-
-		if (Config.debug)
-			System.out.println("Registering Jungle Roadblock");
-		jungleRoadblock = new BlockRoad(Material.wood, "Jungle",
-				"planks_jungle", Block.soundTypeWood);
-
-		if (Config.debug)
-			System.out.println("Registering Acacia Roadblock");
-		acaciaRoadblock = new BlockRoad(Material.wood, "Acacia",
-				"planks_acacia", Block.soundTypeWood);
-
-		if (Config.debug)
-			System.out.println("Registering Dark Oak Roadblock");
-		darkOakRoadblock = new BlockRoad(Material.wood, "DarkOak",
-				"planks_big_oak", Block.soundTypeWood);
-
-		if (Config.debug)
-			System.out.println("Registering Sand Roadblock");
-		sandRoadblock = new BlockRoad(Material.sand, "Sand", "sand",
-				Block.soundTypeSand);
-
-		if (Config.debug)
-			System.out.println("Registering Sandstone Top Roadblock");
-		sandstoneTopRoadblock = new BlockRoad(Material.rock, "SandstoneTop",
-				"sandstone_top", Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Sandstone Bottom Roadblock");
-		sandstoneBottomRoadblock = new BlockRoad(Material.rock,
-				"SandstoneBottom", "sandstone_bottom", Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Gravel Roadblock");
-		gravelRoadblock = new BlockRoad(Material.ground, "Gravel", "gravel",
-				Block.soundTypeGravel);
-
-		if (Config.debug)
-			System.out.println("Registering Stone Slab Roadblock");
-		stoneSlabTopRoadblock = new BlockRoad(Material.rock, "StoneSlabTop",
-				"stone_slab_top", Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Brick Roadblock");
-		bricksRoadblock = new BlockRoad(Material.rock, "Brick", "brick",
-				Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Nether Brick Roadblock");
-		netherRoadblock = new BlockRoad(Material.rock, "NetherBrick",
-				"nether_brick", Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Quartz Bottom Roadblock");
-		quartzBottomRoadblock = new BlockRoad(Material.rock, "QuartzBottom",
-				"quartz_block_bottom", Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Quartz Top Roadblock");
-		quartzTopRoadblock = new BlockRoad(Material.rock, "QuartzTop",
-				"quartz_block_top", Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Chiseled Quartz Roadblock");
-		quartzChiseledRoadblock = new BlockRoad(Material.rock,
-				"QuartzChiseled", "quartz_block_chiseled",
-				Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Quartz Piller Top Roadblock");
-		quartzPillerTopRoadblock = new BlockRoad(Material.rock,
-				"QuartzPillerTop", "quartz_block_lines_top",
-				Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering Chiseled Stone Bricks Roadblock");
-		stonebrickChiseledRoadblock = new BlockRoad(Material.rock,
-				"ChiseledStonebrick", "stonebrick_carved",
-				Block.soundTypePiston);
-	}
-
-	public static void malletCrafting() { // addRecipes
-		for (int i = 0; i < recipeItems[0].length; ++i) {
-			Object object = recipeItems[0][i];
-
-			for (int j = 0; j < recipeItems.length - 1; ++j) {
-				Item item = (Item) recipeItems[j + 1][i];
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(item),
-						new Object[] { recipePatterns[j], 'S', "stickWood",
-								'R', object }));
-			}
-		}
-	}
-
-	public static void malletRecipes() { // RecipesWeapons
-		if (Loader.isModLoaded("SSTOW")) {
-			recipeItems = new Object[][] {
-					{ Items.iron_ingot, Items.gold_ingot, Items.diamond,
-							ObjHandler.SOULIUM_INGOT },
-					{ Register.ironMallet, Register.goldMallet,
-							Register.diamondMallet, Register.souliumMallet } };
-		} else {
-			recipeItems = new Object[][] {
-					{ Items.iron_ingot, Items.gold_ingot, Items.diamond },
-					{ Register.ironMallet, Register.goldMallet,
-							Register.diamondMallet } };
-		}
-	}
-
-	public static void Recipes() {
-		// TODO Register Recipes
-
-		if (Config.debug)
-			System.out.println("Registering Dirt Path Recipe");
-		GameRegistry.addRecipe(new ItemStack(smoothDirt, 4), new Object[] {
-				"#%", "%#", '#', Blocks.dirt, '%', Blocks.sand });
-
-		if (Config.debug)
-			System.out.println("Registering Compressed Cobblestone Recipe");
-		GameRegistry.addRecipe(new ItemStack(compressedCobblestone),
-				new Object[] { "###", "###", "###", '#', Blocks.cobblestone });
-
-		if (Config.debug)
-			System.out
-					.println("Registering Compressed Cobblestone to Cobblestone Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone, 9),
-				new Object[] { compressedCobblestone });
-
-		if (Config.debug)
-			System.out.println("Registering Roadblock Recipe");
-		GameRegistry.addRecipe(new ItemStack(defaultRoadblock), new Object[] {
-				"##", "##", '#', new ItemStack(Blocks.stone_slab, 1, 5) });
-
-		if (Config.debug)
-			System.out.println("Registering Sandstone Top Recipe");
-		GameRegistry.addRecipe(new ItemStack(sandstoneTopRoadblock,
-				Config.returnBlocks), new Object[] { "S", "R", 'S',
-				new ItemStack(Blocks.sandstone, 1, 0), 'R', defaultRoadblock });
-
-		if (Config.debug)
-			System.out.println("Registering Sandstone Bottom Recipe");
-		GameRegistry.addRecipe(new ItemStack(sandstoneBottomRoadblock,
-				Config.returnBlocks), new Object[] { "R", "S", 'S',
-				new ItemStack(Blocks.sandstone, 1, 0), 'R', defaultRoadblock });
-
-		if (Config.debug)
-			System.out.println("Registering Quartz Top Recipe");
-		GameRegistry.addRecipe(new ItemStack(quartzTopRoadblock,
-				Config.returnBlocks),
-				new Object[] { "S", "R", 'S',
-						new ItemStack(Blocks.quartz_block, 1, 0), 'R',
-						defaultRoadblock });
-
-		if (Config.debug)
-			System.out.println("Registering Quartz Bottom Recipe");
-		GameRegistry.addRecipe(new ItemStack(quartzBottomRoadblock,
-				Config.returnBlocks),
-				new Object[] { "R", "S", 'S',
-						new ItemStack(Blocks.quartz_block, 1, 0), 'R',
-						defaultRoadblock });
-
-		// Register Shapeless Recipes
-		if (Config.debug)
-			System.out.println("Registering Stone Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(stoneRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.stone, 1, 0) });
-
-		if (Config.debug)
-			System.out.println("Registering Smooth Dirt Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(smoothDirtRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				smoothDirt });
-
-		if (Config.debug)
-			System.out.println("Registering Stone Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(
-				compressedCobbleRoadblock, Config.returnBlocks),
-				new Object[] { defaultRoadblock,
-						new ItemStack(Register.compressedCobblestone) });
-
-		if (Config.debug)
-			System.out.println("Registering Dirt Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(dirtRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				Blocks.dirt });
-
-		if (Config.debug)
-			System.out.println("Registering Podzol Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(podzolRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.dirt, 1, 2) });
-
-		if (Config.debug)
-			System.out.println("Registering Cobblestone Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(cobbleRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				Blocks.cobblestone });
-
-		if (Config.debug)
-			System.out.println("Registering Oak Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(oakRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.planks, 1, 0) });
-
-		if (Config.debug)
-			System.out.println("Registering Spruce Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(spruceRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.planks, 1, 1) });
-
-		if (Config.debug)
-			System.out.println("Registering Birch Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(birchRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.planks, 1, 2) });
-
-		if (Config.debug)
-			System.out.println("Registering Jungle Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(jungleRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.planks, 1, 3) });
-
-		if (Config.debug)
-			System.out.println("Registering Acacia Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(acaciaRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.planks, 1, 4) });
-
-		if (Config.debug)
-			System.out.println("Registering Dark Oak Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(darkOakRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.planks, 1, 5) });
-
-		if (Config.debug)
-			System.out.println("Registering Sand Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(sandRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.sand, 1, 0) });
-
-		if (Config.debug)
-			System.out.println("Registering Red Sand Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(redsandRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.sand, 1, 1) });
-
-		if (Config.debug)
-			System.out.println("Registering Gravel Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(gravelRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				Blocks.gravel });
-
-		if (Config.debug)
-			System.out.println("Registering Stoneslab Top Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(stoneSlabTopRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.stone_slab, 1, 0) });
-
-		if (Config.debug)
-			System.out.println("Registering Brick Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(bricksRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				Blocks.brick_block });
-
-		if (Config.debug)
-			System.out.println("Registering Nether Brick Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(netherRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				Blocks.nether_brick });
-
-		if (Config.debug)
-			System.out.println("Registering Chiseled Quartz Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(quartzChiseledRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.quartz_block, 1, 1) });
-
-		if (Config.debug)
-			System.out.println("Registering Quartz Piller Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(quartzPillerTopRoadblock,
-				Config.returnBlocks), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.quartz_block, 1, 2) });
-
-		if (Config.debug)
-			System.out
-					.println("Registering Chiseled Stonebrick Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(
-				stonebrickChiseledRoadblock, Config.returnBlocks),
-				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.stonebrick, 1, 3) });
-	}
-
-	public static void Achievements() {
-		// TODO Register Achievements
-
-		if (Config.debug)
-			System.out.println("Registering Achievement");
-		buildRoad = new Achievement("achievement.buildRoad", "buildRoad", 0, 0,
-				Register.defaultRoadblock, (Achievement) null)
-				.initIndependentStat().registerStat();
-
-		if (Config.debug)
-			System.out.println("Registering Achievement Page");
-		AchievementPage.registerAchievementPage(new AchievementPage(
-				"Road Blocks", new Achievement[] { buildRoad }));
-	}
-
-	// public static void Renderers() {
-	// // TODO Register Renderers
-	// if (Config.debug)
-	// System.out.println("Registering Renderers");
-	//
-	// grassRoadRenderType = RenderingRegistry.getNextAvailableRenderId();
-	// RenderingRegistry.registerBlockHandler(new grassRoadRender());
-	// }
+    public static Achievement buildRoad;
+
+    // Full Blocks
+
+    public static Block grassRoad;
+    public static Block smoothDirt;
+    public static Block compressedCobblestone;
+    public static Block defaultRoadblock;
+    public static Block compressedCobbleRoadblock;
+    public static Block smoothDirtRoadblock;
+    public static Block stoneRoadblock;
+    public static Block dirtRoadblock;
+    public static Block podzolRoadblock;
+    public static Block cobbleRoadblock;
+    public static Block oakRoadblock;
+    public static Block spruceRoadblock;
+    public static Block birchRoadblock;
+    public static Block jungleRoadblock;
+    public static Block acaciaRoadblock;
+    public static Block darkOakRoadblock;
+    public static Block sandRoadblock;
+    public static Block redsandRoadblock;
+    public static Block gravelRoadblock;
+    public static Block sandstoneTopRoadblock;
+    public static Block sandstoneBottomRoadblock;
+    public static Block sandStoneRoadblock;
+    public static Block stoneSlabTopRoadblock;
+    public static Block stoneSlabRoadblock;
+    public static Block bricksRoadblock;
+    public static Block netherRoadblock;
+    public static Block quartzBottomRoadblock;
+    public static Block quartzTopRoadblock;
+    public static Block quartzChiseledRoadblock;
+    public static Block quartzPillerTopRoadblock;
+    public static Block stonebrickChiseledRoadblock;
+
+    public static Block[] configBlocks;
+    public static int configBlockCount = 0;
+
+    // Chisel 2 Textures
+    public static Block chiselFactory01;
+    public static Block chiselFactory02;
+    public static Block chiselPaver;
+
+    // Botanita Textures
+    public static Block prismarine;
+    public static Block darkPrismarine;
+    public static Block brickPrismarine;
+
+    public static Item ironMallet;
+    public static Item goldMallet;
+    public static Item diamondMallet;
+    public static Item souliumMallet;
+
+    public static int renderPass;
+    public static int grassRoadRenderType;
+
+    private static String[][] recipePatterns = new String[][]{{"RA", "SR"}};
+    private static Object[][] recipeItems;
+
+    public static void registerItems() {
+        if (Config.debug)
+            System.out.println("Registering Iron Paver's Mallet");
+        ironMallet = new ItemMallet(ToolMaterial.IRON);
+
+        if (Config.debug)
+            System.out.println("Registering Gold Paver's Mallet");
+        goldMallet = new ItemMallet(ToolMaterial.GOLD);
+
+        if (Config.debug)
+            System.out.println("Registering Diamond Paver's Mallet");
+        diamondMallet = new ItemMallet(ToolMaterial.EMERALD);
+
+        if (Loader.isModLoaded("SSTOW")) {
+            if (Config.debug)
+                System.out.println("Registering Soulium Paver's Mallet");
+            souliumMallet = new ItemMallet(ObjHandler.SOULIUM);
+        }
+    }
+
+    public static void registerBlocks() {
+        configBlocks = new Block[Config.roadblocks.length];
+        for (int i = 0; i < Config.roadblocks.length; i++) {
+            String[] split = Config.roadblocks[i].split(":");
+
+            if (split.length == 3) {
+                Block block = GameRegistry.findBlock(split[0], split[1]);
+                int meta = Integer.parseInt(split[2]);
+
+                configBlocks[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone);
+                configBlockCount++;
+            } else if (split.length == 2) {
+                Block block = GameRegistry.findBlock(split[0], split[1]);
+                int meta = 0;
+
+                configBlocks[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone);
+                configBlockCount++;
+            }
+        }
+
+//        if (Loader.isModLoaded("chisel")) {
+//        if (Config.debug)
+//        System.out.println("Registering Chisel Factory Block");
+//        chiselFactory01 = new BlockModroad(Material.iron, "WireFrame",
+//        "wireframe", Block.soundTypeMetal);
+//
+//        if (Config.debug)
+//        System.out.println("Registering Chisel Factory Block");
+//        chiselFactory02 = new BlockModroad(Material.iron, "WireFrameWhite",
+//        "wireframewhite", Block.soundTypeMetal);
+//
+//        if (Config.debug)
+//        System.out.println("Registering Chisel Paver Block");
+//        chiselPaver = new BlockModroad(Material.iron, "paver", "paver",
+//        Block.soundTypeMetal);
+//
+//        }
+//
+//        if (Loader.isModLoaded("Botania")) {
+//            if (Config.debug)
+//                System.out.println("Registering Botania Prismarine Block");
+//            prismarine = new BlockRoadBase(ModBlocks.prismarine, 0, Block.soundTypeStone);
+//            GameRegistry.registerBlock(prismarine, "Prismarine");
+//
+//            brickPrismarine = new BlockRoadBase(ModBlocks.prismarine, 1, Block.soundTypeStone);
+//            GameRegistry.registerBlock(brickPrismarine, "Prismarine Bricks");
+//
+//            darkPrismarine = new BlockRoadBase(ModBlocks.prismarine, 2, Block.soundTypeStone);
+//            GameRegistry.registerBlock(darkPrismarine, "Dark Prismarine");
+//            if (Config.debug)
+//            System.out.println("Registering Botania Dark Prismarine Block");
+//            darkPrismarine = new BlockModroad(Material.ground,
+//            "prismarine03",
+//            "prismarine03", Block.soundTypeMetal);
+//
+//        }
+//
+//        if (Config.debug)
+//        System.out.println("Registering Grass Roadblock");
+//        grassRoad = new Grassroad();
+//
+//        if (Config.debug)
+//            System.out.println("Registering Smooth Dirt Block");
+//        smoothDirt = new BlockDecro(Material.ground, "SmoothDirt", "smoothDirt", Block.soundTypeGravel);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Compressed Cobblestone Block");
+//        compressedCobblestone = new BlockDecro(Material.rock, "compressedCobblestone", "compressedCobblestone", Block.soundTypeStone);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Default Roadblock");
+//        defaultRoadblock = new BlockRoad(Material.rock, "Default", "default", Block.soundTypeStone);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Smooth Dirt Roadblock");
+//        smoothDirtRoadblock = new BlockRoad(Material.ground, "SmoothDirt", "smoothDirt", Block.soundTypeGravel);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Compressed Cobblestone Roadblock");
+//        compressedCobbleRoadblock = new BlockRoad(Material.rock, "CompressedCobble", "compressedcobble", Block.soundTypeStone);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Sand Roadblock");
+//        sandRoadblock = new BlockRoad(Material.sand, "Sand", "sand", Block.soundTypeSand);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Sandstone Top Roadblock");
+//        sandstoneTopRoadblock = new BlockRoad(Material.rock, "SandstoneTop", "sandstone_top", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Sandstone Bottom Roadblock");
+//        sandstoneBottomRoadblock = new BlockRoad(Material.rock, "SandstoneBottom", "sandstone_bottom", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Gravel Roadblock");
+//        gravelRoadblock = new BlockRoad(Material.ground, "Gravel", "gravel", Block.soundTypeGravel);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Stone Slab Roadblock");
+//        stoneSlabTopRoadblock = new BlockRoad(Material.rock, "StoneSlabTop", "stone_slab_top", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Brick Roadblock");
+//        bricksRoadblock = new BlockRoad(Material.rock, "Brick", "brick", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Nether Brick Roadblock");
+//        netherRoadblock = new BlockRoad(Material.rock, "NetherBrick", "nether_brick", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Quartz Bottom Roadblock");
+//        quartzBottomRoadblock = new BlockRoad(Material.rock, "QuartzBottom", "quartz_block_bottom", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Quartz Top Roadblock");
+//        quartzTopRoadblock = new BlockRoad(Material.rock, "QuartzTop", "quartz_block_top", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Chiseled Quartz Roadblock");
+//        quartzChiseledRoadblock = new BlockRoad(Material.rock, "QuartzChiseled", "quartz_block_chiseled", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Quartz Piller Top Roadblock");
+//        quartzPillerTopRoadblock = new BlockRoad(Material.rock, "QuartzPillerTop", "quartz_block_lines_top", Block.soundTypePiston);
+//
+//        if (Config.debug)
+//            System.out.println("Registering Chiseled Stone Bricks Roadblock");
+//        stonebrickChiseledRoadblock = new BlockRoad(Material.rock, "ChiseledStonebrick", "stonebrick_carved", Block.soundTypePiston);
+    }
+
+    public static void malletCrafting() { // addRecipes
+        for (int i = 0; i < recipeItems[0].length; ++i) {
+            Object object = recipeItems[0][i];
+
+            for (int j = 0; j < recipeItems.length - 1; ++j) {
+                Item item = (Item) recipeItems[j + 1][i];
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(item), recipePatterns[j], 'S', "stickWood", 'R', object));
+            }
+        }
+    }
+
+    public static void malletRecipes() { // RecipesWeapons
+        if (Loader.isModLoaded("SSTOW")) {
+            recipeItems = new Object[][]{
+                    {Items.iron_ingot, Items.gold_ingot, Items.diamond,
+                            ObjHandler.SOULIUM_INGOT},
+                    {Register.ironMallet, Register.goldMallet,
+                            Register.diamondMallet, Register.souliumMallet}};
+        } else {
+            recipeItems = new Object[][]{
+                    {Items.iron_ingot, Items.gold_ingot, Items.diamond},
+                    {Register.ironMallet, Register.goldMallet,
+                            Register.diamondMallet}};
+        }
+    }
+
+    public static void Recipes() {
+        // TODO Register Recipes
+
+        if (Config.debug)
+            System.out.println("Registering Dirt Path Recipe");
+        GameRegistry.addRecipe(new ItemStack(smoothDirt, 4), new Object[]{
+                "#%", "%#", '#', Blocks.dirt, '%', Blocks.sand});
+
+        if (Config.debug)
+            System.out.println("Registering Compressed Cobblestone Recipe");
+        GameRegistry.addRecipe(new ItemStack(compressedCobblestone),
+                new Object[]{"###", "###", "###", '#', Blocks.cobblestone});
+
+        if (Config.debug)
+            System.out
+                    .println("Registering Compressed Cobblestone to Cobblestone Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone, 9),
+                new Object[]{compressedCobblestone});
+
+        if (Config.debug)
+            System.out.println("Registering Roadblock Recipe");
+        GameRegistry.addRecipe(new ItemStack(defaultRoadblock), new Object[]{
+                "##", "##", '#', new ItemStack(Blocks.stone_slab, 1, 5)});
+
+        if (Config.debug)
+            System.out.println("Registering Sandstone Top Recipe");
+        GameRegistry.addRecipe(new ItemStack(sandstoneTopRoadblock,
+                Config.returnBlocks), new Object[]{"S", "R", 'S',
+                new ItemStack(Blocks.sandstone, 1, 0), 'R', defaultRoadblock});
+
+        if (Config.debug)
+            System.out.println("Registering Sandstone Bottom Recipe");
+        GameRegistry.addRecipe(new ItemStack(sandstoneBottomRoadblock,
+                Config.returnBlocks), new Object[]{"R", "S", 'S',
+                new ItemStack(Blocks.sandstone, 1, 0), 'R', defaultRoadblock});
+
+        if (Config.debug)
+            System.out.println("Registering Quartz Top Recipe");
+        GameRegistry.addRecipe(new ItemStack(quartzTopRoadblock,
+                        Config.returnBlocks),
+                new Object[]{"S", "R", 'S',
+                        new ItemStack(Blocks.quartz_block, 1, 0), 'R',
+                        defaultRoadblock});
+
+        if (Config.debug)
+            System.out.println("Registering Quartz Bottom Recipe");
+        GameRegistry.addRecipe(new ItemStack(quartzBottomRoadblock,
+                        Config.returnBlocks),
+                new Object[]{"R", "S", 'S',
+                        new ItemStack(Blocks.quartz_block, 1, 0), 'R',
+                        defaultRoadblock});
+
+        // Register Shapeless Recipes
+        if (Config.debug)
+            System.out.println("Registering Stone Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(stoneRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.stone, 1, 0)});
+
+        if (Config.debug)
+            System.out.println("Registering Smooth Dirt Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(smoothDirtRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                smoothDirt});
+
+        if (Config.debug)
+            System.out.println("Registering Stone Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(
+                        compressedCobbleRoadblock, Config.returnBlocks),
+                new Object[]{defaultRoadblock,
+                        new ItemStack(Register.compressedCobblestone)});
+
+        if (Config.debug)
+            System.out.println("Registering Dirt Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(dirtRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                Blocks.dirt});
+
+        if (Config.debug)
+            System.out.println("Registering Podzol Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(podzolRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.dirt, 1, 2)});
+
+        if (Config.debug)
+            System.out.println("Registering Cobblestone Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(cobbleRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                Blocks.cobblestone});
+
+        if (Config.debug)
+            System.out.println("Registering Oak Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(oakRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.planks, 1, 0)});
+
+        if (Config.debug)
+            System.out.println("Registering Spruce Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(spruceRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.planks, 1, 1)});
+
+        if (Config.debug)
+            System.out.println("Registering Birch Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(birchRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.planks, 1, 2)});
+
+        if (Config.debug)
+            System.out.println("Registering Jungle Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(jungleRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.planks, 1, 3)});
+
+        if (Config.debug)
+            System.out.println("Registering Acacia Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(acaciaRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.planks, 1, 4)});
+
+        if (Config.debug)
+            System.out.println("Registering Dark Oak Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(darkOakRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.planks, 1, 5)});
+
+        if (Config.debug)
+            System.out.println("Registering Sand Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(sandRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.sand, 1, 0)});
+
+        if (Config.debug)
+            System.out.println("Registering Red Sand Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(redsandRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.sand, 1, 1)});
+
+        if (Config.debug)
+            System.out.println("Registering Gravel Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(gravelRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                Blocks.gravel});
+
+        if (Config.debug)
+            System.out.println("Registering Stoneslab Top Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(stoneSlabTopRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.stone_slab, 1, 0)});
+
+        if (Config.debug)
+            System.out.println("Registering Brick Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(bricksRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                Blocks.brick_block});
+
+        if (Config.debug)
+            System.out.println("Registering Nether Brick Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(netherRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                Blocks.nether_brick});
+
+        if (Config.debug)
+            System.out.println("Registering Chiseled Quartz Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(quartzChiseledRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.quartz_block, 1, 1)});
+
+        if (Config.debug)
+            System.out.println("Registering Quartz Piller Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(quartzPillerTopRoadblock,
+                Config.returnBlocks), new Object[]{defaultRoadblock,
+                new ItemStack(Blocks.quartz_block, 1, 2)});
+
+        if (Config.debug)
+            System.out
+                    .println("Registering Chiseled Stonebrick Roadblock Recipe");
+        GameRegistry.addShapelessRecipe(new ItemStack(
+                        stonebrickChiseledRoadblock, Config.returnBlocks),
+                new Object[]{defaultRoadblock,
+                        new ItemStack(Blocks.stonebrick, 1, 3)});
+    }
+
+    public static void Achievements() {
+        // TODO Register Achievements
+
+        if (Config.debug)
+            System.out.println("Registering Achievement");
+        buildRoad = new Achievement("achievement.buildRoad", "buildRoad", 0, 0,
+                Register.defaultRoadblock, (Achievement) null)
+                .initIndependentStat().registerStat();
+
+        if (Config.debug)
+            System.out.println("Registering Achievement Page");
+        AchievementPage.registerAchievementPage(new AchievementPage(
+                "Road Blocks", new Achievement[]{buildRoad}));
+    }
+
+    // public static void Renderers() {
+    // // TODO Register Renderers
+    // if (Config.debug)
+    // System.out.println("Registering Renderers");
+    //
+    // grassRoadRenderType = RenderingRegistry.getNextAvailableRenderId();
+    // RenderingRegistry.registerBlockHandler(new grassRoadRender());
+    // }
 
 }

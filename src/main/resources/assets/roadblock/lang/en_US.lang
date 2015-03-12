@@ -34,10 +34,9 @@ tile.QuartzChiseled_roadblock.name=Patterned Quartz Road Block
 tile.QuartzPillerTop_roadblock.name=Decorative Quartz Road Block
 tile.ChiseledStonebrick_roadblock.name=Decorative Stone Brick Road Block
 
-tile.roadblock.road.title=Road
-tile.roadblock.road.name=Unknown Roadblock
+tile.roadblock.road.name=%s Road
 
-itemGroup.road_block=Road Blocks
+itemGroup.roadblock.creativeTab=Road Blocks
 achievement.buildRoad=The Road not taken
 achievement.buildRoad.desc=Crafting a road block
 

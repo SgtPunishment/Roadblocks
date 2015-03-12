@@ -26,8 +26,16 @@ public class UseMalletEvent extends PlayerEvent {
 	public final int y;
 	public final int z;
 
-	public UseMalletEvent(EntityPlayer player, ItemStack current, World world,
-			int x, int y, int z) {
+    /**
+     *
+     * @param player - Player holding the mallet
+     * @param current - Currently held item. Should be a mallet.
+     * @param world - The world
+     * @param x - X Coordinate
+     * @param y - Y Coordinate
+     * @param z - Z Coordinate
+     */
+	public UseMalletEvent(EntityPlayer player, ItemStack current, World world, int x, int y, int z) {
 		super(player);
 		this.current = current;
 		this.world = world;

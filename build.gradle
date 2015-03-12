@@ -32,30 +32,37 @@ minecraft {
     replace "@VERSION@", project.version
 }
 
+repositories {
+    maven { url = "http://coloredlightscore.us.to/maven/chisel-2-dev/" }
+	
+	ivy {
+		name "Botania"
+        artifactPattern "http://botaniamod.net/files/deobf/[module] r[revision]-deobf.[ext]"
+    }
+}
+
 dependencies {
+	compile "com.cricketcraft.chisel:Chisel2:${chisel_version}:deobf"
+	compile name: 'Botania', version: "${botania_version}", ext: 'jar'
 	compile fileTree(dir: 'libs', include: '*.jar')
 	compile fileTree(dir: 'Libraries', include: '*.jar')
 }
 
-processResources
-{
-    // this will ensure that this task is redone when the versions change.
+processResources{
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
                 
-        // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
         
-    // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
+
 // Create deobf dev jars
 task deobfJar(type: Jar) {
     from sourceSets.main.output

@@ -89,14 +89,40 @@ public class BlockRoadBase extends Block {
 				Items.sugar, 'B', new ItemStack(block, 1, blockMeta)));
 	}
 
+	public BlockRoadBase(Block block, int blockMeta, SoundType soundType,
+			float lightLevel) {
+		super(block.getMaterial());
+
+		setBlockName(Reference.modid + ".road");
+		setCreativeTab(Roadblock.tabRoadblocks);
+		setStepSound(soundType);
+		setHardness(1.5F);
+
+		this.block = block;
+		this.blockMeta = blockMeta;
+
+		setLightLevel(lightLevel);
+
+		LogHelper.info("Registering roadblock for block: "
+				+ block.getLocalizedName());
+		ItemStack blockStack = new ItemStack(block, 1, blockMeta);
+
+		GameRegistry.registerBlock(this, "BlockRoad"
+				+ blockStack.getDisplayName().replaceAll(" ", ""));
+		GameRegistry.addRecipe(new ShapedOreRecipe(this, "SBS", 'S',
+				Items.sugar, 'B', new ItemStack(block, 1, blockMeta)));
+	}
+
 	@Override
 	public String getUnlocalizedName() {
-          if (block != null) {
-		ItemStack blockStack = new ItemStack(block, 1, blockMeta);
-		return String.format(StatCollector.translateToLocal("tile.roadblock.road.name"),blockStack.getDisplayName());
-          }
+		if (block != null) {
+			ItemStack blockStack = new ItemStack(block, 1, blockMeta);
+			return String.format(
+					StatCollector.translateToLocal("tile.roadblock.road.name"),
+					blockStack.getDisplayName());
+		}
 
-          return super.getUnlocalizedName();
+		return super.getUnlocalizedName();
 	}
 
 	@SideOnly(Side.CLIENT)

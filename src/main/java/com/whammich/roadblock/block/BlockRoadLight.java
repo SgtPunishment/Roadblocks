@@ -7,12 +7,12 @@ import com.whammich.roadblock.Roadblock;
 import com.whammich.roadblock.utils.LogHelper;
 import com.whammich.roadblock.utils.Reference;
 
-public class BlockGlowRoad extends BlockRoadBase {
+public class BlockRoadLight extends BlockRoadBase {
 
 	@SuppressWarnings("unused")
 	private Block block = null;
 
-	public BlockGlowRoad(String unlocName, String textureName,
+	public BlockRoadLight(String unlocName, String textureName,
 			Material material, SoundType soundType) {
 		super(unlocName, textureName, material, soundType);
 

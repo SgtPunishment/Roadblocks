@@ -3,6 +3,7 @@ package com.whammich.roadblock.block;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,11 +26,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSlabBase extends Block {
+public class BlockSlabBase extends BlockSlab {
 
 	int speed;
 	private Block block = null;
 	int blockMeta = 0;
+	public final boolean field_150004_a;
 
 	/**
 	 *
@@ -43,10 +45,10 @@ public class BlockSlabBase extends Block {
 	 * @param soundType
 	 *            - Sound type of the block
 	 */
-	public BlockSlabBase(String unlocName, String textureName,
-			Material material, SoundType soundType) {
-		super(material);
-
+	public BlockSlabBase(boolean p_i45410_1_, String unlocName,
+			String textureName, Material material, SoundType soundType) {
+		super(p_i45410_1_, material);
+		this.field_150004_a = p_i45410_1_;
 		setBlockName(Reference.modid + "." + unlocName + ".roadslab");
 		setBlockTextureName(textureName);
 		setCreativeTab(Roadblock.tabRoadblocks);
@@ -54,7 +56,7 @@ public class BlockSlabBase extends Block {
 		setHardness(1.5F);
 
 		LogHelper
-				.info("Registering roadblock with name: " + getLocalizedName());
+				.info("Registering road slab with name: " + getLocalizedName());
 	}
 
 	/**
@@ -66,9 +68,11 @@ public class BlockSlabBase extends Block {
 	 * @param soundType
 	 *            - Soundtype of the roadblock
 	 */
-	public BlockSlabBase(Block block, int blockMeta, SoundType soundType) {
-		super(block.getMaterial());
+	public BlockSlabBase(boolean p_i45410_1_, Block block, int blockMeta,
+			SoundType soundType) {
+		super(p_i45410_1_, block.getMaterial());
 
+		this.field_150004_a = p_i45410_1_;
 		setBlockName(Reference.modid + ".roadslab");
 		setCreativeTab(Roadblock.tabRoadblocks);
 		setStepSound(soundType);
@@ -163,5 +167,11 @@ public class BlockSlabBase extends Block {
 		// entity.motionX *= speed;
 		// if (motionZ < max)
 		// entity.motionZ *= speed;
+	}
+
+	@Override
+	public String func_150002_b(int p_150002_1_) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

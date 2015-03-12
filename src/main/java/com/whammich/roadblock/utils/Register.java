@@ -7,7 +7,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
-import com.whammich.roadblock.block.BlockGlowRoad;
+import com.whammich.roadblock.block.BlockRoadLight;
 import com.whammich.roadblock.block.BlockRoadBase;
 import com.whammich.roadblock.block.BlockSlabBase;
 import com.whammich.roadblock.item.ItemMallet;
@@ -35,7 +35,8 @@ public class Register {
 		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "gemDiamond");
 
 		if (Loader.isModLoaded("SSTOW"))
-			souliumMallet = new ItemMallet(com.whammich.sstow.utils.Register.SOULIUM, "ingotSoulium");
+			souliumMallet = new ItemMallet(
+					com.whammich.sstow.utils.Register.SOULIUM, "ingotSoulium");
 	}
 
 	public static void registerBlocks() {
@@ -43,32 +44,44 @@ public class Register {
 		for (int i = 0; i < Config.roadblocks.length; i++) {
 			String[] split = Config.roadblocks[i].split(":");
 
-			if (split.length == 3) {
-				Block block = GameRegistry.findBlock(split[0], split[1]);
-				int meta = Integer.parseInt(split[2]);
-
-                roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone);
-                roadblockConfig[configBlockCount] = new BlockSlabBase(block, meta, Block.soundTypeStone);
-				configBlockCount++;
-			} else if (split.length == 2) {
+			switch (split.length) {
+			case 2: {
 				Block block = GameRegistry.findBlock(split[0], split[1]);
 				int meta = 0;
 
-                roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone);
-                roadblockConfig[configBlockCount] = new BlockSlabBase(block, meta, Block.soundTypeStone);
-                LogHelper.info(block + ": " + meta);
-                configBlockCount++;
+				roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone);
+				roadblockConfig[configBlockCount] = new BlockSlabBase(false, block, meta, Block.soundTypeStone);
+				LogHelper.info(block + ": " + meta);
+				configBlockCount++;			}
+			case 3: {
+				Block block = GameRegistry.findBlock(split[0], split[1]);
+				int meta = Integer.parseInt(split[2]);
+
+				roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone);
+				roadblockConfig[configBlockCount] = new BlockSlabBase(false, block, meta, Block.soundTypeStone);
+				configBlockCount++;
 			}
+			case 4: {
+				Block block = GameRegistry.findBlock(split[0], split[1]);
+				int meta = Integer.parseInt(split[2]);
+				float light = Float.parseFloat(split[3]);
+				
+				roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone, light);
+				configBlockCount++;
+			}
+			}
+
 		}
 
-        roadblockGlowstone = new BlockGlowRoad("glowstone", "glowstone", Material.glass, Block.soundTypeGlass);
-        GameRegistry.registerBlock(roadblockGlowstone, "BlockRoadGlowstone");
+//		roadblockGlowstone = new BlockRoadLight("glowstone", "glowstone",
+//				Material.glass, Block.soundTypeGlass);
+//		GameRegistry.registerBlock(roadblockGlowstone, "BlockRoadGlowstone");
 	}
 
 	public static void Achievements() {
 		LogHelper.info("Registering Achievement");
 		buildRoad = new Achievement("achievement.buildRoad", "buildRoad", 0, 0,
-                roadblockDefault, (Achievement) null).initIndependentStat()
+				roadblockDefault, (Achievement) null).initIndependentStat()
 				.registerStat();
 
 		LogHelper.info("Registering Achievement Page");

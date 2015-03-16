@@ -17,34 +17,23 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.8-2.1.5"
-group= "roadblock" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Roadblocks"
+version = "${mod_version}"
+group= "com.whammich.roadblock" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "Roadblocks-${minecraft_version}"
 
 minecraft {
-    mappings = 'snapshot_20150204'
-    version = "1.8-11.14.1.1305"
+    mappings = '${forge_mappings}'
+    version = "${minecraft_version}-${forge_version}"
 	if(file('../run-1.8').exists()){
-		assetDir = "../run-1.8/assets"
+		runDir = "run-1.8/"
 	} else {
-		assetDir = "assets"
+		runDir = "run"
 	}
-    //runDir = "eclipse"
+	replaceIn "Reference.java"
+    replace "@VERSION@", project.version
 }
 
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
 }
 

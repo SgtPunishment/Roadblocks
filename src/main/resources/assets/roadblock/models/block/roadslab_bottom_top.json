@@ -1,0 +1,12 @@
+{
+    "parent": "roadblock:block/roadslab",
+	"textures": {
+        "particle": "#side",
+        "down": "#bottom",
+        "up": "#top",
+        "north": "#side",
+        "east": "#side",
+        "south": "#side",
+        "west": "#side"
+    }
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "roadblock:block/roadslab_top",
+	"textures": {
+		"top": "blocks/furnace_top",
+		"side": "roadblock:blocks/CompressedCobble_roadslab"
+	}
+}

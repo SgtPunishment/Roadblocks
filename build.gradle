@@ -17,65 +17,53 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "${mod_version}"
-group= "com.whammich.roadblock" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "roadblock-${minecraft_version}"
+version = "1.8-2.1.5"
+group= "roadblock" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "Roadblocks"
 
 minecraft {
-    version = "${minecraft_version}-${forge_version}"
-	if(file('../run-1.7.10').exists()){
-		runDir = "run-1.7.10/"
+    mappings = 'snapshot_20150204'
+    version = "1.8-11.14.1.1305"
+	if(file('../run-1.8').exists()){
+		assetDir = "../run-1.8/assets"
 	} else {
-		runDir = "run"
+		assetDir = "assets"
 	}
-	replaceIn "Reference.java"
-    replace "@VERSION@", project.version
-}
-
-repositories {
-    maven { url = "http://coloredlightscore.us.to/maven/chisel-2-dev/" }
-	maven { url = "http://tehnut.info/maven/" } 
-	
-	ivy {
-		name "Botania"
-        artifactPattern "http://botaniamod.net/files/deobf/[module] r[revision]-deobf.[ext]"
-    }
-	ivy {
-		name "Baubles"
-        artifactPattern "https://dl.dropboxusercontent.com/u/47135879/[module]-deobf-1.7.10-[revision].[ext]"
-    }
+    //runDir = "eclipse"
 }
 
 dependencies {
-	compile "com.cricketcraft.chisel:Chisel2:${chisel_version}:deobf"
-	compile "com.whammich.sstow:SoulShards-TOW:${minecraft_version}-${sstow_version}:deobf"
-	compile name: 'Botania', version: "${botania_version}", ext: 'jar'
-	compile name: 'Baubles', version: "${baubles_version}", ext: 'jar'
-	compile fileTree(dir: 'libs', include: '*.jar')
-	compile fileTree(dir: 'Libraries', include: '*.jar')
+    // you may put jars on which you depend on in ./libs
+    // or you may define them like so..
+    //compile "some.group:artifact:version:classifier"
+    //compile "some.group:artifact:version"
+      
+    // real examples
+    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+
+    // for more info...
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
 }
 
-processResources{
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
+    // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
                 
+        // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
         
+    // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-// Create deobf dev jars
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
-}
-
-artifacts {
-    archives deobfJar
 }

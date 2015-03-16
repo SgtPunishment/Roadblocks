@@ -1,17 +1,69 @@
-# Gui
-itemGroup.roadblock.creativeTab=Roadblocks
+tile.roadblock_compressedCobble.name=Block of Compressed Cobblestone
+tile.roadblock_Default_roadblock.name=Road Block
+tile.roadblock_Stone_roadblock.name=Stone Road Block
+tile.roadblock_Andesite_roadblock.name=Andesite Road Block
+tile.roadblock_Dirt_roadblock.name=Dirt Road Block
+tile.roadblock_CoarseDirt_roadblock.name=Coarse Dirt Road Block
+tile.roadblock_Podzol_roadblock.name=Podzol Road Block
+tile.roadblock_Cobblestone_roadblock.name=Cobblestone Road Block
+tile.roadblock_Oak_roadblock.name=Oak Road Block
+tile.roadblock_Spruce_roadblock.name=Spruce Road Block
+tile.roadblock_Birch_roadblock.name=Birch Road Block
+tile.roadblock_Jungle_roadblock.name=Jungle Road Block
+tile.roadblock_Acacia_roadblock.name=Acacia Road Block
+tile.roadblock_DarkOak_roadblock.name=Dark Oak Road Block
+tile.roadblock_Sand_roadblock.name=Sand Road Block
+tile.roadblock_Redsand_roadblock.name=Red Sand Road Block
+tile.roadblock_Gravel_roadblock.name=Gravel Road Block
+tile.roadblock_SandstoneTop_roadblock.name=Smooth Sandstone Road Block
+tile.roadblock_RedSandstoneBottom_roadblock.name=Cracked Red Sandstone Road Block
+tile.roadblock_RedSandstoneTop_roadblock.name=Smooth Red Sandstone Road Block
+tile.roadblock_SandstoneBottom_roadblock.name=Cracked Sandstone Road Block
+tile.roadblock_StoneSlabTop_roadblock.name=Smooth Stone Road Block
+tile.roadblock_Brick_roadblock.name=Brick Road Block
+tile.roadblock_NetherBrick_roadblock.name=Nether Brick Road Block
+tile.roadblock_QuartzBottom_roadblock.name=Raw Quartz Road Block
+tile.roadblock_QuartzTop_roadblock.name=Refined Quartz Road Block
+tile.roadblock_QuartzChiseled_roadblock.name=Patterned Quartz Road Block
+tile.roadblock_QuartzPillerTop_roadblock.name=Decorative Quartz Road Block
+tile.roadblock_ChiseledStonebrick_roadblock.name=Decorative Stone Brick Road Block
+tile.roadblock_DarkPrismarine_roadblock.name=Dark Prismarine Road Block
+tile.roadblock_Prismarine_roadblock.name=Prismarine Road Block
+tile.roadblock_CompressedCobble_roadblock.name=Compressed Cobblestone Road Block
+
+tile.roadblock_compressedCobble.name=Block of Compressed Cobblestone
+tile.roadblock_Default_roadslab.name=Road Block
+tile.roadblock_Stone_roadslab.name=Stone Road Block Slab
+tile.roadblock_Andesite_roadslab.name=Andesite Road Block Slab
+tile.roadblock_Dirt_roadslab.name=Dirt Road Block Slab
+tile.roadblock_CoarseDirt_roadslab.name=Coarse Dirt Road Block Slab
+tile.roadblock_Podzol_roadslab.name=Podzol Road Block Slab
+tile.roadblock_Cobblestone_roadslab.name=Cobblestone Road Block Slab
+tile.roadblock_Oak_roadslab.name=Oak Road Block Slab
+tile.roadblock_Spruce_roadslab.name=Spruce Road Block Slab
+tile.roadblock_Birch_roadslab.name=Birch Road Block Slab
+tile.roadblock_Jungle_roadslab.name=Jungle Road Block Slab
+tile.roadblock_Acacia_roadslab.name=Acacia Road Block Slab
+tile.roadblock_DarkOak_roadslab.name=Dark Oak Road Block Slab
+tile.roadblock_Sand_roadslab.name=Sand Road Block Slab
+tile.roadblock_Redsand_roadslab.name=Red Sand Road Block Slab
+tile.roadblock_Gravel_roadslab.name=Gravel Road Block Slab
+tile.roadblock_SandstoneTop_roadslab.name=Smooth Sandstone Road Block Slab
+tile.roadblock_RedSandstoneBottom_roadslab.name=Cracked Red Sandstone Road Block Slab
+tile.roadblock_RedSandstoneTop_roadslab.name=Smooth Red Sandstone Road Block Slab
+tile.roadblock_SandstoneBottom_roadslab.name=Cracked Sandstone Road Block Slab
+tile.roadblock_StoneSlabTop_roadslab.name=Smooth Stone Road Block Slab
+tile.roadblock_Brick_roadslab.name=Brick Road Block Slab
+tile.roadblock_NetherBrick_roadslab.name=Nether Brick Road Block Slab
+tile.roadblock_QuartzBottom_roadslab.name=Raw Quartz Road Block Slab
+tile.roadblock_QuartzTop_roadslab.name=Refined Quartz Road Block Slab
+tile.roadblock_QuartzChiseled_roadslab.name=Patterned Quartz Road Block Slab
+tile.roadblock_QuartzPillerTop_roadslab.name=Decorative Quartz Road Block Slab
+tile.roadblock_ChiseledStonebrick_roadslab.name=Decorative Stone Brick Road Block Slab
+tile.roadblock_DarkPrismarine_roadslab.name=Dark Prismarine Road Block Slab
+tile.roadblock_Prismarine_roadslab.name=Prismarine Road Block Slab
+tile.roadblock_CompressedCobble_roadslab.name=Compressed Cobblestone Road Block Slab
+
+itemGroup.roadblock=Roadblocks
 achievement.buildRoad=The Road not taken
 achievement.buildRoad.desc=Crafting a road block
-
-# Blocks
-tile.roadblock.road.name=%s Road
-tile.roadblock.slab.name=%s Road Slab
-
-# Items
-item.roadblock.mallet.iron.name=Iron Paving Mallet
-item.roadblock.mallet.gold.name=Gold Paving Mallet
-item.roadblock.mallet.emerald.name=Diamond Paving Mallet
-item.roadblock.mallet.soulium.name=Soulium Paving Mallet
-
-# Console
-info.roadblock.config.reload=Refreshing configuration file.

@@ -1,0 +1,6 @@
+{
+	"parent": "roadblock:block/roadslab_all",
+	"textures": {
+		"all": "blocks/sand"
+	}
+}

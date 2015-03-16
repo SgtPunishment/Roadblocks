@@ -1,0 +1,7 @@
+{
+	"parent": "roadblock:block/roadblock_top",
+	"textures": {
+		"top": "roadblock:blocks/default_roadblock",
+		"side": "blocks/stonebrick"
+	}
+}

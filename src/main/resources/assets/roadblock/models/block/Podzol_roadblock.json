@@ -1,0 +1,8 @@
+{
+	"parent": "roadblock:block/roadblock_bottom_top",
+	"textures": {
+		"top": "blocks/dirt_podzol_top",
+		"side": "blocks/dirt_podzol_side",
+		"bottom": "blocks/dirt"
+	}
+}

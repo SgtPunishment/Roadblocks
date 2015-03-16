@@ -1,0 +1,7 @@
+{
+	"parent": "roadblock:block/roadslab_top",
+	"textures": {
+		"top": "blocks/stonebrick_carved",
+		"side": "roadblock:blocks/ChiseledStonebrick_roadslab"
+	}
+}

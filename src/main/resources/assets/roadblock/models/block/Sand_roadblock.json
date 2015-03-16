@@ -1,0 +1,6 @@
+{
+	"parent": "roadblock:block/roadblock_all",
+	"textures": {
+		"all": "blocks/sand"
+	}
+}

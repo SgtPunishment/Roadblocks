@@ -7,9 +7,10 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
+import com.whammich.roadblock.block.BlockDecor;
 import com.whammich.roadblock.block.BlockRoadBase;
-import com.whammich.roadblock.block.BlockSlabBase;
 import com.whammich.roadblock.item.ItemMallet;
+import com.whammich.roadblock.item.blocks.ItemBlockDecor;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -24,6 +25,8 @@ public class Register {
 	public static Item souliumMallet;
 
 	public static Block roadblockDefault;
+	public static Block wornpath;
+	
 	public static Block[] roadblockConfig;
 	public static int configBlockCount = 0;
 
@@ -47,10 +50,8 @@ public class Register {
 				Block block = GameRegistry.findBlock(split[0], split[1]);
 				int meta = 0;
 				if (block != null) {
-					roadblockConfig[configBlockCount] = new BlockRoadBase(
-							block, meta, Block.soundTypeStone);
-					roadblockConfig[configBlockCount] = new BlockSlabBase(
-							false, block, meta, Block.soundTypeStone);
+					roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone);
+					//roadblockConfig[configBlockCount] = new BlockSlabBase(false, block, meta, Block.soundTypeStone);
 				}
 				LogHelper.info(block + ": " + meta);
 				configBlockCount++;
@@ -60,10 +61,8 @@ public class Register {
 				Block block = GameRegistry.findBlock(split[0], split[1]);
 				int meta = Integer.parseInt(split[2]);
 				if (block != null) {
-					roadblockConfig[configBlockCount] = new BlockRoadBase(
-							block, meta, Block.soundTypeStone);
-					roadblockConfig[configBlockCount] = new BlockSlabBase(
-							false, block, meta, Block.soundTypeStone);
+					roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone);
+					//roadblockConfig[configBlockCount] = new BlockSlabBase(false, block, meta, Block.soundTypeStone);
 				}
 				configBlockCount++;
 				break;
@@ -73,8 +72,7 @@ public class Register {
 				int meta = Integer.parseInt(split[2]);
 				float light = Float.parseFloat(split[3]);
 				if (block != null) {
-					roadblockConfig[configBlockCount] = new BlockRoadBase(
-							block, meta, Block.soundTypeStone, light);
+					roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone, light);
 				}
 				configBlockCount++;
 				break;
@@ -83,13 +81,14 @@ public class Register {
 
 		}
 
-		roadblockDefault = new BlockRoadBase("default", Reference.modid
-				+ ":default", Material.ground, Block.soundTypeStone);
+		roadblockDefault = new BlockRoadBase("default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
 		GameRegistry.registerBlock(roadblockDefault, "BlockRoadDefault");
-		roadblockDefault = new BlockSlabBase(false, "default", Reference.modid
-				+ ":default", Material.ground, Block.soundTypeStone);
-		GameRegistry.registerBlock(roadblockDefault, "BlockSlabDefault");
-
+		//roadblockDefault = new BlockSlabBase(false, "default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
+		//GameRegistry.registerBlock(roadblockDefault, "BlockSlabDefault");
+		
+		wornpath = new BlockDecor(Material.ground, "worn_dirt_path");
+		GameRegistry.registerBlock(wornpath, ItemBlockDecor.class, "BlockDecor").setStepSound(Block.soundTypeGravel);
+		
 	}
 
 	public static void Achievements() {

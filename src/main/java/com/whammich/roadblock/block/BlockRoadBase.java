@@ -21,7 +21,6 @@ import com.whammich.roadblock.Roadblock;
 import com.whammich.roadblock.utils.Config;
 import com.whammich.roadblock.utils.LogHelper;
 import com.whammich.roadblock.utils.Reference;
-import com.whammich.roadblock.utils.Utils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -45,8 +44,7 @@ public class BlockRoadBase extends Block {
 	 * @param soundType
 	 *            - Sound type of the block
 	 */
-	public BlockRoadBase(String unlocName, String textureName,
-			Material material, SoundType soundType) {
+	public BlockRoadBase(String unlocName, String textureName, Material material, SoundType soundType) {
 		super(material);
 
 		setBlockName(Reference.modid + "." + unlocName + ".roadblock");
@@ -170,41 +168,24 @@ public class BlockRoadBase extends Block {
 		return false;
 	}
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x,
-			int y, int z) {
-		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
-	}
-
 	@SideOnly(Side.CLIENT)
 	public void setBlockBoundsForItemRender() {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 	}
 
 	@Override
-	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
-		if (Utils.findBlockUnderEntity(entity) instanceof BlockRoadBase) {
-			if (Config.speedOn) {
-				if (entity instanceof EntityLivingBase) {
-					if (Config.speed > 9) {
-						speed = 9;
-					} else {
-						speed = Config.speed;
-					}
-					((EntityLivingBase) entity)
-							.addPotionEffect(new PotionEffect(
-									Potion.moveSpeed.id, 20, speed));
+	public void onEntityCollidedWithBlock(World world, int xCoord, int yCoord,
+			int zCoord, Entity entity) {
+		if (Config.speedOn) {
+			if (entity instanceof EntityLivingBase) {
+				if (Config.speed > 9) {
+					speed = 9;
+				} else {
+					speed = Config.speed;
 				}
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
+						Potion.moveSpeed.id, 0, speed));
 			}
 		}
-		// float speed = 2F;
-		// float max = 0.4F;
-		// double motionX = Math.abs(entity.motionX);
-		// double motionZ = Math.abs(entity.motionZ);
-		//
-		// if (motionX < max)
-		// entity.motionX *= speed;
-		// if (motionZ < max)
-		// entity.motionZ *= speed;
 	}
 }

@@ -23,11 +23,7 @@ archivesBaseName = "roadblock-${minecraft_version}"
 
 minecraft {
     version = "${minecraft_version}-${forge_version}"
-	if(file('../run-1.7.10').exists()){
-		runDir = "run-1.7.10/"
-	} else {
-		runDir = "run"
-	}
+	runDir = "run"
 	replaceIn "Reference.java"
     replace "@VERSION@", project.version
 }

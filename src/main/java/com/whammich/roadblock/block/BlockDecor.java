@@ -8,23 +8,16 @@ import net.minecraft.util.IIcon;
 import com.whammich.roadblock.Roadblock;
 import com.whammich.roadblock.utils.Reference;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockDecro extends Block {
+public class BlockDecor extends Block {
 
-	public String name;
 	public String texture;
-	public IIcon sDirt;
 
-	public BlockDecro(Material material, String blockName, String blockTexture,
-			SoundType stepsound) {
+	public BlockDecor(Material material, String blockTexture) {
 		super(material);
-		name = blockName;
 		texture = blockTexture;
-		GameRegistry.registerBlock(this, name).setStepSound(stepsound);
-		setBlockName(name);
 		setCreativeTab(Roadblock.tabRoadblocks);
 		setLightOpacity(255);
 		useNeighborBrightness = true;
@@ -39,10 +32,6 @@ public class BlockDecro extends Block {
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		if (texture == "smoothDirt") {
-			this.blockIcon = register.registerIcon(Reference.modid + ":smoothdirt");
-		} else if (texture == "compressedCobblestone") {
-			this.blockIcon = register.registerIcon("furnace_top");
-		}
+		this.blockIcon = register.registerIcon(Reference.modid + ":" + texture);
 	}
 }

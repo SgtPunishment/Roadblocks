@@ -1,31 +1,33 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
+        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
 
 apply plugin: 'forge'
+apply plugin: 'maven-publish'
 
-version = "${mod_version}"
-group= "com.whammich.roadblock" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "roadblock-${minecraft_version}"
+def build_number = 'CUSTOM'
 
-minecraft {
-    version = "${minecraft_version}-${forge_version}"
-	runDir = "run"
-	replaceIn "Reference.java"
-    replace "@VERSION@", project.version
+if (System.getenv('BUILD_NUMBER') != null)
+    build_number = System.getenv('BUILD_NUMBER')
+
+group = package_group
+archivesBaseName = mod_name
+version = "${mc_version}-${mod_version}-${build_number}"
+
+import org.ajoberstar.grgit.Grgit
+
+def gitHash = 'unknown'
+if (new File(projectDir, '.git').exists()) {
+    def repo = Grgit.open(project.file('.'))
+    gitHash = repo.log().find().abbreviatedId
 }
 
 repositories {
@@ -44,34 +46,90 @@ repositories {
 
 dependencies {
 	compile "com.cricketcraft.chisel:Chisel2:${chisel_version}:deobf"
-	compile "com.whammich.sstow:SoulShards-TOW:${minecraft_version}-${sstow_version}:deobf"
+	compile "com.whammich.sstow:SoulShards-TOW:${mc_version}-${sstow_version}:deobf"
 	compile name: 'Botania', version: "${botania_version}", ext: 'jar'
 	compile name: 'Baubles', version: "${baubles_version}", ext: 'jar'
 	compile fileTree(dir: 'libs', include: '*.jar')
 	compile fileTree(dir: 'Libraries', include: '*.jar')
 }
 
-processResources{
+minecraft {
+    version = "${mc_version}-${forge_version}"
+    runDir = "run"
+
+	replaceIn "Reference.java"
+    replace "@VERSION@", project.version
+	
+    if (project.hasProperty('mappings_version'))
+        mappings = project.mappings_version
+}
+
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        include '**/*.info'
+        include '**/*.properties'
+
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-        
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+        exclude '**/*.info'
+        exclude '**/*.properties'
     }
 }
 
-// Create deobf dev jars
+jar {
+    classifier = ''
+    manifest.mainAttributes(
+            "Built-By": System.getProperty('user.name'),
+            "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
+            "Implementation-Title": project.name,
+            "Implementation-Version": project.version,
+            "Git-Hash": gitHash
+    )
+}
+
+// add a source jar
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+// add a javadoc jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+// because the normal output has been made to be obfuscated
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'
 }
 
-artifacts {
-    archives deobfJar
+tasks.build.dependsOn sourceJar, javadocJar, deobfJar
+
+tasks.withType(JavaCompile) { task ->
+    task.options.encoding = 'UTF-8'
+}
+
+publishing {
+    tasks.publish.dependsOn 'build'
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourceJar
+            artifact javadocJar
+            artifact deobfJar
+        }
+    }
+    repositories {
+        if (project.hasProperty('maven_repo')) {
+            maven { url maven_repo }
+        } else {
+            mavenLocal()
+        }
+    }
 }

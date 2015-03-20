@@ -98,6 +98,9 @@ public class Config {
 		"minecraft:stained_hardened_clay:13",
 		"minecraft:stained_hardened_clay:14",
 		"minecraft:stained_hardened_clay:15",
+        "roadblock:wornpath",
+        "roadblock:worn_dirt_path",
+        "roadblock:BlocKDecor:0"
 	};
 
 	public static void init(File file) {

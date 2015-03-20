@@ -47,15 +47,11 @@ public class Roadblock {
 
 		// Register Recipes
         LogHelper.info("Registering Recipes");
-//		Register.Recipes();
+		Register.Recipes();
 
 		// Register Achievements
         LogHelper.info("Registering Achievements");
 		Register.Achievements();
-
-		// // Register Renderer
-		// LogHelper.info("Registering Renderers");
-		// Register.Renderers();
 	}
 
     @SubscribeEvent

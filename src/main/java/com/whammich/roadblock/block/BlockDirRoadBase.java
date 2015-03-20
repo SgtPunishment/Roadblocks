@@ -3,6 +3,7 @@ package com.whammich.roadblock.block;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,7 +27,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockRoadBase extends Block {
+public class BlockDirRoadBase extends BlockRotatedPillar {
 
 	int speed;
 	private Block block = null;
@@ -44,7 +45,7 @@ public class BlockRoadBase extends Block {
 	 * @param soundType
 	 *            - Sound type of the block
 	 */
-	public BlockRoadBase(String unlocName, String textureName, Material material, SoundType soundType) {
+	public BlockDirRoadBase(String unlocName, String textureName, Material material, SoundType soundType) {
 		super(material);
 
 		setBlockName(Reference.modid + "." + unlocName + ".roadblock");
@@ -66,7 +67,7 @@ public class BlockRoadBase extends Block {
 	 * @param soundType
 	 *            - Soundtype of the roadblock
 	 */
-	public BlockRoadBase(Block block, int blockMeta, SoundType soundType) {
+	public BlockDirRoadBase(Block block, int blockMeta, SoundType soundType) {
 		super(block.getMaterial());
 
 		setBlockName(Reference.modid + ".road");
@@ -86,7 +87,7 @@ public class BlockRoadBase extends Block {
 		GameRegistry.addRecipe(new ShapedOreRecipe(this, "SBS", 'S', Register.roadblockDefault, 'B', new ItemStack(block, Config.returnBlocks, blockMeta)));
 	}
 
-	public BlockRoadBase(Block block, int blockMeta, SoundType soundType,
+	public BlockDirRoadBase(Block block, int blockMeta, SoundType soundType,
 			float lightLevel) {
 		super(block.getMaterial());
 
@@ -121,7 +122,6 @@ public class BlockRoadBase extends Block {
 		return super.getUnlocalizedName();
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		if (block != null)
@@ -186,5 +186,11 @@ public class BlockRoadBase extends Block {
 						Potion.moveSpeed.id, 0, speed));
 			}
 		}
+	}
+
+	@Override
+	protected IIcon getSideIcon(int p_150163_1_) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

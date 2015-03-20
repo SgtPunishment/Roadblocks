@@ -2,8 +2,10 @@ package com.whammich.roadblock.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
@@ -50,10 +52,20 @@ public class Register {
 		}
 	}
 
+	public static void Recipes() {
+		GameRegistry.addRecipe(new ItemStack(wornpath, 4), new Object[] { "#%", "%#", '#', Blocks.dirt, '%', Blocks.sand });
+		GameRegistry.addRecipe(new ItemStack(roadblockDefault), new Object[] { "##", "##", '#', new ItemStack(Blocks.stone_slab, 1, 5) });
+	}
+	
 	public static void registerBlocks() {
 		
 		wornpath = new BlockDecor(Material.ground, "worn_dirt_path");
 		GameRegistry.registerBlock(wornpath, ItemBlockDecor.class, "BlockDecor").setStepSound(Block.soundTypeGravel);
+
+		roadblockDefault = new BlockRoadBase("default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
+		GameRegistry.registerBlock(roadblockDefault, "BlockRoadDefault");
+		//roadblockDefault = new BlockSlabBase(false, "default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
+		//GameRegistry.registerBlock(roadblockDefault, "BlockSlabDefault");
 		
 		roadblockConfig = new Block[Config.roadblocks.length];
 		for (int i = 0; i < Config.roadblocks.length; i++) {
@@ -95,11 +107,6 @@ public class Register {
 
 		}
 
-		roadblockDefault = new BlockRoadBase("default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
-		GameRegistry.registerBlock(roadblockDefault, "BlockRoadDefault");
-		//roadblockDefault = new BlockSlabBase(false, "default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
-		//GameRegistry.registerBlock(roadblockDefault, "BlockSlabDefault");
-		
 	}
 
 	public static void Achievements() {
@@ -112,4 +119,6 @@ public class Register {
 		AchievementPage.registerAchievementPage(new AchievementPage(
 				"Roadblocks", buildRoad));
 	}
+
+
 }

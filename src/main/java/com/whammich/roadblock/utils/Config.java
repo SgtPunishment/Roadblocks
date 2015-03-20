@@ -12,9 +12,9 @@ public class Config {
 	static String category;
 
 	// Config Options
+	public static boolean speedOn;
 	public static int speed;
 	public static boolean debug;
-	public static boolean speedOn;
 	public static int returnBlocks;
 	public static String[] roadblocks;
 	private static String[] roadblocksDefault = {
@@ -109,10 +109,14 @@ public class Config {
 	public static void syncConfig() {
 		category = "general";
 
-		speed = config.get(category, "Speed Boost Level", 0, "How fast you travel on a roadblock").getInt();
-		returnBlocks = config.get(category, "amountCraftedReturn", 1, "Amount of roadblocks to obtain when crafted").getInt();
 		speedOn = config.get(category, "speedBoostEnabled", true, "Enable the speed boost.").getBoolean();
+		
+		speed = config.get(category, "speedBoostLevel", 0, "How fast you travel on a roadblock").getInt();
+		
 		debug = config.get(category, "enableDebugSettings", false, "Enables debug console logging.").getBoolean();
+		
+		returnBlocks = config.get(category, "amountCraftedReturn", 3, "Amount of roadblocks to obtain when crafted").getInt();
+		
 		roadblocks = config .get(category, "roadblocksToCreate", roadblocksDefault, "Blocks to create roadblocks for. \nValid syntax: \nmodid:blockname \nmodid:blockname:meta \nmodid:blockname:meta:lightlevel").getStringList();
 
 		config.save();

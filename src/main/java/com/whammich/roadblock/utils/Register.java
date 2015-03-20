@@ -18,11 +18,17 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class Register {
 
 	public static Achievement buildRoad;
-
+	
+	// Default Mallets
 	public static Item ironMallet;
 	public static Item goldMallet;
 	public static Item diamondMallet;
+
+	// Mod Mallets
 	public static Item souliumMallet;
+	public static Item manaMallet;
+	public static Item terraMallet;
+	public static Item elementMallet;
 
 	public static Block roadblockDefault;
 	public static Block wornpath;
@@ -36,8 +42,12 @@ public class Register {
 		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "gemDiamond");
 
 		if (Loader.isModLoaded("SSTOW"))
-			souliumMallet = new ItemMallet(
-					com.whammich.sstow.utils.Register.SOULIUM, "ingotSoulium");
+			souliumMallet = new ItemMallet(com.whammich.sstow.utils.Register.SOULIUM, "ingotSoulium");
+		if(Loader.isModLoaded("Botania")) {
+			manaMallet = new ItemMallet(vazkii.botania.api.BotaniaAPI.manasteelToolMaterial, "ingotManasteel");
+			terraMallet = new ItemMallet(vazkii.botania.api.BotaniaAPI.terrasteelToolMaterial, "ingotTerrasteel");
+			elementMallet = new ItemMallet(vazkii.botania.api.BotaniaAPI.elementiumToolMaterial, "ingotElvenElementium");
+		}
 	}
 
 	public static void registerBlocks() {

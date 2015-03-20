@@ -60,10 +60,8 @@ public class ItemMallet extends Item {
 		DamVEnt = 2.0F + material.getDamageVsEntity();
 
 		LogHelper.info("Registering " + toolMaterial + " Pavers Mallet");
-		GameRegistry.registerItem(this,
-				"ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
-		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S',
-				"stickWood", 'M', resource));
+		GameRegistry.registerItem(this, "ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
+		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', "stickWood", 'M', resource));
 	}
 
 	@SideOnly(Side.CLIENT)

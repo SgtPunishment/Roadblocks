@@ -6,12 +6,20 @@ achievement.buildRoad.desc=Crafting a road block
 # Blocks
 tile.roadblock.road.name=%s Road
 tile.roadblock.slab.name=%s Road Slab
+tile.roadblock.default.roadblock.name=Roadblock
+tile.Decor.dirt.worn.name=Worn Dirt
 
 # Items
 item.roadblock.mallet.iron.name=Iron Paving Mallet
 item.roadblock.mallet.gold.name=Gold Paving Mallet
 item.roadblock.mallet.emerald.name=Diamond Paving Mallet
+
+# Mod Mallets
 item.roadblock.mallet.soulium.name=Soulium Paving Mallet
+item.roadblock.mallet.manasteel.name=Manasteel Paving Mallet
+item.roadblock.mallet.terrasteel.name=Terrasteel Paving Mallet
+item.roadblock.mallet.b_elementium.name=Elementium Paving Mallet
+
 
 # Console
 info.roadblock.config.reload=Refreshing configuration file.

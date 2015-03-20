@@ -98,9 +98,7 @@ public class Config {
 		"minecraft:stained_hardened_clay:13",
 		"minecraft:stained_hardened_clay:14",
 		"minecraft:stained_hardened_clay:15",
-        "roadblock:wornpath",
-        "roadblock:worn_dirt_path",
-        "roadblock:BlocKDecor:0"
+        "roadblock:BlockDecor:0"
 	};
 
 	public static void init(File file) {
@@ -111,20 +109,11 @@ public class Config {
 	public static void syncConfig() {
 		category = "general";
 
-		speed = config.get(category, "Speed Boost Level", 0,
-				"How fast you travel on a roadblock").getInt();
-		returnBlocks = config.get(category, "amountCraftedReturn", 1,
-				"Amount of roadblocks to obtain when crafted").getInt();
-		speedOn = config.get(category, "speedBoostEnabled", true,
-				"Enable the speed boost.").getBoolean();
-		debug = config.get(category, "enableDebugSettings", false,
-				"Enables debug console logging.").getBoolean();
-		roadblocks = config
-				.get(category,
-						"roadblocksToCreate",
-						roadblocksDefault,
-						"Blocks to create roadblocks for. \nValid syntax: \nmodid:blockname \nmodid:blockname:meta \nmodid:blockname:meta:lightlevel")
-				.getStringList();
+		speed = config.get(category, "Speed Boost Level", 0, "How fast you travel on a roadblock").getInt();
+		returnBlocks = config.get(category, "amountCraftedReturn", 1, "Amount of roadblocks to obtain when crafted").getInt();
+		speedOn = config.get(category, "speedBoostEnabled", true, "Enable the speed boost.").getBoolean();
+		debug = config.get(category, "enableDebugSettings", false, "Enables debug console logging.").getBoolean();
+		roadblocks = config .get(category, "roadblocksToCreate", roadblocksDefault, "Blocks to create roadblocks for. \nValid syntax: \nmodid:blockname \nmodid:blockname:meta \nmodid:blockname:meta:lightlevel").getStringList();
 
 		config.save();
 	}

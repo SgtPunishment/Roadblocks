@@ -22,6 +22,7 @@ public class BlockDecor extends Block {
 		setLightOpacity(255);
 		useNeighborBrightness = true;
 		setHardness(1.5F);
+		setBlockName("Decor");
 
 	}
 

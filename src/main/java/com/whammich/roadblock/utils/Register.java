@@ -41,6 +41,10 @@ public class Register {
 	}
 
 	public static void registerBlocks() {
+		
+		wornpath = new BlockDecor(Material.ground, "worn_dirt_path");
+		GameRegistry.registerBlock(wornpath, ItemBlockDecor.class, "BlockDecor").setStepSound(Block.soundTypeGravel);
+		
 		roadblockConfig = new Block[Config.roadblocks.length];
 		for (int i = 0; i < Config.roadblocks.length; i++) {
 			String[] split = Config.roadblocks[i].split(":");
@@ -85,9 +89,6 @@ public class Register {
 		GameRegistry.registerBlock(roadblockDefault, "BlockRoadDefault");
 		//roadblockDefault = new BlockSlabBase(false, "default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
 		//GameRegistry.registerBlock(roadblockDefault, "BlockSlabDefault");
-		
-		wornpath = new BlockDecor(Material.ground, "worn_dirt_path");
-		GameRegistry.registerBlock(wornpath, ItemBlockDecor.class, "BlockDecor").setStepSound(Block.soundTypeGravel);
 		
 	}
 

@@ -11,6 +11,7 @@ import net.minecraftforge.common.AchievementPage;
 
 import com.whammich.roadblock.block.BlockDecor;
 import com.whammich.roadblock.block.BlockRoadBase;
+import com.whammich.roadblock.item.ItemBotaniaMallet;
 import com.whammich.roadblock.item.ItemMallet;
 import com.whammich.roadblock.item.blocks.ItemBlockDecor;
 
@@ -39,16 +40,16 @@ public class Register {
 	public static int configBlockCount = 0;
 
 	public static void registerItems() {
-		ironMallet = new ItemMallet(ToolMaterial.IRON, "ingotIron");
-		goldMallet = new ItemMallet(ToolMaterial.GOLD, "ingotGold");
-		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "gemDiamond");
-
+		ironMallet = new ItemMallet(ToolMaterial.IRON, "stickWood", "ingotIron");
+		goldMallet = new ItemMallet(ToolMaterial.GOLD, "stickWood", "ingotGold");
+		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "stickWood", "gemDiamond");
 		if (Loader.isModLoaded("SSTOW"))
-			souliumMallet = new ItemMallet(com.whammich.sstow.utils.Register.SOULIUM, "ingotSoulium");
-		if(Loader.isModLoaded("Botania")) {
-			manaMallet = new ItemMallet(vazkii.botania.api.BotaniaAPI.manasteelToolMaterial, "ingotManasteel");
-			terraMallet = new ItemMallet(vazkii.botania.api.BotaniaAPI.terrasteelToolMaterial, "ingotTerrasteel");
-			elementMallet = new ItemMallet(vazkii.botania.api.BotaniaAPI.elementiumToolMaterial, "ingotElvenElementium");
+			souliumMallet = new ItemMallet(
+					com.whammich.sstow.utils.Register.SOULIUM, "stickWood", "ingotSoulium");
+		if (Loader.isModLoaded("Botania")) {
+			manaMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.manasteelToolMaterial, "livingwoodTwig", "ingotManasteel");
+			terraMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.terrasteelToolMaterial, "livingwoodTwig", "ingotTerrasteel");
+			elementMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.elementiumToolMaterial, "dreamwoodTwig", "ingotElvenElementium");
 		}
 	}
 

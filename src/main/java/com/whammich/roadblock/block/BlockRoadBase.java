@@ -47,10 +47,9 @@ public class BlockRoadBase extends Block {
 	 *            - Sound type of the block
 	 */
 	public BlockRoadBase(String unlocName, String textureName,
-			Material material, SoundType soundType, int num) {
+			Material material, SoundType soundType) {
 		super(material);
-		this.blockNum = num;
-		setBlockName(Reference.modid + "." + unlocName + ".roadblock."+String.valueOf(num));
+		setBlockName(Reference.modid + "." + unlocName + ".roadblock");
 		setBlockTextureName(textureName);
 		setCreativeTab(Roadblock.tabRoadblocks);
 		setStepSound(soundType);
@@ -73,8 +72,7 @@ public class BlockRoadBase extends Block {
 	 * @param soundType
 	 *            - Soundtype of the roadblock
 	 */
-	public BlockRoadBase(Block block, int blockMeta, SoundType soundType,
-			int num) {
+	public BlockRoadBase(Block block, int blockMeta, SoundType soundType) {
 		super(block.getMaterial());
 
 		setBlockName(Reference.modid + ".road");
@@ -97,7 +95,7 @@ public class BlockRoadBase extends Block {
 	}
 
 	public BlockRoadBase(Block block, int blockMeta, SoundType soundType,
-			float lightLevel, int num) {
+			float lightLevel) {
 		super(block.getMaterial());
 
 		setBlockName(Reference.modid + ".road");

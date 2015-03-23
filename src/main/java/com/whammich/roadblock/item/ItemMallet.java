@@ -4,6 +4,7 @@ import com.whammich.roadblock.Roadblock;
 import com.whammich.roadblock.block.BlockRoadBase;
 import com.whammich.roadblock.utils.LogHelper;
 import com.whammich.roadblock.utils.Utils;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,45 +24,40 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemMallet extends Item {
-
+	
 	private float DamVEnt;
-
 	String toolMaterial;
 
-	public ItemMallet(Item.ToolMaterial material, Item resource) {
-
+	public ItemMallet(Item.ToolMaterial material, Item handle, Item head) {
+		super();
+		
 		String toolMaterial = material.toString().toLowerCase();
 		this.toolMaterial = toolMaterial;
-
+		
 		setUnlocalizedName(Reference.modid + ".mallet." + toolMaterial);
 		setCreativeTab(Roadblock.tabRoadblocks);
 		setMaxStackSize(1);
 		setMaxDamage(material.getMaxUses());
-
+		
 		DamVEnt = 2.0F + material.getDamageVsEntity();
+		
+		LogHelper.info("Registering " + toolMaterial + " Pavers Mallet");
+		GameRegistry.registerItem(this, "ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
+		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', handle, 'M', head));
+	}
 
+	public ItemMallet(Item.ToolMaterial material, String handle, String head) {
+		String toolMaterial = material.toString().toLowerCase();
+		this.toolMaterial = toolMaterial;
+		setUnlocalizedName(Reference.modid + ".mallet." + toolMaterial);
+		setCreativeTab(Roadblock.tabRoadblocks);
+		setMaxStackSize(1);
+		setMaxDamage(material.getMaxUses());
+		DamVEnt = 2.0F + material.getDamageVsEntity();
 		LogHelper.info("Registering " + toolMaterial + " Pavers Mallet");
 		GameRegistry.registerItem(this,
 				"ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
-		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S',
-				"stickWood", 'M', resource));
-	}
-
-	public ItemMallet(Item.ToolMaterial material, String resource) {
-
-		String toolMaterial = material.toString().toLowerCase();
-		this.toolMaterial = toolMaterial;
-
-		setUnlocalizedName(Reference.modid + ".mallet." + toolMaterial);
-		setCreativeTab(Roadblock.tabRoadblocks);
-		setMaxStackSize(1);
-		setMaxDamage(material.getMaxUses());
-
-		DamVEnt = 2.0F + material.getDamageVsEntity();
-
-		LogHelper.info("Registering " + toolMaterial + " Pavers Mallet");
-		GameRegistry.registerItem(this, "ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
-		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', "stickWood", 'M', resource));
+		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', handle, 'M', head));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -79,7 +75,6 @@ public class ItemMallet extends Item {
 	public boolean hitEntity(ItemStack stack, EntityLivingBase entity,
 			EntityLivingBase player) {
 		stack.damageItem(1, player);
-
 		return true;
 	}
 
@@ -87,7 +82,6 @@ public class ItemMallet extends Item {
 			int xCoord, int yCoord, int zCoord, EntityLivingBase player) {
 		if ((double) block.getBlockHardness(world, xCoord, yCoord, zCoord) != 0.0D)
 			stack.damageItem(2, player);
-
 		return true;
 	}
 
@@ -97,7 +91,6 @@ public class ItemMallet extends Item {
 		multimap.put(SharedMonsterAttributes.attackDamage
 				.getAttributeUnlocalizedName(), new AttributeModifier(
 				field_111210_e, "Weapon modifier", (double) this.DamVEnt, 0));
-
 		return multimap;
 	}
 
@@ -119,7 +112,6 @@ public class ItemMallet extends Item {
 				return true;
 			}
 		}
-
 		return false;
 	}
 }

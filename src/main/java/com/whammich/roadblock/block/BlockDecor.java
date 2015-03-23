@@ -23,7 +23,6 @@ public class BlockDecor extends Block {
 		useNeighborBrightness = true;
 		setHardness(1.5F);
 		setBlockName("Decor");
-
 	}
 
 	@SideOnly(Side.CLIENT)

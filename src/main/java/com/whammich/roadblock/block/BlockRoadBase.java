@@ -54,7 +54,6 @@ public class BlockRoadBase extends Block {
 		setCreativeTab(Roadblock.tabRoadblocks);
 		setStepSound(soundType);
 		setHardness(1.5F);
-
 		LogHelper
 				.info("Registering roadblock with name: " + getLocalizedName());
 	}
@@ -62,7 +61,7 @@ public class BlockRoadBase extends Block {
 	public int getBlockNum() {
 		return this.blockNum;
 	}
-	
+
 	/**
 	 *
 	 * @param block
@@ -86,32 +85,6 @@ public class BlockRoadBase extends Block {
 		LogHelper.info("Registering roadblock for block: "
 				+ block.getLocalizedName());
 		ItemStack blockStack = new ItemStack(block, 1, blockMeta);
-
-		GameRegistry.registerBlock(this, "BlockRoad"
-				+ blockStack.getDisplayName().replaceAll(" ", ""));
-		GameRegistry.addRecipe(new ShapedOreRecipe(this, "SBS", 'S',
-				Register.roadblockDefault, 'B', new ItemStack(block,
-						Config.returnBlocks, blockMeta)));
-	}
-
-	public BlockRoadBase(Block block, int blockMeta, SoundType soundType,
-			float lightLevel) {
-		super(block.getMaterial());
-
-		setBlockName(Reference.modid + ".road");
-		setCreativeTab(Roadblock.tabRoadblocks);
-		setStepSound(soundType);
-		setHardness(1.5F);
-
-		this.block = block;
-		this.blockMeta = blockMeta;
-
-		setLightLevel(lightLevel);
-
-		LogHelper.info("Registering roadblock for block: "
-				+ block.getLocalizedName());
-		ItemStack blockStack = new ItemStack(block, Config.returnBlocks,
-				blockMeta);
 
 		GameRegistry.registerBlock(this, "BlockRoad"
 				+ blockStack.getDisplayName().replaceAll(" ", ""));

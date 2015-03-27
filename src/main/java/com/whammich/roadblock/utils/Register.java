@@ -94,16 +94,6 @@ public class Register {
 				configBlockCount++;
 				break;
 			}
-			case 4: {
-				Block block = GameRegistry.findBlock(split[0], split[1]);
-				int meta = Integer.parseInt(split[2]);
-				float light = Float.parseFloat(split[3]);
-				if (block != null) {
-					roadblockConfig[configBlockCount] = new BlockRoadBase(block, meta, Block.soundTypeStone, light);
-				}
-				configBlockCount++;
-				break;
-			}
 			}
 
 		}

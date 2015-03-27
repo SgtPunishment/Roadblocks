@@ -99,14 +99,12 @@ public class ItemMallet extends Item {
 			float hitY, float hitZ) {
 		if (world.getBlock(xCoord, yCoord, zCoord) instanceof BlockRoadBase) {
 			if (world.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
-				world.setBlock(xCoord, yCoord, zCoord,
-						world.getBlock(xCoord, yCoord, zCoord), 1, 3);
+				world.setBlock(xCoord, yCoord, zCoord, world.getBlock(xCoord, yCoord, zCoord), 1, 3);
 				world.markBlockForUpdate(xCoord, yCoord, zCoord);
 				stack.damageItem(1, player);
 				return true;
 			} else {
-				world.setBlock(xCoord, yCoord, zCoord,
-						world.getBlock(xCoord, yCoord, zCoord), 0, 3);
+				world.setBlock(xCoord, yCoord, zCoord, world.getBlock(xCoord, yCoord, zCoord), 0, 3);
 				world.markBlockForUpdate(xCoord, yCoord, zCoord);
 				stack.damageItem(1, player);
 				return true;

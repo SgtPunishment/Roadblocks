@@ -1,10 +1,5 @@
 package com.whammich.roadblock.item;
 
-import com.whammich.roadblock.Roadblock;
-import com.whammich.roadblock.block.BlockRoadBase;
-import com.whammich.roadblock.utils.LogHelper;
-import com.whammich.roadblock.utils.Utils;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,37 +9,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import com.google.common.collect.Multimap;
+import com.whammich.roadblock.Roadblock;
+import com.whammich.roadblock.block.BlockRoadBase;
 import com.whammich.roadblock.utils.Reference;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemMallet extends Item {
 	
 	private float DamVEnt;
 	String toolMaterial;
-
-	public ItemMallet(Item.ToolMaterial material, Item handle, Item head) {
-		super();
-		
-		String toolMaterial = material.toString().toLowerCase();
-		this.toolMaterial = toolMaterial;
-		
-		setUnlocalizedName(Reference.modid + ".mallet." + toolMaterial);
-		setCreativeTab(Roadblock.tabRoadblocks);
-		setMaxStackSize(1);
-		setMaxDamage(material.getMaxUses());
-		
-		DamVEnt = 2.0F + material.getDamageVsEntity();
-		
-		LogHelper.info("Registering " + toolMaterial + " Pavers Mallet");
-		GameRegistry.registerItem(this, "ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
-		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', handle, 'M', head));
-	}
 
 	public ItemMallet(Item.ToolMaterial material, String handle, String head) {
 		String toolMaterial = material.toString().toLowerCase();
@@ -54,9 +33,6 @@ public class ItemMallet extends Item {
 		setMaxStackSize(1);
 		setMaxDamage(material.getMaxUses());
 		DamVEnt = 2.0F + material.getDamageVsEntity();
-		LogHelper.info("Registering " + toolMaterial + " Pavers Mallet");
-		GameRegistry.registerItem(this,
-				"ItemMallet" + Utils.capitalizeFirstLetter(toolMaterial));
 		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', handle, 'M', head));
 	}
 

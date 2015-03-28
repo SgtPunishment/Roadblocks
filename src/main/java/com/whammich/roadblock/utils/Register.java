@@ -13,6 +13,7 @@ import com.whammich.roadblock.block.BlockDecor;
 import com.whammich.roadblock.block.BlockRoadBase;
 import com.whammich.roadblock.item.ItemBotaniaMallet;
 import com.whammich.roadblock.item.ItemMallet;
+import com.whammich.roadblock.item.ItemUnstableMallet;
 import com.whammich.roadblock.item.blocks.ItemBlockDecor;
 
 import cpw.mods.fml.common.Loader;
@@ -32,32 +33,54 @@ public class Register {
 	public static Item manaMallet;
 	public static Item terraMallet;
 	public static Item elementMallet;
-
+	public static Item unstableMallet;
+	
+	// Blocks
+	
 	public static Block roadblockDefault;
 	public static Block wornpath;
+	
 	
 	public static Block[] roadblockConfig;
 	public static int configBlockCount = 0;
 
-	public static void registerItems() {
-		ironMallet = new ItemMallet(ToolMaterial.IRON, "stickWood", "ingotIron");
-		goldMallet = new ItemMallet(ToolMaterial.GOLD, "stickWood", "ingotGold");
-		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "stickWood", "gemDiamond");
-		if (Loader.isModLoaded("SSTOW"))
-			souliumMallet = new ItemMallet(
-					com.whammich.sstow.utils.Register.SOULIUM, "stickWood", "ingotSoulium");
-		if (Loader.isModLoaded("Botania")) {
-			manaMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.manasteelToolMaterial, "livingwoodTwig", "ingotManasteel");
-			terraMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.terrasteelToolMaterial, "livingwoodTwig", "ingotTerrasteel");
-			elementMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.elementiumToolMaterial, "dreamwoodTwig", "ingotElvenElementium");
-		}
-	}
-
 	public static void Recipes() {
+		Utils.safeRegister("blockObsidian", new ItemStack(Blocks.obsidian));
 		GameRegistry.addRecipe(new ItemStack(wornpath, 4), new Object[] { "#%", "%#", '#', Blocks.dirt, '%', Blocks.sand });
 		GameRegistry.addRecipe(new ItemStack(roadblockDefault), new Object[] { "##", "##", '#', new ItemStack(Blocks.stone_slab, 1, 5) });
 	}
 	
+	public static void registerItems() {
+		ironMallet = new ItemMallet(ToolMaterial.IRON, "stickWood", "ingotIron");
+		GameRegistry.registerItem(ironMallet, "IronMallet");
+		
+		goldMallet = new ItemMallet(ToolMaterial.GOLD, "stickWood", "ingotGold");
+		GameRegistry.registerItem(goldMallet, "GoldMallet");
+		
+		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "stickWood", "gemDiamond");
+		GameRegistry.registerItem(diamondMallet, "DiamondMallet");
+		
+		if (Loader.isModLoaded("SSTOW")){
+			souliumMallet = new ItemMallet(com.whammich.sstow.utils.Register.SOULIUM, "stickWood", "ingotSoulium");
+			GameRegistry.registerItem(souliumMallet, "SouliumMallet");
+		}
+		if (Loader.isModLoaded("Botania")) {
+			manaMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.manasteelToolMaterial, "livingwoodTwig", "ingotManasteel");
+			GameRegistry.registerItem(manaMallet, "ManasteelMallet");
+
+			terraMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.terrasteelToolMaterial, "livingwoodTwig", "ingotTerrasteel");
+			GameRegistry.registerItem(terraMallet, "TerrasteelMallet");
+
+			elementMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.elementiumToolMaterial, "dreamwoodTwig", "ingotElvenElementium");
+			GameRegistry.registerItem(elementMallet, "ElementiumMallet");
+		}
+		
+		if(Loader.isModLoaded("ExtraUtilities")) {
+			unstableMallet = new ItemUnstableMallet(ToolMaterial.EMERALD, "blockObsidian", "ingotUnstable");
+			GameRegistry.registerItem(unstableMallet, "UnstableMallet");
+		}
+	}
+
 	public static void registerBlocks() {
 		
 		wornpath = new BlockDecor(Material.ground, "worn_dirt_path");

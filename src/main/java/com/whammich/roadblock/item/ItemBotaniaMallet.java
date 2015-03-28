@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import vazkii.botania.api.mana.IManaUsingItem;
 import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.common.item.ModItems;
@@ -15,22 +14,14 @@ import vazkii.botania.common.item.equipment.tool.ToolCommons;
 
 import com.whammich.roadblock.block.BlockRoadBase;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class ItemBotaniaMallet extends ItemMallet implements IManaUsingItem {
 
 	private static final int MANA_PER_DAMAGE = 60;
 
 	String toolMaterial;
 
-	public ItemBotaniaMallet(Item.ToolMaterial material, Item handle, Item head) {
-		super(material, handle, head);
-		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', handle, 'M', head));
-	}
-
 	public ItemBotaniaMallet(Item.ToolMaterial material, String handle, String head) {
 		super(material, handle, head);
-		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', handle, 'M', head));
 	}
 
 	@Override

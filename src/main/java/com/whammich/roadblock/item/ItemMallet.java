@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import com.google.common.collect.Multimap;
-import com.whammich.roadblock.Roadblock;
 import com.whammich.roadblock.block.BlockRoadBase;
 import com.whammich.roadblock.utils.Reference;
 
@@ -29,7 +28,6 @@ public class ItemMallet extends Item {
 		String toolMaterial = material.toString().toLowerCase();
 		this.toolMaterial = toolMaterial;
 		setUnlocalizedName(Reference.modid + ".mallet." + toolMaterial);
-		setCreativeTab(Roadblock.tabRoadblocks);
 		setMaxStackSize(1);
 		setMaxDamage(material.getMaxUses());
 		DamVEnt = 2.0F + material.getDamageVsEntity();

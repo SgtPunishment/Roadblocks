@@ -9,14 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
+import com.whammich.roadblock.Roadblock;
 import com.whammich.roadblock.block.BlockDecor;
 import com.whammich.roadblock.block.BlockRoadBase;
-import com.whammich.roadblock.item.ItemBotaniaMallet;
 import com.whammich.roadblock.item.ItemMallet;
-import com.whammich.roadblock.item.ItemUnstableMallet;
 import com.whammich.roadblock.item.blocks.ItemBlockDecor;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Register {
@@ -27,13 +25,6 @@ public class Register {
 	public static Item ironMallet;
 	public static Item goldMallet;
 	public static Item diamondMallet;
-
-	// Mod Mallets
-	public static Item souliumMallet;
-	public static Item manaMallet;
-	public static Item terraMallet;
-	public static Item elementMallet;
-	public static Item unstableMallet;
 	
 	// Blocks
 	
@@ -51,34 +42,14 @@ public class Register {
 	}
 	
 	public static void registerItems() {
-		ironMallet = new ItemMallet(ToolMaterial.IRON, "stickWood", "ingotIron");
+		ironMallet = new ItemMallet(ToolMaterial.IRON, "stickWood", "ingotIron").setCreativeTab(Roadblock.tabRoadblocks);
 		GameRegistry.registerItem(ironMallet, "IronMallet");
 		
-		goldMallet = new ItemMallet(ToolMaterial.GOLD, "stickWood", "ingotGold");
+		goldMallet = new ItemMallet(ToolMaterial.GOLD, "stickWood", "ingotGold").setCreativeTab(Roadblock.tabRoadblocks);
 		GameRegistry.registerItem(goldMallet, "GoldMallet");
 		
-		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "stickWood", "gemDiamond");
+		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "stickWood", "gemDiamond").setCreativeTab(Roadblock.tabRoadblocks);
 		GameRegistry.registerItem(diamondMallet, "DiamondMallet");
-		
-		if (Loader.isModLoaded("SSTOW")){
-			souliumMallet = new ItemMallet(com.whammich.sstow.utils.Register.SOULIUM, "stickWood", "ingotSoulium");
-			GameRegistry.registerItem(souliumMallet, "SouliumMallet");
-		}
-		if (Loader.isModLoaded("Botania")) {
-			manaMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.manasteelToolMaterial, "livingwoodTwig", "ingotManasteel");
-			GameRegistry.registerItem(manaMallet, "ManasteelMallet");
-
-			terraMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.terrasteelToolMaterial, "livingwoodTwig", "ingotTerrasteel");
-			GameRegistry.registerItem(terraMallet, "TerrasteelMallet");
-
-			elementMallet = new ItemBotaniaMallet(vazkii.botania.api.BotaniaAPI.elementiumToolMaterial, "dreamwoodTwig", "ingotElvenElementium");
-			GameRegistry.registerItem(elementMallet, "ElementiumMallet");
-		}
-		
-		if(Loader.isModLoaded("ExtraUtilities")) {
-			unstableMallet = new ItemUnstableMallet(ToolMaterial.EMERALD, "blockObsidian", "ingotUnstable");
-			GameRegistry.registerItem(unstableMallet, "UnstableMallet");
-		}
 	}
 
 	public static void registerBlocks() {

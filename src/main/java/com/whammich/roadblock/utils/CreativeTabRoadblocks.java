@@ -12,7 +12,7 @@ public class CreativeTabRoadblocks extends CreativeTabs {
 
     @Override
     public ItemStack getIconItemStack() {
-        return new ItemStack(Register.diamondMallet);
+        return new ItemStack(Register.ironMallet);
     }
 
     @Override

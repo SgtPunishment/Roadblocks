@@ -5,7 +5,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class ItemBlockDecor extends ItemBlock {
-	String[] names = { "dirt.worn" };
+	String[] names = { "dirtpath" };
 
 	public ItemBlockDecor(Block block) {
 		super(block);

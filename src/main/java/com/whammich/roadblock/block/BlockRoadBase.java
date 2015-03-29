@@ -46,8 +46,7 @@ public class BlockRoadBase extends Block {
 	 * @param soundType
 	 *            - Sound type of the block
 	 */
-	public BlockRoadBase(String unlocName, String textureName,
-			Material material, SoundType soundType) {
+	public BlockRoadBase(String unlocName, String textureName, Material material, SoundType soundType) {
 		super(material);
 		setBlockName(Reference.modid + "." + unlocName + ".roadblock");
 		setBlockTextureName(textureName);

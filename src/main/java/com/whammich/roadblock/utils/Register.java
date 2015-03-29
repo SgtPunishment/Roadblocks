@@ -83,7 +83,7 @@ public class Register {
 
 	public static void registerBlocks() {
 		
-		wornpath = new BlockDecor(Material.ground, "worn_dirt_path");
+		wornpath = new BlockDecor(Material.ground, "worndirtpath");
 		GameRegistry.registerBlock(wornpath, ItemBlockDecor.class, "BlockDecor").setStepSound(Block.soundTypeGravel);
 
 		roadblockDefault = new BlockRoadBase("default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);

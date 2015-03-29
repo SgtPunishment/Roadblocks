@@ -7,7 +7,7 @@ achievement.buildRoad.desc=Crafting a road block
 tile.roadblock.road.name=%s Road
 tile.roadblock.slab.name=%s Road Slab
 tile.roadblock.default.roadblock.name=Roadblock
-tile.Decor.dirt.worn.name=Worn Dirt
+tile.roadblock.decor.dirtpath.name=Worn Dirt
 
 # Items
 item.roadblock.mallet.iron.name=Iron Paving Mallet

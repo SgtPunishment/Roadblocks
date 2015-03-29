@@ -4,8 +4,10 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.rwtema.extrautils.item.IItemMultiTransparency;
+import com.rwtema.extrautils.item.RenderItemMultiTransparency;
 import com.whammich.roadblock.utils.Reference;
 
 import cpw.mods.fml.common.Optional;
@@ -21,6 +23,7 @@ public class ItemUnstableMallet extends ItemMallet implements IItemMultiTranspar
 		super(material, handle, head);
 		setUnlocalizedName(Reference.modid + ":unstablemallet");
 		this.setMaxDamage(-1);
+		MinecraftForgeClient.registerItemRenderer(this, new RenderItemMultiTransparency());
 	}
 
 	@SideOnly(Side.CLIENT)

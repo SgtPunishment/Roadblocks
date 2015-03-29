@@ -21,7 +21,7 @@ public class ItemUnstableMallet extends ItemMallet implements IItemMultiTranspar
 
 	public ItemUnstableMallet(Item.ToolMaterial material, String handle, String head) {
 		super(material, handle, head);
-		setUnlocalizedName(Reference.modid + ":unstablemallet");
+		setUnlocalizedName(Reference.modid + ".mallet.unstable");
 		this.setMaxDamage(-1);
 		MinecraftForgeClient.registerItemRenderer(this, new RenderItemMultiTransparency());
 	}
@@ -30,8 +30,8 @@ public class ItemUnstableMallet extends ItemMallet implements IItemMultiTranspar
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
 		this.icons = new IIcon[2];
-		this.itemIcon = (this.icons[0] = iconRegister .registerIcon(getUnlocalizedName().substring(5)));
-		this.icons[1] = iconRegister.registerIcon(getUnlocalizedName().substring(5) + "1");
+		this.itemIcon = (this.icons[0] = iconRegister .registerIcon(Reference.modid + ":unstablemallet"));
+		this.icons[1] = iconRegister.registerIcon(Reference.modid + ":unstablemallet1");
 		// itemIcon = iconRegister.registerIcon(Reference.modid +
 		// ":unstablemallet");
 	}

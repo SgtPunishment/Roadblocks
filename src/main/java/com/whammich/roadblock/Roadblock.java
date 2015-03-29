@@ -1,13 +1,11 @@
 package com.whammich.roadblock;
 
-import com.whammich.roadblock.proxy.IProxy;
 import com.whammich.roadblock.utils.*;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -21,9 +19,6 @@ public class Roadblock {
 
 	@Instance(Reference.modid)
 	public static Roadblock instance;
-
-	@SidedProxy(clientSide = Reference.client_proxy_class, serverSide = Reference.server_proxy_class)
-	public static IProxy proxy;
 
     public static CreativeTabs tabRoadblocks = new CreativeTabRoadblocks(Reference.modid + ".creativeTab");
 

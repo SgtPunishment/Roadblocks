@@ -23,10 +23,12 @@ public class ItemMallet extends Item {
 	
 	private float DamVEnt;
 	String toolMaterial;
+	String tex;
 
-	public ItemMallet(Item.ToolMaterial material, String handle, String head) {
+	public ItemMallet(Item.ToolMaterial material, String handle, String head, String texture) {
 		String toolMaterial = material.toString().toLowerCase();
 		this.toolMaterial = toolMaterial;
+		tex = texture;
 		setUnlocalizedName(Reference.modid + ".mallet." + toolMaterial);
 		setMaxStackSize(1);
 		setMaxDamage(material.getMaxUses());
@@ -34,13 +36,13 @@ public class ItemMallet extends Item {
 		GameRegistry.addRecipe(new ShapedOreRecipe(this, "M ", "SM", 'S', handle, 'M', head));
 	}
 
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.modid + ":"
-				+ toolMaterial + "mallet");
+		itemIcon = iconRegister.registerIcon(tex);
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D() {
 		return true;

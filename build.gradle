@@ -31,32 +31,10 @@ if (new File(projectDir, '.git').exists()) {
 }
 
 repositories {
-    maven { url = "http://coloredlightscore.us.to/maven/chisel-2-dev/" }
-	maven { url = "http://tehnut.info/maven/" } 
-	
-	ivy {
-		name "Botania"
-        artifactPattern "http://botaniamod.net/files/deobf/[module] r[revision]-deobf.[ext]"
-    }
-	ivy {
-		name "Baubles"
-        artifactPattern "https://dl.dropboxusercontent.com/u/47135879/[module]-deobf-1.7.10-[revision].[ext]"
-    }
-	ivy {
-		name "extrautilities"
-		artifactPattern "http://addons-origin.cursecdn.com/files/2228/681/[module]-[revision]-deobf.[ext]"
-	}
+
 }
 
 dependencies {
-	compile "com.cricketcraft.chisel:Chisel2:${chisel_version}:deobf"
-	compile "com.whammich.sstow:SoulShards-TOW:${mc_version}-${sstow_version}:deobf"
-	compile name: 'extrautilities', version: "${extutil_version}", ext: 'jar'
-	compile name: 'Botania', version: "${botania_version}", ext: 'jar'
-	compile name: 'Baubles', version: "${baubles_version}", ext: 'jar'
-	compile fileTree(dir: 'libs', include: ['*.jar'])
-	compile fileTree(dir: 'libs', include: '*.jar')
-	compile fileTree(dir: 'Libraries', include: '*.jar')
 
 }
 

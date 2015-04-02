@@ -42,13 +42,13 @@ public class Register {
 	}
 	
 	public static void registerItems() {
-		ironMallet = new ItemMallet(ToolMaterial.IRON, "stickWood", "ingotIron", Reference.modid + ":ironmallet").setCreativeTab(Roadblock.tabRoadblocks);
+		ironMallet = new ItemMallet(ToolMaterial.IRON, "stickWood", "ingotIron", Reference.modid + ":mallet_iron").setCreativeTab(Roadblock.tabRoadblocks);
 		GameRegistry.registerItem(ironMallet, "IronMallet");
 		
-		goldMallet = new ItemMallet(ToolMaterial.GOLD, "stickWood", "ingotGold", Reference.modid + ":goldmallet").setCreativeTab(Roadblock.tabRoadblocks);
+		goldMallet = new ItemMallet(ToolMaterial.GOLD, "stickWood", "ingotGold", Reference.modid + ":mallet_gold").setCreativeTab(Roadblock.tabRoadblocks);
 		GameRegistry.registerItem(goldMallet, "GoldMallet");
 		
-		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "stickWood", "gemDiamond", Reference.modid + ":diamondmallet").setCreativeTab(Roadblock.tabRoadblocks);
+		diamondMallet = new ItemMallet(ToolMaterial.EMERALD, "stickWood", "gemDiamond", Reference.modid + ":mallet_diamond").setCreativeTab(Roadblock.tabRoadblocks);
 		GameRegistry.registerItem(diamondMallet, "DiamondMallet");
 	}
 

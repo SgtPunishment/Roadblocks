@@ -29,7 +29,7 @@ public class Register {
 	// Blocks
 	
 	public static Block roadblockDefault;
-	public static Block wornpath;
+	public static Block BlockDecor;
 	
 	
 	public static Block[] roadblockConfig;
@@ -37,7 +37,7 @@ public class Register {
 
 	public static void Recipes() {
 		Utils.safeRegister("blockObsidian", new ItemStack(Blocks.obsidian));
-		GameRegistry.addRecipe(new ItemStack(wornpath, 4), new Object[] { "#%", "%#", '#', Blocks.dirt, '%', Blocks.sand });
+		GameRegistry.addRecipe(new ItemStack(BlockDecor, 4, 0), new Object[] { "#%", "%#", '#', Blocks.dirt, '%', Blocks.sand });
 		GameRegistry.addRecipe(new ItemStack(roadblockDefault), new Object[] { "##", "##", '#', new ItemStack(Blocks.stone_slab, 1, 5) });
 	}
 	
@@ -54,8 +54,8 @@ public class Register {
 
 	public static void registerBlocks() {
 		
-		wornpath = new BlockDecor(Material.ground, "worndirtpath");
-		GameRegistry.registerBlock(wornpath, ItemBlockDecor.class, "BlockDecor").setStepSound(Block.soundTypeGravel);
+		BlockDecor = new BlockDecor();
+		GameRegistry.registerBlock(BlockDecor, ItemBlockDecor.class, "BlockDecor").setStepSound(Block.soundTypeStone);
 
 		roadblockDefault = new BlockRoadBase("default", Reference.modid + ":default", Material.ground, Block.soundTypeStone);
 		GameRegistry.registerBlock(roadblockDefault, "BlockRoadDefault");

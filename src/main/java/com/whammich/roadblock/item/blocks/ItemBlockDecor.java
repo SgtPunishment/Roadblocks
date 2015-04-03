@@ -5,13 +5,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class ItemBlockDecor extends ItemBlock {
-	String[] names = { "dirtpath" };
+	public static final String[] names = { "worndirtpath", "yellowbrickroad" };
 
 	public ItemBlockDecor(Block block) {
 		super(block);
 		setHasSubtypes(true);
 	}
-
+	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		return getUnlocalizedName() + "." + names[stack.getItemDamage() % names.length];

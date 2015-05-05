@@ -24,7 +24,7 @@ public class Roadblock {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		Config.init(event.getSuggestedConfigurationFile());
+		Config.init(event);
 
         FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);

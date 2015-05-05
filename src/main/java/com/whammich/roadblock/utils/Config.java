@@ -2,12 +2,18 @@ package com.whammich.roadblock.utils;
 
 import java.io.File;
 
+import com.whammich.roadblock.utils.Config;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 
 public class Config {
 
 	public static Configuration config;
 
+	public static File configDirectory;
+	
 	// Category Base
 	static String category;
 
@@ -102,8 +108,14 @@ public class Config {
 		"roadblock:BlockDecor:1"
 	};
 
-	public static void init(File file) {
-		config = new Configuration(file);
+	public static void init(FMLPreInitializationEvent event) {
+		FMLCommonHandler.instance().bus().register(new Config());
+		configDirectory = new File(event.getModConfigurationDirectory() + "/Whammich/");
+		if (!configDirectory.exists()) {
+			configDirectory.mkdir();
+		}
+		File configFile = new File(configDirectory, "Roadblocks.cfg");
+		config = new Configuration(configFile);
 		syncConfig();
 	}
 

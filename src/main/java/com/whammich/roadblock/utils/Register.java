@@ -97,12 +97,10 @@ public class Register {
 	public static void Achievements() {
 		LogHelper.info("Registering Achievement");
 		buildRoad = new Achievement("achievement.buildRoad", "buildRoad", 0, 0,
-				roadblockDefault, (Achievement) null).initIndependentStat()
-				.registerStat();
+				roadblockDefault, (Achievement) null).initIndependentStat().registerStat();
 
 		LogHelper.info("Registering Achievement Page");
-		AchievementPage.registerAchievementPage(new AchievementPage(
-				"Roadblocks", buildRoad));
+		AchievementPage.registerAchievementPage(new AchievementPage("Roadblocks", buildRoad));
 	}
 
 

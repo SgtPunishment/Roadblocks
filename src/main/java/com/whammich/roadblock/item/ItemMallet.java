@@ -43,36 +43,36 @@ public class ItemMallet extends Item {
 		itemIcon = iconRegister.registerIcon(tex);
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D() {
 		return true;
 	}
 
-	public boolean hitEntity(ItemStack stack, EntityLivingBase entity,
-			EntityLivingBase player) {
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase player) {
 		stack.damageItem(1, player);
 		return true;
 	}
 
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block,
-			int xCoord, int yCoord, int zCoord, EntityLivingBase player) {
+	@Override
+	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int xCoord, int yCoord, int zCoord, EntityLivingBase player) {
 		if ((double) block.getBlockHardness(world, xCoord, yCoord, zCoord) != 0.0D)
 			stack.damageItem(2, player);
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked", "deprecation", "rawtypes" })
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();
 		multimap.put(SharedMonsterAttributes.attackDamage
-				.getAttributeUnlocalizedName(), new AttributeModifier(
-				field_111210_e, "Weapon modifier", (double) this.DamVEnt, 0));
+				.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double) this.DamVEnt, 0));
 		return multimap;
 	}
 
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world,
-			int xCoord, int yCoord, int zCoord, int side, float hitX,
-			float hitY, float hitZ) {
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int xCoord, int yCoord, int zCoord, int side, float hitX, float hitY, float hitZ) {
 		if (world.getBlock(xCoord, yCoord, zCoord) instanceof BlockRoadBase) {
 			if (world.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
 				world.setBlock(xCoord, yCoord, zCoord, world.getBlock(xCoord, yCoord, zCoord), 1, 3);

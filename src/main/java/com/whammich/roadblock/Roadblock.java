@@ -13,7 +13,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = Reference.modid, name = Reference.name, version = Reference.version, dependencies = Reference.dependencies, guiFactory = Reference.GuiFactory_class)
+@Mod(
+		modid = Reference.modid, 
+		name = Reference.name, 
+		version = Reference.version, 
+		dependencies = Reference.dependencies, 
+		guiFactory = Reference.GuiFactory_class
+	)
 
 public class Roadblock {
 

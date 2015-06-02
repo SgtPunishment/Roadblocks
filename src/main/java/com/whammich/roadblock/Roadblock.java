@@ -1,21 +1,26 @@
-package roadblock;
+package com.whammich.roadblock;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import roadblock.utils.Config;
-import roadblock.utils.Creative_Tab;
-import roadblock.utils.Register;
 
-@Mod(modid = Main.modid, name = Main.name, version = Main.version, dependencies = "required-after:Forge@[11.14.1.1305,)", guiFactory = "roadblock.utils.Gui_Factory")
-public class Main {
+import com.whammich.roadblock.utils.Config;
+import com.whammich.roadblock.utils.CreativeTab;
+import com.whammich.roadblock.utils.Reference;
+import com.whammich.roadblock.utils.Register;
 
-	public static final String modid = "roadblock";
-	public static final String name = "Roadblocks";
-	public static final String version = "2.1.5";
+@Mod(
+		modid = Reference.modID, 
+		name = Reference.name, 
+		version = Reference.version, 
+		dependencies = Reference.Dependencies, 
+		guiFactory = Reference.GuiFactory
+	)
 
-	public static Creative_Tab tabRoadBlock = new Creative_Tab();
+public class Roadblock {
+
+	public static CreativeTab tabRoadBlock = new CreativeTab();
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -39,11 +44,9 @@ public class Main {
 		if (Config.debug)
 			System.out.println("Registering Recipes");
 		Register.Recipes();
-		// Register Achievements
-		if (Config.debug)
-			System.out.println("Registering Achievements");
-		Register.Achievements();
-
+		
+		
+		
 		if (event.getSide() == Side.CLIENT) {
 			// Render Blocks
 			if (Config.debug)

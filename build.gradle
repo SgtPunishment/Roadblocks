@@ -22,7 +22,7 @@ group= "com.whammich.roadblock" // http://maven.apache.org/guides/mini/guide-nam
 archivesBaseName = "Roadblocks-${minecraft_version}"
 
 minecraft {
-    mappings = '${forge_mappings}'
+    mappings = 'snapshot_20150204'
     version = "${minecraft_version}-${forge_version}"
 	if(file('../run-1.8').exists()){
 		runDir = "run-1.8/"

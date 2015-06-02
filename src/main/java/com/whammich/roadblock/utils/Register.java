@@ -1,4 +1,4 @@
-package roadblock.utils;
+package com.whammich.roadblock.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -6,20 +6,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
-import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import roadblock.Main;
-import roadblock.block.compressedCobble;
-import roadblock.block.roadblock;
-import roadblock.block.roadslab;
-import roadblock.item.Mallet;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import com.whammich.roadblock.block.BlockRoad;
+import com.whammich.roadblock.block.SlabRoad;
+import com.whammich.roadblock.item.ItemMallet;
 
 public class Register {
-	public static Block compressedCobble;
-	public static Block compressedCobbleRoadblock;
 	public static Block defaultRoadblock;
 	public static Block stoneRoadblock;
 	public static Block andesiteRoadblock;
@@ -84,167 +81,160 @@ public class Register {
 	public static Block prismarineRoadslab;
 
 	public static Item ironMallet;
+	public static Item goldMallet;
+	public static Item diamondMallet;
 
-	
+
 	public static void Blocks() {
 
 		if (Config.debug)
-			System.out.println("Registering Compressed Cobblestone");
-		compressedCobble = new compressedCobble();
-
-		if (Config.debug)
 			System.out.println("Registering Default Roadblock");
-		defaultRoadblock = new roadblock(Material.rock, "Default",
+		defaultRoadblock = new BlockRoad(Material.rock, "Default",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Roadblock");
-		stoneRoadblock = new roadblock(Material.rock, "Stone",
+		stoneRoadblock = new BlockRoad(Material.rock, "Stone",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Andesite Roadblock");
-		andesiteRoadblock = new roadblock(Material.rock, "Andesite",
+		andesiteRoadblock = new BlockRoad(Material.rock, "Andesite",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Dirt Roadblock");
-		dirtRoadblock = new roadblock(Material.grass, "Dirt",
+		dirtRoadblock = new BlockRoad(Material.grass, "Dirt",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Coarse Dirt Roadblock");
-		coarseDirtRoadblock = new roadblock(Material.ground, "CoarseDirt",
+		coarseDirtRoadblock = new BlockRoad(Material.ground, "CoarseDirt",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Podzol Roadblock");
-		podzolRoadblock = new roadblock(Material.grass, "Podzol",
+		podzolRoadblock = new BlockRoad(Material.grass, "Podzol",
 				Block.soundTypeGrass);
 
 		if (Config.debug)
 			System.out.println("Registering Cobblestone Roadblock");
-		cobbleRoadblock = new roadblock(Material.rock, "Cobblestone",
+		cobbleRoadblock = new BlockRoad(Material.rock, "Cobblestone",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Oak Roadblock");
-		oakRoadblock = new roadblock(Material.wood, "Oak", Block.soundTypeWood);
+		oakRoadblock = new BlockRoad(Material.wood, "Oak", Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Spruce Roadblock");
-		spruceRoadblock = new roadblock(Material.wood, "Spruce",
+		spruceRoadblock = new BlockRoad(Material.wood, "Spruce",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Birch Roadblock");
-		birchRoadblock = new roadblock(Material.wood, "Birch",
+		birchRoadblock = new BlockRoad(Material.wood, "Birch",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Jungle Roadblock");
-		jungleRoadblock = new roadblock(Material.wood, "Jungle",
+		jungleRoadblock = new BlockRoad(Material.wood, "Jungle",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Acacia Roadblock");
-		acaciaRoadblock = new roadblock(Material.wood, "Acacia",
+		acaciaRoadblock = new BlockRoad(Material.wood, "Acacia",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Dark Oak Roadblock");
-		darkOakRoadblock = new roadblock(Material.wood, "DarkOak",
+		darkOakRoadblock = new BlockRoad(Material.wood, "DarkOak",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Sand Roadblock");
-		sandRoadblock = new roadblock(Material.sand, "Sand",
+		sandRoadblock = new BlockRoad(Material.sand, "Sand",
 				Block.soundTypeSand);
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Top Roadblock");
-		sandstoneTopRoadblock = new roadblock(Material.rock, "SandstoneTop",
+		sandstoneTopRoadblock = new BlockRoad(Material.rock, "SandstoneTop",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Bottom Roadblock");
-		sandstoneBottomRoadblock = new roadblock(Material.rock,
+		sandstoneBottomRoadblock = new BlockRoad(Material.rock,
 				"SandstoneBottom", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Redsand Roadblock");
-		redsandRoadblock = new roadblock(Material.sand, "Redsand",
+		redsandRoadblock = new BlockRoad(Material.sand, "Redsand",
 				Block.soundTypeSand);
 
 		if (Config.debug)
 			System.out.println("Registering Red Sandstone Bottom Roadblock");
-		redSandstoneBottomRoadblock = new roadblock(Material.rock,
+		redSandstoneBottomRoadblock = new BlockRoad(Material.rock,
 				"RedSandstoneBottom", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Red Sandstone Top Roadblock");
-		redSandstoneTopRoadblock = new roadblock(Material.rock,
+		redSandstoneTopRoadblock = new BlockRoad(Material.rock,
 				"RedSandstoneTop", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Gravel Roadblock");
-		gravelRoadblock = new roadblock(Material.ground, "Gravel",
+		gravelRoadblock = new BlockRoad(Material.ground, "Gravel",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Slab Roadblock");
-		stoneSlabTopRoadblock = new roadblock(Material.rock, "StoneSlabTop",
+		stoneSlabTopRoadblock = new BlockRoad(Material.rock, "StoneSlabTop",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Brick Roadblock");
-		bricksRoadblock = new roadblock(Material.rock, "Brick",
+		bricksRoadblock = new BlockRoad(Material.rock, "Brick",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Nether Brick Roadblock");
-		netherRoadblock = new roadblock(Material.rock, "NetherBrick",
+		netherRoadblock = new BlockRoad(Material.rock, "NetherBrick",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Bottom Roadblock");
-		quartzBottomRoadblock = new roadblock(Material.rock, "QuartzBottom",
+		quartzBottomRoadblock = new BlockRoad(Material.rock, "QuartzBottom",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Top Roadblock");
-		quartzTopRoadblock = new roadblock(Material.rock, "QuartzTop",
+		quartzTopRoadblock = new BlockRoad(Material.rock, "QuartzTop",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Chiseled Quartz Roadblock");
-		quartzChiseledRoadblock = new roadblock(Material.rock,
+		quartzChiseledRoadblock = new BlockRoad(Material.rock,
 				"QuartzChiseled", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Piller Top Roadblock");
-		quartzPillerTopRoadblock = new roadblock(Material.rock,
+		quartzPillerTopRoadblock = new BlockRoad(Material.rock,
 				"QuartzPillerTop", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Chiseled Stone Bricks Roadblock");
-		stonebrickChiseledRoadblock = new roadblock(Material.rock,
+		stonebrickChiseledRoadblock = new BlockRoad(Material.rock,
 				"ChiseledStonebrick", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Dark Prismarine Roadblock");
-		darkPrismarineRoadblock = new roadblock(Material.rock,
+		darkPrismarineRoadblock = new BlockRoad(Material.rock,
 				"DarkPrismarine", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Prismarine Roadblock");
-		prismarineRoadblock = new roadblock(Material.rock, "Prismarine",
+		prismarineRoadblock = new BlockRoad(Material.rock, "Prismarine",
 				Block.soundTypePiston);
-
-		if (Config.debug)
-			System.out.println("Registering CompressedCobble Roadblock");
-		compressedCobbleRoadblock = new roadblock(Material.rock,
-				"CompressedCobble", Block.soundTypePiston);
 
 	}
 
@@ -252,21 +242,12 @@ public class Register {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 
 		if (Config.debug)
-			System.out.println("Rendering Compressed Cobblestone");
-		renderItem.getItemModelMesher().register(
-				Item.getItemFromBlock(compressedCobble),
-				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((compressedCobble) compressedCobble).getName(),
-						"inventory"));
-
-		if (Config.debug)
 			System.out.println("Rendering Default Roadblock");
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(defaultRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) defaultRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) defaultRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -275,8 +256,8 @@ public class Register {
 				Item.getItemFromBlock(stoneRoadblock),
 				0,
 				new ModelResourceLocation(
-						Main.modid + ":"
-								+ ((roadblock) stoneRoadblock).getName()
+						Reference.modID + ":"
+								+ ((BlockRoad) stoneRoadblock).getName()
 								+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -284,8 +265,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(andesiteRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) andesiteRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) andesiteRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -293,8 +274,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(dirtRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) dirtRoadblock).getName() + "_roadblock",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) dirtRoadblock).getName() + "_roadblock",
 						"inventory"));
 
 		if (Config.debug)
@@ -302,8 +283,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(coarseDirtRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) coarseDirtRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) coarseDirtRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -311,8 +292,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(podzolRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) podzolRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) podzolRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -320,8 +301,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(cobbleRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) cobbleRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) cobbleRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -329,8 +310,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(oakRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) oakRoadblock).getName() + "_roadblock",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) oakRoadblock).getName() + "_roadblock",
 						"inventory"));
 
 		if (Config.debug)
@@ -338,8 +319,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(spruceRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) spruceRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) spruceRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -348,8 +329,8 @@ public class Register {
 				Item.getItemFromBlock(birchRoadblock),
 				0,
 				new ModelResourceLocation(
-						Main.modid + ":"
-								+ ((roadblock) birchRoadblock).getName()
+						Reference.modID + ":"
+								+ ((BlockRoad) birchRoadblock).getName()
 								+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -357,8 +338,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(jungleRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) jungleRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) jungleRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -366,8 +347,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(acaciaRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) acaciaRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) acaciaRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -375,8 +356,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(darkOakRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) darkOakRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) darkOakRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -384,8 +365,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(sandRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) sandRoadblock).getName() + "_roadblock",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) sandRoadblock).getName() + "_roadblock",
 						"inventory"));
 
 		if (Config.debug)
@@ -393,8 +374,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(redsandRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) redsandRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) redsandRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -402,8 +383,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(gravelRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) gravelRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) gravelRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -411,8 +392,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(sandstoneTopRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) sandstoneTopRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) sandstoneTopRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -420,8 +401,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(sandstoneBottomRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) sandstoneBottomRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) sandstoneBottomRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -429,8 +410,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(redSandstoneTopRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) redSandstoneTopRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) redSandstoneTopRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -438,8 +419,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(redSandstoneBottomRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) redSandstoneBottomRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) redSandstoneBottomRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -447,8 +428,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(stoneSlabTopRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) stoneSlabTopRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) stoneSlabTopRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -456,8 +437,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(bricksRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) bricksRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) bricksRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -465,8 +446,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(netherRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) netherRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) netherRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -474,8 +455,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(quartzBottomRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) quartzBottomRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) quartzBottomRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -483,8 +464,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(quartzTopRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) quartzTopRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) quartzTopRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -492,8 +473,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(quartzChiseledRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) quartzChiseledRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) quartzChiseledRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -501,8 +482,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(quartzPillerTopRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) quartzPillerTopRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) quartzPillerTopRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -510,8 +491,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(stonebrickChiseledRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) stonebrickChiseledRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) stonebrickChiseledRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -519,8 +500,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(darkPrismarineRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) darkPrismarineRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) darkPrismarineRoadblock).getName()
 						+ "_roadblock", "inventory"));
 
 		if (Config.debug)
@@ -528,27 +509,9 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(prismarineRoadblock),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) prismarineRoadblock).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((BlockRoad) prismarineRoadblock).getName()
 						+ "_roadblock", "inventory"));
-
-		if (Config.debug)
-			System.out.println("Rendering Compressed Cobblestone Roadblock");
-		renderItem.getItemModelMesher().register(
-				Item.getItemFromBlock(compressedCobbleRoadblock),
-				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadblock) compressedCobbleRoadblock).getName()
-						+ "_roadblock", "inventory"));
-
-		if (Config.debug)
-			System.out.println("Rendering Compressed Cobblestone");
-		renderItem.getItemModelMesher().register(
-				Item.getItemFromBlock(compressedCobble),
-				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((compressedCobble) compressedCobble).getName(),
-						"inventory"));
 
 	}
 
@@ -556,157 +519,157 @@ public class Register {
 
 		if (Config.debug)
 			System.out.println("Registering CompressedCobble Roadblock Slab");
-		compressedCobbleRoadslab = new roadslab(Material.rock,
+		compressedCobbleRoadslab = new SlabRoad(Material.rock,
 				"CompressedCobble", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Default Roadblock Slab");
-		defaultRoadslab = new roadslab(Material.rock, "Default",
+		defaultRoadslab = new SlabRoad(Material.rock, "Default",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Roadblock Slab");
-		stoneRoadslab = new roadslab(Material.rock, "Stone",
+		stoneRoadslab = new SlabRoad(Material.rock, "Stone",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Andesite Roadblock Slab");
-		andesiteRoadslab = new roadslab(Material.rock, "Andesite",
+		andesiteRoadslab = new SlabRoad(Material.rock, "Andesite",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Dirt Roadblock Slab");
-		dirtRoadslab = new roadslab(Material.grass, "Dirt",
+		dirtRoadslab = new SlabRoad(Material.grass, "Dirt",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Coarse Dirt Roadblock Slab");
-		coarseDirtRoadslab = new roadslab(Material.ground, "CoarseDirt",
+		coarseDirtRoadslab = new SlabRoad(Material.ground, "CoarseDirt",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Podzol Roadblock Slab");
-		podzolRoadslab = new roadslab(Material.grass, "Podzol",
+		podzolRoadslab = new SlabRoad(Material.grass, "Podzol",
 				Block.soundTypeGrass);
 
 		if (Config.debug)
 			System.out.println("Registering Cobblestone Roadblock Slab");
-		cobbleRoadslab = new roadslab(Material.rock, "Cobblestone",
+		cobbleRoadslab = new SlabRoad(Material.rock, "Cobblestone",
 				Block.soundTypeStone);
 
 		if (Config.debug)
 			System.out.println("Registering Oak Roadblock Slab");
-		oakRoadslab = new roadslab(Material.wood, "Oak", Block.soundTypeWood);
+		oakRoadslab = new SlabRoad(Material.wood, "Oak", Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Spruce Roadblock Slab");
-		spruceRoadslab = new roadslab(Material.wood, "Spruce",
+		spruceRoadslab = new SlabRoad(Material.wood, "Spruce",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Birch Roadblock Slab");
-		birchRoadslab = new roadslab(Material.wood, "Birch",
+		birchRoadslab = new SlabRoad(Material.wood, "Birch",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Jungle Roadblock Slab");
-		jungleRoadslab = new roadslab(Material.wood, "Jungle",
+		jungleRoadslab = new SlabRoad(Material.wood, "Jungle",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Acacia Roadblock Slab");
-		acaciaRoadslab = new roadslab(Material.wood, "Acacia",
+		acaciaRoadslab = new SlabRoad(Material.wood, "Acacia",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Dark Oak Roadblock Slab");
-		darkOakRoadslab = new roadslab(Material.wood, "DarkOak",
+		darkOakRoadslab = new SlabRoad(Material.wood, "DarkOak",
 				Block.soundTypeWood);
 
 		if (Config.debug)
 			System.out.println("Registering Sand Roadblock Slab");
-		sandRoadslab = new roadslab(Material.sand, "Sand", Block.soundTypeSand);
+		sandRoadslab = new SlabRoad(Material.sand, "Sand", Block.soundTypeSand);
 
 		if (Config.debug)
 			System.out.println("Registering Redsand Roadblock Slab");
-		redsandRoadslab = new roadslab(Material.sand, "Redsand",
+		redsandRoadslab = new SlabRoad(Material.sand, "Redsand",
 				Block.soundTypeSand);
 
 		if (Config.debug)
 			System.out.println("Registering Gravel Roadblock Slab");
-		gravelRoadslab = new roadslab(Material.ground, "Gravel",
+		gravelRoadslab = new SlabRoad(Material.ground, "Gravel",
 				Block.soundTypeGravel);
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Top Roadblock Slab");
-		sandstoneTopRoadslab = new roadslab(Material.rock, "SandstoneTop",
+		sandstoneTopRoadslab = new SlabRoad(Material.rock, "SandstoneTop",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out
-					.println("Registering Red Sandstone Bottom Roadblock Slab");
-		redSandstoneBottomRoadslab = new roadslab(Material.rock,
+			.println("Registering Red Sandstone Bottom Roadblock Slab");
+		redSandstoneBottomRoadslab = new SlabRoad(Material.rock,
 				"RedSandstoneBottom", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Red Sandstone Top Roadblock Slab");
-		redSandstoneTopRoadslab = new roadslab(Material.rock,
+		redSandstoneTopRoadslab = new SlabRoad(Material.rock,
 				"RedSandstoneTop", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Bottom Roadblock Slab");
-		sandstoneBottomRoadslab = new roadslab(Material.rock,
+		sandstoneBottomRoadslab = new SlabRoad(Material.rock,
 				"SandstoneBottom", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Stone Slab Roadblock Slab");
-		stoneSlabTopRoadslab = new roadslab(Material.rock, "StoneSlabTop",
+		stoneSlabTopRoadslab = new SlabRoad(Material.rock, "StoneSlabTop",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Brick Roadblock Slab");
-		bricksRoadslab = new roadslab(Material.rock, "Brick",
+		bricksRoadslab = new SlabRoad(Material.rock, "Brick",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Nether Brick Roadblock Slab");
-		netherRoadslab = new roadslab(Material.rock, "NetherBrick",
+		netherRoadslab = new SlabRoad(Material.rock, "NetherBrick",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Bottom Roadblock Slab");
-		quartzBottomRoadslab = new roadslab(Material.rock, "QuartzBottom",
+		quartzBottomRoadslab = new SlabRoad(Material.rock, "QuartzBottom",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Top Roadblock Slab");
-		quartzTopRoadslab = new roadslab(Material.rock, "QuartzTop",
+		quartzTopRoadslab = new SlabRoad(Material.rock, "QuartzTop",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Chiseled Quartz Roadblock Slab");
-		quartzChiseledRoadslab = new roadslab(Material.rock, "QuartzChiseled",
+		quartzChiseledRoadslab = new SlabRoad(Material.rock, "QuartzChiseled",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Piller Top Roadblock Slab");
-		quartzPillerTopRoadslab = new roadslab(Material.rock,
+		quartzPillerTopRoadslab = new SlabRoad(Material.rock,
 				"QuartzPillerTop", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out
-					.println("Registering Chiseled Stone Bricks Roadblock Slab");
-		stonebrickChiseledRoadslab = new roadslab(Material.rock,
+			.println("Registering Chiseled Stone Bricks Roadblock Slab");
+		stonebrickChiseledRoadslab = new SlabRoad(Material.rock,
 				"ChiseledStonebrick", Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Dark Prismarine Roadblock Slab");
-		darkPrismarineRoadslab = new roadslab(Material.rock, "DarkPrismarine",
+		darkPrismarineRoadslab = new SlabRoad(Material.rock, "DarkPrismarine",
 				Block.soundTypePiston);
 
 		if (Config.debug)
 			System.out.println("Registering Prismarine Roadblock Slab");
-		prismarineRoadslab = new roadslab(Material.rock, "Prismarine",
+		prismarineRoadslab = new SlabRoad(Material.rock, "Prismarine",
 				Block.soundTypePiston);
 
 	}
@@ -719,8 +682,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(defaultRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) defaultRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) defaultRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -728,8 +691,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(stoneRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) stoneRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) stoneRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -738,8 +701,8 @@ public class Register {
 				Item.getItemFromBlock(andesiteRoadslab),
 				0,
 				new ModelResourceLocation(
-						Main.modid + ":"
-								+ ((roadslab) andesiteRoadslab).getName()
+						Reference.modID + ":"
+								+ ((SlabRoad) andesiteRoadslab).getName()
 								+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -747,8 +710,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(dirtRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) dirtRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) dirtRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -756,8 +719,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(coarseDirtRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) coarseDirtRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) coarseDirtRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -765,8 +728,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(podzolRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) podzolRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) podzolRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -774,8 +737,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(cobbleRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) cobbleRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) cobbleRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -783,8 +746,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(oakRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) oakRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) oakRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -792,8 +755,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(spruceRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) spruceRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) spruceRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -801,8 +764,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(birchRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) birchRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) birchRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -810,8 +773,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(jungleRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) jungleRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) jungleRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -819,8 +782,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(acaciaRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) acaciaRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) acaciaRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -828,8 +791,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(darkOakRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) darkOakRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) darkOakRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -837,8 +800,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(sandRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) sandRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) sandRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -846,8 +809,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(redsandRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) redsandRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) redsandRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -855,8 +818,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(gravelRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) gravelRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) gravelRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -864,8 +827,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(sandstoneTopRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) sandstoneTopRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) sandstoneTopRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -873,8 +836,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(sandstoneBottomRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) sandstoneBottomRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) sandstoneBottomRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -882,8 +845,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(redSandstoneTopRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) redSandstoneTopRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) redSandstoneTopRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -891,8 +854,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(redSandstoneBottomRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) redSandstoneBottomRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) redSandstoneBottomRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -900,8 +863,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(stoneSlabTopRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) stoneSlabTopRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) stoneSlabTopRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -909,8 +872,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(bricksRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) bricksRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) bricksRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -918,8 +881,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(netherRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) netherRoadslab).getName() + "_roadslab",
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) netherRoadslab).getName() + "_roadslab",
 						"inventory"));
 
 		if (Config.debug)
@@ -927,8 +890,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(quartzBottomRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) quartzBottomRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) quartzBottomRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -936,8 +899,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(quartzTopRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) quartzTopRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) quartzTopRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -945,8 +908,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(quartzChiseledRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) quartzChiseledRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) quartzChiseledRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -954,8 +917,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(quartzPillerTopRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) quartzPillerTopRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) quartzPillerTopRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -963,8 +926,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(stonebrickChiseledRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) stonebrickChiseledRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) stonebrickChiseledRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -972,8 +935,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(darkPrismarineRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) darkPrismarineRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) darkPrismarineRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -981,8 +944,8 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(prismarineRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) prismarineRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) prismarineRoadslab).getName()
 						+ "_roadslab", "inventory"));
 
 		if (Config.debug)
@@ -990,102 +953,111 @@ public class Register {
 		renderItem.getItemModelMesher().register(
 				Item.getItemFromBlock(compressedCobbleRoadslab),
 				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((roadslab) compressedCobbleRoadslab).getName()
+				new ModelResourceLocation(Reference.modID + ":"
+						+ ((SlabRoad) compressedCobbleRoadslab).getName()
 						+ "_roadslab", "inventory"));
 	}
 
 	public static void Items() {
-		
-		ironMallet = new Mallet(0, Item.ToolMaterial.IRON, null);
+		ironMallet = new ItemMallet(Item.ToolMaterial.IRON);
+		goldMallet = new ItemMallet(Item.ToolMaterial.GOLD);
+		diamondMallet = new ItemMallet(Item.ToolMaterial.EMERALD);
 	}
 
 	public static void RenderItems() {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		renderItem.getItemModelMesher().register(
-				ironMallet,
-				0,
-				new ModelResourceLocation(Main.modid + ":"
-						+ ((Mallet) ironMallet).getName(), "inventory"));
+		renderItem.getItemModelMesher().register(ironMallet, 0, new ModelResourceLocation(Reference.modID + ":" +  ironMallet.getUnlocalizedName(), "inventory"));
+
+//		renderItem.getItemModelMesher().register(goldMallet, 0, new ModelResourceLocation(Reference.modID + ":" + goldMallet.getUnlocalizedName(), "inventory"));
+//
+//		renderItem.getItemModelMesher().register(diamondMallet, 0, new ModelResourceLocation(Reference.modID + ":" +  diamondMallet.getUnlocalizedName(), "inventory"));
 	}
 
+	private static String[][] recipePatterns = new String[][] { { "RA", "SR" } };
+	private static Object[][] recipeItems;
+	
+	public static void malletCrafting() { // addRecipes
+		for (int i = 0; i < recipeItems[0].length; ++i) {
+			Object object = recipeItems[0][i];
+
+			for (int j = 0; j < recipeItems.length - 1; ++j) {
+				Item item = (Item) recipeItems[j + 1][i];
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(item),
+						new Object[] { recipePatterns[j], 'S', "stickWood", 'R', object }));
+			}
+		}
+	}
+
+	public static void malletRecipes() { // RecipesWeapons
+		recipeItems = new Object[][] {
+					{ Items.iron_ingot, Items.gold_ingot, Items.diamond },
+					{ Register.ironMallet, Register.goldMallet, Register.diamondMallet } };
+		
+	}
+	
 	public static void Recipes() {
 		// Register Recipes
-		if (Config.debug)
-			System.out.println("Registering Compressed Cobblestone Recipe");
-		GameRegistry.addRecipe(new ItemStack(compressedCobble), new Object[] {
-				"AAA", "AAA", "AAA", 'A', Blocks.cobblestone });
-
-		if (Config.debug)
-			System.out
-					.println("Registering Compressed Cobblestone to Cobblestone Recipe");
-		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone, 9),
-				new Object[] { compressedCobble });
-
+		
+		malletRecipes();
+		malletCrafting();
+		
 		if (Config.debug)
 			System.out.println("Registering Roadblock Recipe");
 		GameRegistry.addRecipe(new ItemStack(defaultRoadblock), new Object[] {
-				"AAA", "ASS", "ASS", 'S',
-				new ItemStack(Blocks.stone_slab, 1, 5) });
+			"AAA", "ASS", "ASS", 'S',
+			new ItemStack(Blocks.stone_slab, 1, 5) });
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Top Recipe");
 		GameRegistry.addRecipe(new ItemStack(sandstoneTopRoadblock),
 				new Object[] { "S  ", "R  ", "   ", 'S',
-						new ItemStack(Blocks.sandstone, 1, 0), 'R',
-						defaultRoadblock });
+			new ItemStack(Blocks.sandstone, 1, 0), 'R',
+			defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Bottom Recipe");
 		GameRegistry.addRecipe(new ItemStack(sandstoneBottomRoadblock),
 				new Object[] { "R  ", "S  ", "   ", 'S',
-						new ItemStack(Blocks.sandstone, 1, 0), 'R',
-						defaultRoadblock });
+			new ItemStack(Blocks.sandstone, 1, 0), 'R',
+			defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Red Sandstone Top Recipe");
 		GameRegistry.addRecipe(new ItemStack(redSandstoneTopRoadblock),
 				new Object[] { "S  ", "R  ", "   ", 'S',
-						new ItemStack(Blocks.red_sandstone, 1, 0), 'R',
-						defaultRoadblock });
+			new ItemStack(Blocks.red_sandstone, 1, 0), 'R',
+			defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Red Sandstone Bottom Recipe");
 		GameRegistry.addRecipe(new ItemStack(redSandstoneBottomRoadblock),
 				new Object[] { "R  ", "S  ", "   ", 'S',
-						new ItemStack(Blocks.red_sandstone, 1, 0), 'R',
-						defaultRoadblock });
+			new ItemStack(Blocks.red_sandstone, 1, 0), 'R',
+			defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Top Recipe");
 		GameRegistry.addRecipe(new ItemStack(quartzTopRoadblock),
 				new Object[] { "S  ", "R  ", "   ", 'S',
-						new ItemStack(Blocks.quartz_block, 1, 0), 'R',
-						defaultRoadblock });
+			new ItemStack(Blocks.quartz_block, 1, 0), 'R',
+			defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Bottom Recipe");
 		GameRegistry.addRecipe(new ItemStack(quartzBottomRoadblock),
 				new Object[] { "R  ", "S  ", "   ", 'S',
-						new ItemStack(Blocks.quartz_block, 1, 0), 'R',
-						defaultRoadblock });
+			new ItemStack(Blocks.quartz_block, 1, 0), 'R',
+			defaultRoadblock });
 		// Register Slab Recipes
-		if (Config.debug)
-			System.out
-					.println("Registering Compressed Cobblestone Slab Recipe");
-		GameRegistry.addRecipe(new ItemStack(compressedCobbleRoadslab, 6),
-				new Object[] { "   ", "   ", "AAA", 'A',
-						compressedCobbleRoadblock });
-
 		if (Config.debug)
 			System.out.println("Registering Default Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(defaultRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', defaultRoadblock });
+			"   ", "   ", "AAA", 'A', defaultRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Stone Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(stoneRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', stoneRoadblock });
+			"   ", "   ", "AAA", 'A', stoneRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Andesite Slab Recipe");
@@ -1095,7 +1067,7 @@ public class Register {
 		if (Config.debug)
 			System.out.println("Registering Dirt Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(dirtRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', dirtRoadblock });
+			"   ", "   ", "AAA", 'A', dirtRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Coarse Dirt Slab Recipe");
@@ -1105,106 +1077,106 @@ public class Register {
 		if (Config.debug)
 			System.out.println("Registering Podzol Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(podzolRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', podzolRoadblock });
+			"   ", "   ", "AAA", 'A', podzolRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Cobblestone Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(cobbleRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', cobbleRoadblock });
+			"   ", "   ", "AAA", 'A', cobbleRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Oak Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(oakRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', oakRoadblock });
+			"   ", "   ", "AAA", 'A', oakRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Spruce Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(spruceRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', spruceRoadblock });
+			"   ", "   ", "AAA", 'A', spruceRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Birch Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(birchRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', birchRoadblock });
+			"   ", "   ", "AAA", 'A', birchRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Jungle Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(jungleRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', jungleRoadblock });
+			"   ", "   ", "AAA", 'A', jungleRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Acacia Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(acaciaRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', acaciaRoadblock });
+			"   ", "   ", "AAA", 'A', acaciaRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Dark Oak Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(darkOakRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', darkOakRoadblock });
+			"   ", "   ", "AAA", 'A', darkOakRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Sand Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(sandRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', sandRoadblock });
+			"   ", "   ", "AAA", 'A', sandRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Red sand Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(redsandRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', redsandRoadblock });
+			"   ", "   ", "AAA", 'A', redsandRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Gravel Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(gravelRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', gravelRoadblock });
+			"   ", "   ", "AAA", 'A', gravelRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Red Sandstone Top Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(redSandstoneTopRoadslab, 6),
 				new Object[] { "   ", "   ", "AAA", 'A',
-						redSandstoneTopRoadblock });
+			redSandstoneTopRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Red Sandstone Bottom Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(redSandstoneBottomRoadslab, 6),
 				new Object[] { "   ", "   ", "AAA", 'A',
-						redSandstoneBottomRoadblock });
+			redSandstoneBottomRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Top Slab Recipe");
 		GameRegistry
-				.addRecipe(new ItemStack(sandstoneTopRoadslab, 6),
-						new Object[] { "   ", "   ", "AAA", 'A',
-								sandstoneTopRoadblock });
+		.addRecipe(new ItemStack(sandstoneTopRoadslab, 6),
+				new Object[] { "   ", "   ", "AAA", 'A',
+			sandstoneTopRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Sandstone Bottom Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(sandstoneBottomRoadslab, 6),
 				new Object[] { "   ", "   ", "AAA", 'A',
-						sandstoneBottomRoadblock });
+			sandstoneBottomRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Stone Slab Top Slab Recipe");
 		GameRegistry
-				.addRecipe(new ItemStack(stoneSlabTopRoadslab, 6),
-						new Object[] { "   ", "   ", "AAA", 'A',
-								stoneSlabTopRoadblock });
+		.addRecipe(new ItemStack(stoneSlabTopRoadslab, 6),
+				new Object[] { "   ", "   ", "AAA", 'A',
+			stoneSlabTopRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Brick Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(bricksRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', bricksRoadblock });
+			"   ", "   ", "AAA", 'A', bricksRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Nether Brick Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(netherRoadslab, 6), new Object[] {
-				"   ", "   ", "AAA", 'A', netherRoadblock });
+			"   ", "   ", "AAA", 'A', netherRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Bottom Slab Recipe");
 		GameRegistry
-				.addRecipe(new ItemStack(quartzBottomRoadslab, 6),
-						new Object[] { "   ", "   ", "AAA", 'A',
-								quartzBottomRoadblock });
+		.addRecipe(new ItemStack(quartzBottomRoadslab, 6),
+				new Object[] { "   ", "   ", "AAA", 'A',
+			quartzBottomRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Top Slab Recipe");
@@ -1215,25 +1187,25 @@ public class Register {
 			System.out.println("Registering Quartz Chiseled Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(quartzChiseledRoadslab, 6),
 				new Object[] { "   ", "   ", "AAA", 'A',
-						quartzChiseledRoadblock });
+			quartzChiseledRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Piller Top Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(quartzPillerTopRoadslab, 6),
 				new Object[] { "   ", "   ", "AAA", 'A',
-						quartzPillerTopRoadblock });
+			quartzPillerTopRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Chiseled Stone Brick Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(stonebrickChiseledRoadslab, 6),
 				new Object[] { "   ", "   ", "AAA", 'A',
-						stonebrickChiseledRoadblock });
+			stonebrickChiseledRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Dark Prismarine Slab Recipe");
 		GameRegistry.addRecipe(new ItemStack(darkPrismarineRoadslab, 6),
 				new Object[] { "   ", "   ", "AAA", 'A',
-						darkPrismarineRoadblock });
+			darkPrismarineRoadblock });
 
 		if (Config.debug)
 			System.out.println("Registering Prismarine Slab Recipe");
@@ -1245,13 +1217,13 @@ public class Register {
 			System.out.println("Registering Stone Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(stoneRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.stone, 1, 0) });
+			new ItemStack(Blocks.stone, 1, 0) });
 
 		if (Config.debug)
 			System.out.println("Registering Andesite Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(andesiteRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.stone, 1, 5) });
+			new ItemStack(Blocks.stone, 1, 5) });
 
 		if (Config.debug)
 			System.out.println("Registering Dirt Roadblock Recipe");
@@ -1262,13 +1234,13 @@ public class Register {
 			System.out.println("Registering Coarse Dirt Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(coarseDirtRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.dirt, 1, 1) });
+			new ItemStack(Blocks.dirt, 1, 1) });
 
 		if (Config.debug)
 			System.out.println("Registering Podzol Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(podzolRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.dirt, 1, 2) });
+			new ItemStack(Blocks.dirt, 1, 2) });
 
 		if (Config.debug)
 			System.out.println("Registering Cobblestone Roadblock Recipe");
@@ -1279,49 +1251,49 @@ public class Register {
 			System.out.println("Registering Oak Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(oakRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.planks, 1, 0) });
+			new ItemStack(Blocks.planks, 1, 0) });
 
 		if (Config.debug)
 			System.out.println("Registering Spruce Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(spruceRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.planks, 1, 1) });
+			new ItemStack(Blocks.planks, 1, 1) });
 
 		if (Config.debug)
 			System.out.println("Registering Birch Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(birchRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.planks, 1, 2) });
+			new ItemStack(Blocks.planks, 1, 2) });
 
 		if (Config.debug)
 			System.out.println("Registering Jungle Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(jungleRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.planks, 1, 3) });
+			new ItemStack(Blocks.planks, 1, 3) });
 
 		if (Config.debug)
 			System.out.println("Registering Acacia Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(acaciaRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.planks, 1, 4) });
+			new ItemStack(Blocks.planks, 1, 4) });
 
 		if (Config.debug)
 			System.out.println("Registering Dark Oak Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(darkOakRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.planks, 1, 5) });
+			new ItemStack(Blocks.planks, 1, 5) });
 
 		if (Config.debug)
 			System.out.println("Registering Sand Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(sandRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.sand, 1, 0) });
+			new ItemStack(Blocks.sand, 1, 0) });
 
 		if (Config.debug)
 			System.out.println("Registering Red Sand Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(redsandRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.sand, 1, 1) });
+			new ItemStack(Blocks.sand, 1, 1) });
 
 		if (Config.debug)
 			System.out.println("Registering Gravel Roadblock Recipe");
@@ -1332,7 +1304,7 @@ public class Register {
 			System.out.println("Registering Stoneslab Top Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(stoneSlabTopRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.stone_slab, 1, 0) });
+			new ItemStack(Blocks.stone_slab, 1, 0) });
 
 		if (Config.debug)
 			System.out.println("Registering Brick Roadblock Recipe");
@@ -1348,48 +1320,32 @@ public class Register {
 			System.out.println("Registering Chiseled Quartz Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(quartzChiseledRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.quartz_block, 1, 1) });
+			new ItemStack(Blocks.quartz_block, 1, 1) });
 
 		if (Config.debug)
 			System.out.println("Registering Quartz Piller Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(
 				new ItemStack(quartzPillerTopRoadblock), new Object[] {
-						defaultRoadblock,
-						new ItemStack(Blocks.quartz_block, 1, 2) });
+					defaultRoadblock,
+					new ItemStack(Blocks.quartz_block, 1, 2) });
 
 		if (Config.debug)
 			System.out
-					.println("Registering Chiseled Stonebrick Roadblock Recipe");
+			.println("Registering Chiseled Stonebrick Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(
 				stonebrickChiseledRoadblock), new Object[] { defaultRoadblock,
-				new ItemStack(Blocks.stonebrick, 1, 3) });
+			new ItemStack(Blocks.stonebrick, 1, 3) });
 
 		if (Config.debug)
 			System.out.println("Registering Prismarine Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(prismarineRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.prismarine, 1, 0) });
+			new ItemStack(Blocks.prismarine, 1, 0) });
 
 		if (Config.debug)
 			System.out.println("Registering Dark Prismarine Roadblock Recipe");
 		GameRegistry.addShapelessRecipe(new ItemStack(darkPrismarineRoadblock),
 				new Object[] { defaultRoadblock,
-						new ItemStack(Blocks.prismarine, 1, 2) });
-
-		if (Config.debug)
-			System.out
-					.println("Registering Compressed Cobblestone Roadblock Recipe");
-		GameRegistry.addShapelessRecipe(
-				new ItemStack(compressedCobbleRoadblock), new Object[] {
-						defaultRoadblock, compressedCobble });
-	}
-
-	public static Achievement buildRoad = (new Achievement(
-			"achievement.buildRoad", "buildRoad", 0, 0, defaultRoadblock,
-			(Achievement) null)).setIndependent().registerAchievement();
-
-	public static void Achievements() {
-		AchievementPage.registerAchievementPage(new AchievementPage(
-				"Roadblocks", new Achievement[] { buildRoad }));
+			new ItemStack(Blocks.prismarine, 1, 2) });
 	}
 }

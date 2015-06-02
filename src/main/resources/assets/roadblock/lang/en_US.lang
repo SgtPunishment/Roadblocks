@@ -64,6 +64,12 @@ tile.roadblock_DarkPrismarine_roadslab.name=Dark Prismarine Road Block Slab
 tile.roadblock_Prismarine_roadslab.name=Prismarine Road Block Slab
 tile.roadblock_CompressedCobble_roadslab.name=Compressed Cobblestone Road Block Slab
 
+item.roadblock.mallet.iron.name=Iron Pavers Mallet
+item.roadblock.mallet.emerald.name=Diamond Pavers Mallet
+item.roadblock.mallet.gold.name=Gold Pavers Mallet
+
+name=Mallet
+
 itemGroup.roadblock=Roadblocks
 achievement.buildRoad=The Road not taken
 achievement.buildRoad.desc=Crafting a road block

@@ -1,4 +1,4 @@
-package roadblock.utils;
+package com.whammich.roadblock.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.IConfigElement;
-import roadblock.utils.Config.Section;
-import roadblock.Main;
 
-public class Gui_Screen extends GuiConfig {
-	public Gui_Screen(GuiScreen parentScreen) {
-		super(parentScreen, getConfigElements(parentScreen), Main.modid, false,
+import com.whammich.roadblock.utils.Config.Section;
+
+public class Guiscreen extends GuiConfig {
+	public Guiscreen(GuiScreen parentScreen) {
+		super(parentScreen, getConfigElements(parentScreen), Reference.modID, false,
 				false, GuiConfig.getAbridgedConfigPath("/RoadBlocks/"));
 	}
 

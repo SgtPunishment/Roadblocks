@@ -91,6 +91,7 @@ public class BlockRoadBase extends Block {
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
 		setBlockBoundsBasedOnState(world, x, y, z);
+		world.markBlockForUpdate(x, y, z);
 		//LogHelper.info("onNeighborBlockChange Called");
 	}
 
